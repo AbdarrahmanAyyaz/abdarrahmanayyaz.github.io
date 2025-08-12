@@ -68,3 +68,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Portfolio update instructions
+
+This folder contains modified files for your React + Tailwind portfolio.  To integrate the changes into your repository (`abdarrahmanayyaz.github.io`):
+
+1. **Replace component files** — copy the files from `src/components` in this folder into the same location in your repo:
+
+   * `Home.jsx` — updated hero section that emphasises AI and cloud troubleshooting.
+   * `About.jsx` — updated about section with AI/cloud description and your motto.
+
+2. **Update project data** — replace `src/data/data.js` in your repo with the version in this folder.  It adds your new projects (TriagedAI and Advancely) and imports the new images.
+
+3. **Add new assets** — copy `triagedai.png` and `advancely.png` from `src/assets` in this folder into `src/assets` in your repo.  These images will be used for the new project cards.
+
+4. **Install react‑icons (if not already installed)** — the new `Home.jsx` imports `HiArrowNarrowRight` from `react-icons/hi`.  If your project doesn’t already have `react-icons`, install it with:
+
+   ```bash
+   npm install react-icons
+   ```
+
+5. **Rebuild and deploy** — run your project locally (`npm start`) to verify that the new sections render correctly.  Then commit the changes and deploy to your GitHub Pages or preferred hosting platform.
+
+These updates will add two new projects, update your hero/about copy to highlight your AI and cloud expertise and lay the groundwork for further design enhancements such as glassmorphism cards and gradient buttons.
+
