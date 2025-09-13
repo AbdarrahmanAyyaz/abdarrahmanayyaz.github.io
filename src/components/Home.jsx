@@ -74,7 +74,7 @@ export default function Home() {
             3 AI demos
           </Badge>
           <Badge variant="info" size="md" className="font-semibold text-xs sm:text-sm">
-            ↓25% MTTR
+            100s of users helped
           </Badge>
           <Badge variant="warning" size="md" className="font-semibold text-xs sm:text-sm">
             5+ tools shipped

@@ -6,7 +6,7 @@ const SimpleAIChat = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hi! I'm AI Abdarrahman 👋 I can tell you about my work in AI development, cloud engineering, and the projects I've built. What would you like to know?",
+      text: "Hi! I'm AI Abdarrahman 👋 I can tell you about my work in AI development, cloud engineering, and the projects I've built - including TriagedAI which has helped hundreds of users solve production issues. What would you like to know?",
       type: 'ai',
       timestamp: new Date()
     }
@@ -16,7 +16,7 @@ const SimpleAIChat = () => {
 
   const quickSuggestions = [
     "Tell me about TriagedAI",
-    "What projects have you built?",
+    "What projects have you built?", 
     "What technologies do you use?",
     "How can we work together?"
   ];
@@ -41,10 +41,10 @@ const SimpleAIChat = () => {
       
       // Simple keyword-based responses
       const lowerMessage = messageText.toLowerCase();
-      if (lowerMessage.includes('triaged') || lowerMessage.includes('mttr')) {
-        response = "TriagedAI is one of my key projects - it's an AI-powered technical support companion that helped reduce mean-time-to-resolution by 25%! It uses OpenAI, React, and LangChain on Oracle Cloud Infrastructure. You can see it live at triagedai.com.";
+      if (lowerMessage.includes('triaged')) {
+        response = "TriagedAI is one of my key projects - it's an AI-powered technical support companion that has helped hundreds of users solve complex production issues! It uses OpenAI, React, and LangChain on Oracle Cloud Infrastructure. You can see it live at triagedai.com.";
       } else if (lowerMessage.includes('project') || lowerMessage.includes('work')) {
-        response = "I've built several exciting projects! TriagedAI (25% MTTR improvement), Advancely (AI-powered success dashboard), and a Sales Professional Portfolio. You can see all of them in my Work section above, with live demos and code when available.";
+        response = "I've built several exciting projects! TriagedAI (helped hundreds of users with production issues), Advancely (AI-powered success dashboard), and a Sales Professional Portfolio. You can see all of them in my Work section above, with live demos and code when available.";
       } else if (lowerMessage.includes('technology') || lowerMessage.includes('tech') || lowerMessage.includes('skill')) {
         response = "I work with AI technologies like OpenAI and LangChain, frontend with React & Tailwind (4+ years), cloud platforms especially Oracle Cloud Infrastructure, and I'm currently learning Vector DBs and RAG optimization. Check out my Skills section for the full breakdown!";
       } else if (lowerMessage.includes('collaborate') || lowerMessage.includes('work together') || lowerMessage.includes('hire')) {
