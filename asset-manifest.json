@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.319ef80c.css",
-    "main.js": "/static/js/main.283296b6.js",
+    "main.js": "/static/js/main.b43876bd.js",
     "static/media/Porsche.png": "/static/media/Porsche.1c80d48d248d2bdf1df7.png",
     "static/media/advancely.png": "/static/media/advancely.a62720296a9d2a76b800.png",
     "static/media/triagedai.png": "/static/media/triagedai.f70df678acc149048729.png",
@@ -12,10 +12,10 @@
     "static/media/dna.jpg": "/static/media/dna.d0ac4310d8351d0395a1.jpg",
     "index.html": "/index.html",
     "main.319ef80c.css.map": "/static/css/main.319ef80c.css.map",
-    "main.283296b6.js.map": "/static/js/main.283296b6.js.map"
+    "main.b43876bd.js.map": "/static/js/main.b43876bd.js.map"
   },
   "entrypoints": [
     "static/css/main.319ef80c.css",
-    "static/js/main.283296b6.js"
+    "static/js/main.b43876bd.js"
   ]
 }
