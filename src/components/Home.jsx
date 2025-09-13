@@ -5,7 +5,7 @@ import Section from "./Section";
 import { Button, Badge } from "./ui";
 import ProjectPeek from "./ProjectPeek";
 import ScrollCue from "./ScrollCue";
-import SimpleAIChat from "./SimpleAIChat";
+import EnhancedAIChat from "./EnhancedAIChat";
 import projects from "../data/data";
 
 const fadeUp = {
@@ -151,7 +151,7 @@ export default function Home() {
               Ask me anything about my projects, experience, or expertise!
             </p>
           </div>
-          <SimpleAIChat />
+          <EnhancedAIChat />
         </motion.div>
 
         {/* 6. Project Peek (3 compact cards) */}
