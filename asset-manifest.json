@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.6c9ce52c.css",
-    "main.js": "/static/js/main.9c69c1f5.js",
+    "main.css": "/static/css/main.b48e0e10.css",
+    "main.js": "/static/js/main.67114938.js",
     "static/media/Porsche.png": "/static/media/Porsche.1c80d48d248d2bdf1df7.png",
     "static/media/advancely.png": "/static/media/advancely.a62720296a9d2a76b800.png",
     "static/media/triagedai.png": "/static/media/triagedai.f70df678acc149048729.png",
     "static/media/SocialMedia.png": "/static/media/SocialMedia.b0265abca3dc18bc98f0.png",
     "static/media/1714780311641.jpeg": "/static/media/1714780311641.7feb404ebd3e59447acb.jpeg",
     "static/media/portfolio.png": "/static/media/portfolio.3c2cdd9cc319669ac5b8.png",
-    "static/media/Mypic.png": "/static/media/Mypic.7de4b74f014ae798fcb7.png",
     "static/media/gigApp.jpg": "/static/media/gigApp.4fc92e9e7f9b7f4367a2.jpg",
+    "static/media/NewPic.png": "/static/media/NewPic.92eea82a7d8604d3cc28.png",
     "static/media/dna.jpg": "/static/media/dna.d0ac4310d8351d0395a1.jpg",
     "index.html": "/index.html",
-    "main.6c9ce52c.css.map": "/static/css/main.6c9ce52c.css.map",
-    "main.9c69c1f5.js.map": "/static/js/main.9c69c1f5.js.map"
+    "main.b48e0e10.css.map": "/static/css/main.b48e0e10.css.map",
+    "main.67114938.js.map": "/static/js/main.67114938.js.map"
   },
   "entrypoints": [
-    "static/css/main.6c9ce52c.css",
-    "static/js/main.9c69c1f5.js"
+    "static/css/main.b48e0e10.css",
+    "static/js/main.67114938.js"
   ]
 }
