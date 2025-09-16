@@ -3,23 +3,13 @@
   "name": "Abdarrahman Ayyaz - AI Engineer Portfolio",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'><rect width='192' height='192' rx='42' fill='%236366f1'/><text x='96' y='96' font-family='system-ui, -apple-system, sans-serif' font-size='76' font-weight='bold' text-anchor='middle' fill='white' dominant-baseline='central'>AA</text></svg>",
       "type": "image/svg+xml",
-      "sizes": "any"
-    },
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%236366f1'/><text x='256' y='256' font-family='system-ui, -apple-system, sans-serif' font-size='200' font-weight='bold' text-anchor='middle' fill='white' dominant-baseline='central'>AA</text></svg>",
+      "type": "image/svg+xml",
       "sizes": "512x512"
     }
   ],
