@@ -65,10 +65,10 @@ export default function Navbar() {
   );
 
   const desktopLinkBase = `
-    px-3 py-2 rounded-lg text-muted hover:text-text transition-colors duration-200
+    relative px-3 py-2 rounded-lg text-muted hover:text-text transition-all duration-200
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
   `.trim();
-  
+
   const activeClass = "text-text bg-accent/10 border border-accent/20";
 
   return (
@@ -102,6 +102,15 @@ export default function Navbar() {
                 className={`${desktopLinkBase} ${active === id ? activeClass : ""}`}
               >
                 {label}
+                {active === id && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"
+                    layoutId="activeTab"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
               </a>
             ))}
             
@@ -115,7 +124,7 @@ export default function Navbar() {
                 className="font-medium"
               >
                 <a 
-                  href="/Abdarrahman_Ayyaz_Resume.pdf"
+                  href="/AbdarrahmanAyyazResume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -226,7 +235,7 @@ export default function Navbar() {
                     className="w-full h-14 text-lg font-semibold rounded-2xl"
                   >
                     <a 
-                      href="/Abdarrahman_Ayyaz_Resume.pdf"
+                      href="/AbdarrahmanAyyazResume.pdf"
                       onClick={() => setOpen(false)}
                       target="_blank"
                       rel="noopener noreferrer"

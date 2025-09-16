@@ -1,23 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { HiArrowNarrowRight } from "react-icons/hi";
+import { Maximize2, Minimize2 } from "lucide-react";
 import Section from "./Section";
-import { Button, Badge } from "./ui";
-import ProjectPeek from "./ProjectPeek";
 import ScrollCue from "./ScrollCue";
-import EnhancedAIChat from "./EnhancedAIChat";
-import projects from "../data/data";
+import EnhancedAIChatWorking from "./EnhancedAIChatWorking";
+import TypewriterText from "./TypewriterText";
+import profileImage from "../assets/NewPic.png";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: 0.08 * i, duration: 0.35 } }),
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.2 * i,
+      duration: 0.6,
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  }),
+};
+
+const chatBubbleSpring = {
+  hidden: { opacity: 0, scale: 0.8, y: 50 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: 0.8,
+      type: "spring",
+      stiffness: 200,
+      damping: 20
+    }
+  }
 };
 
 export default function Home() {
+  const [chatSize, setChatSize] = useState('compact'); // 'compact', 'expanded', 'fullscreen'
+  const [isFocusMode, setIsFocusMode] = useState(false);
+
+  const handleQuestionSelect = (question) => {
+    // This will be passed to the chat component to auto-fill the input
+    const event = new CustomEvent('autoFillQuestion', { detail: question });
+    window.dispatchEvent(event);
+  };
+
+  const toggleChatSize = () => {
+    const sizes = ['compact', 'expanded', 'fullscreen'];
+    const currentIndex = sizes.indexOf(chatSize);
+    const nextIndex = (currentIndex + 1) % sizes.length;
+    setChatSize(sizes[nextIndex]);
+  };
+
+  const toggleFocusMode = () => {
+    setIsFocusMode(!isFocusMode);
+  };
+
+  const getChatHeight = () => {
+    switch (chatSize) {
+      case 'compact':
+        return window.innerWidth < 768 ? '400px' : '500px'; // Shorter on mobile
+      case 'expanded':
+        return window.innerWidth < 768 ? '60vh' : '70vh';
+      case 'fullscreen':
+        return 'calc(100vh - 120px)';
+      default:
+        return window.innerWidth < 768 ? '400px' : '500px';
+    }
+  };
+
+  const getChatIcon = () => {
+    return chatSize === 'fullscreen' ? Minimize2 : Maximize2;
+  };
+
   return (
     <Section
       id="home"
-      className="relative w-full min-h-[95vh] text-text overflow-hidden"
+      className="relative w-full min-h-[95vh] text-text overflow-hidden animated-mesh"
     >
       {/* Subtle grid pattern - theme aware with reduced opacity in light mode */}
       <div
@@ -39,136 +101,132 @@ export default function Home() {
         }} 
       />
 
-      <div className="relative max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
 
-        {/* 1. H1 (name) */}
-        <motion.h1
-          className="text-display font-extrabold tracking-tight text-text text-center sm:text-left"
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          Abdarrahman Ayyaz
-        </motion.h1>
+        {/* Hero Section - Centered - Hide in focus mode */}
+        {!isFocusMode && (
+          <div className="text-center space-y-6 mb-8">
 
-        {/* 2. Subhead (one concise line) */}
-        <motion.p 
-          className="mt-3 text-lg sm:text-xl font-semibold text-text text-center sm:text-left"
-          custom={1}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          I build AI apps and cut mean-time-to-resolution on OCI.
-        </motion.p>
-
-        {/* 3. Highlights (three numeric chips) */}
-        <motion.div
-          className="mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3"
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <Badge variant="success" size="md" className="font-semibold text-xs sm:text-sm">
-            3 AI demos
-          </Badge>
-          <Badge variant="info" size="md" className="font-semibold text-xs sm:text-sm">
-            100s of users helped
-          </Badge>
-          <Badge variant="warning" size="md" className="font-semibold text-xs sm:text-sm">
-            5+ tools shipped
-          </Badge>
-        </motion.div>
-
-        {/* Optional "Want the story?" link */}
-        <motion.div
-          className="mt-4 text-center sm:text-left"
-          custom={2.5}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <a 
-            href="#about"
-            className="inline-block text-sm text-muted hover:text-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded px-1 py-1 touch-manipulation"
+          {/* Professional Photo */}
+          <motion.div
+            className="flex justify-center"
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
           >
-            Want the story? <span className="underline underline-offset-4">About →</span>
-          </a>
-        </motion.div>
+            <div className="relative">
+              {/* Animated gradient border */}
+              <div className="absolute -inset-1 gradient-border rounded-full opacity-75"></div>
 
-        {/* 4. Primary/Secondary CTAs */}
+              {/* Profile image with hover effect */}
+              <motion.img
+                src={profileImage}
+                alt="Abdarrahman Ayyaz"
+                className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl"
+                style={{ objectPosition: '70% 20%', transform: 'scale(1.6)' }}
+                whileHover={{ scale: 1.65 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              />
+
+              {/* Soft glow effect */}
+              <div className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(139,92,246,0.4)] pointer-events-none"></div>
+            </div>
+          </motion.div>
+
+          {/* Name */}
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-text"
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+          >
+            Abdarrahman Ayyaz
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            className="text-lg sm:text-xl md:text-2xl font-semibold text-muted"
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+          >
+            <TypewriterText
+              texts={["AI & Cloud Engineer", "Problem Solver", "Full Stack Developer"]}
+              className="text-muted"
+            />
+          </motion.p>
+
+        </div>
+        )}
+
+        {/* Chat Interface - Full Width */}
         <motion.div
-          className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-4"
+          className={`w-full mx-auto px-4 md:px-2 lg:px-0 transition-all duration-500 ${
+            isFocusMode ? 'fixed inset-0 z-50 bg-black/80 flex items-center justify-center' : 'max-w-2xl md:max-w-3xl lg:max-w-4xl relative'
+          }`}
           custom={3}
           variants={fadeUp}
           initial="hidden"
           animate="show"
         >
-          <Button
-            asChild
-            variant="primary"
-            size="lg"
-            className="group w-full sm:w-auto"
-          >
-            <a href="#work" className="touch-manipulation">
-              View Projects
-              <HiArrowNarrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-            </a>
-          </Button>
+          {/* Chat Section Header - Only show if not in focus mode */}
+          {!isFocusMode && (
+            <div className="text-center mb-4">
+              <h3 className="text-xl font-semibold text-text">
+                Ask me something
+              </h3>
+              <p className="text-muted text-sm mt-2">
+                Chat about my projects, experience, or technical expertise
+              </p>
+            </div>
+          )}
 
-          <Button
-            asChild
-            variant="secondary"
-            size="lg"
-            className="w-full sm:w-auto"
+          {/* Chat Component */}
+          <motion.div
+            className="glassmorphism border border-border rounded-lg sm:rounded-2xl overflow-hidden shadow-2xl chat-glow-pulse"
+            variants={chatBubbleSpring}
+            initial="hidden"
+            animate="show"
+            style={{
+              backdropFilter: 'blur(15px)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderColor: 'rgba(139, 92, 246, 0.3)',
+              height: isFocusMode ? '90vh' : getChatHeight(),
+              transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              maxWidth: isFocusMode ? '800px' : '100%',
+              width: '100%'
+            }}
           >
-            <a 
-              href="/AbdarrahmanAyyazResume.pdf" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="touch-manipulation"
+            <div className={`flex flex-col h-full transition-all duration-300`}>
+              <EnhancedAIChatWorking
+                onQuestionSelect={handleQuestionSelect}
+                chatSize={chatSize}
+                isFocusMode={isFocusMode}
+                onToggleSize={toggleChatSize}
+                onToggleFocus={toggleFocusMode}
+                getChatIcon={getChatIcon}
+              />
+            </div>
+          </motion.div>
+
+          {/* Focus Mode ESC hint */}
+          {isFocusMode && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute top-4 right-4 text-white/70 text-sm"
             >
-              Download Resume
-            </a>
-          </Button>
+              Press ESC to exit focus mode
+            </motion.div>
+          )}
         </motion.div>
 
-        {/* 5. AI Chat Interface */}
+        {/* Scroll Cue */}
         <motion.div
-          className="mt-12 sm:mt-16"
+          className="mt-16 sm:mt-20 flex justify-center pb-4 sm:pb-0"
           custom={4}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-text mb-4">
-              Chat with AI Abdarrahman 🤖
-            </h2>
-            <p className="text-muted max-w-2xl mx-auto">
-              Instead of reading about my work, why not have a conversation? 
-              Ask me anything about my projects, experience, or expertise!
-            </p>
-          </div>
-          <EnhancedAIChat />
-        </motion.div>
-
-        {/* 6. Project Peek (3 compact cards) */}
-        <motion.div
-          className="mt-12 sm:mt-16"
-          custom={5}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <ProjectPeek projects={projects} />
-        </motion.div>
-
-        {/* 7. Scroll Cue */}
-        <motion.div
-          className="mt-8 sm:mt-12 flex justify-center pb-4 sm:pb-0"
-          custom={6}
           variants={fadeUp}
           initial="hidden"
           animate="show"

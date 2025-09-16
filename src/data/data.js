@@ -7,6 +7,7 @@ import dna from '../assets/dna.jpg';
 import RealEst from '../assets/1714780311641.jpeg';
 import triaged from '../assets/triagedai.png';
 import advancely from '../assets/advancely.png';
+import porsche from '../assets/Porsche.png';
 
 // Project list
 const projects = [
@@ -73,6 +74,15 @@ const projects = [
     tags: ['AI', 'React', 'Tailwind'],
     github: null,                 // add repo URL if public
     live: 'https://advancely.ai',
+  },
+  {
+    id: 8,
+    name: 'Sales Professional Portfolio',
+    image: porsche,
+    summary: 'Sales professional portfolio for Porsches with clean UI and dashboard.',
+    tags: ['React', 'Tailwind', 'Dashboard', 'UI/UX'],
+    github: null,                 // add repo URL if public
+    live: 'https://abdullahayyaz.com',
   },
 ];
 

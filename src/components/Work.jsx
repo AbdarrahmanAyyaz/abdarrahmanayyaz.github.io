@@ -63,102 +63,102 @@ export default function Work() {
   }, [filteredProjects]);
 
   return (
-    <Section id="work" className="py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="Selected Work"
-          title="Projects & Applications"
-          description="A showcase of AI-powered applications, full-stack projects, and technical implementations I've built."
-          center
-        />
+    <Section id="work">
+      <SectionHeader
+        eyebrow="Selected Work"
+        title="Projects & Applications"
+        description="A showcase of AI-powered applications, full-stack projects, and technical implementations I've built."
+        center
+      />
 
-        {/* Skills Filter Display */}
-        <AnimatePresence>
-          {selectedSkills.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-8 flex flex-wrap items-center gap-3 p-4 bg-accent/5 border border-accent/20 rounded-lg"
-            >
-              <span className="text-sm text-muted font-medium">
-                Filtered by skills:
-              </span>
-              {selectedSkills.map((skillId) => (
-                <Badge
-                  key={skillId}
-                  variant="primary"
-                  size="sm"
-                  className="cursor-pointer hover:bg-accent/80"
-                  onClick={() => useSkillsFilterStore.getState().toggleSkill(skillId)}
-                >
-                  {skillId} ×
-                </Badge>
-              ))}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearSelectedSkills}
-                className="ml-auto text-xs"
-              >
-                Clear filters
-              </Button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Projects Grid */}
-        <motion.div 
-          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          layout
-        >
-          <AnimatePresence mode="popLayout">
-            {sortedProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <ProjectCard
-                  title={project.name}
-                  img={project.image}
-                  summary={project.summary || ""}
-                  tags={project.tags || []}
-                  live={project.live}
-                  code={project.github}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* No results message */}
-        {selectedSkills.length > 0 && sortedProjects.length === 0 && (
+      {/* Skills Filter Display */}
+      <AnimatePresence>
+        {selectedSkills.length > 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-12 text-center py-12"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mt-8 flex flex-wrap items-center gap-3 p-4 bg-accent/5 border border-accent/20 rounded-lg"
           >
-            <p className="text-muted mb-4">No projects match the selected skills.</p>
+            <span className="text-sm text-muted font-medium">
+              Filtered by skills:
+            </span>
+            {selectedSkills.map((skillId) => (
+              <Badge
+                key={skillId}
+                variant="primary"
+                size="sm"
+                className="cursor-pointer hover:bg-accent/80"
+                onClick={() => useSkillsFilterStore.getState().toggleSkill(skillId)}
+              >
+                {skillId} ×
+              </Badge>
+            ))}
             <Button
               variant="ghost"
+              size="sm"
               onClick={clearSelectedSkills}
+              className="ml-auto"
             >
-              Show all projects
+              Clear filters
             </Button>
           </motion.div>
         )}
+      </AnimatePresence>
 
-        {/* Stats */}
-        <div className="mt-8 text-center text-sm text-muted">
+      {/* Projects Grid */}
+      <motion.div 
+        className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        layout
+      >
+        <AnimatePresence mode="popLayout">
+          {sortedProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <ProjectCard
+                title={project.name}
+                img={project.image}
+                summary={project.summary || ""}
+                tags={project.tags || []}
+                live={project.live}
+                code={project.github}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* No results message */}
+      {selectedSkills.length > 0 && sortedProjects.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-12 flex flex-col items-center text-center py-12"
+        >
+          <p className="text-muted mb-4">No projects match the selected skills.</p>
+          <Button
+            variant="ghost"
+            onClick={clearSelectedSkills}
+          >
+            Show all projects
+          </Button>
+        </motion.div>
+      )}
+
+      {/* Stats */}
+      <div className="mt-8 flex justify-center">
+        <p className="text-sm text-muted">
           {selectedSkills.length > 0 
             ? `Showing ${sortedProjects.length} of ${allProjects.length} projects`
             : `${allProjects.length} projects total`
           }
-        </div>
+        </p>
       </div>
     </Section>
   );

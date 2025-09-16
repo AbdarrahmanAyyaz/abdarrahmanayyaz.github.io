@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-const PersonalizedAvatar = ({ state = 'idle', size = 48 }) => {
+const PersonalizedAvatar = ({ state = 'idle', size = 48, customGradient = null }) => {
   const [currentExpression, setCurrentExpression] = useState('😊');
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -78,7 +78,7 @@ const PersonalizedAvatar = ({ state = 'idle', size = 48 }) => {
         width: size,
         height: size,
         borderRadius: '50%',
-        background: getGradientForState(),
+        background: customGradient || getGradientForState(),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

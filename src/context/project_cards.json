@@ -1,0 +1,32 @@
+[
+  {
+    "project": "TriagedAI",
+    "one_liner": "Context-aware support agent that speeds up issue resolution.",
+    "stack": ["React/TS", "Express/TS", "Postgres + Drizzle", "Firebase Auth", "Perplexity API"],
+    "features": ["solution tracking", "multi-chat", "term tooltips", "sentiment analysis"],
+    "impact": ["reduces debugging time", "captures fixes for reuse"],
+    "links": {"demo": "/work#triagedai"}
+  },
+  {
+    "project": "Advancely",
+    "one_liner": "AI-powered goals & habits with insights and recommendations.",
+    "stack": ["React/TS", "Node/Express", "Postgres", "OpenAI", "Perplexity Sonar", "Mailjet", "Firebase"],
+    "features": ["5-year goal framework", "habit tracking", "AI tips", "progress analytics"],
+    "links": {"demo": "/work#advancely"}
+  },
+  {
+    "project": "Brain Tumor Segmentation",
+    "one_liner": "Medical AI research on BraTS using U-Net for tumor segmentation.",
+    "stack": ["Python", "PyTorch/TensorFlow", "Colab"],
+    "findings": ["FLAIR modality strongest; 98.3% Dice, 96.66% Jaccard (per study)"],
+    "links": {"paper": "/work#brats"}
+  },
+  {
+    "project": "RealTimeSearch",
+    "one_liner": "RAG/agents system with OCI GenAI or Ollama for real-time search.",
+    "stack": ["RAG", "OCI GenAI", "Ollama", "Vector DB"],
+    "features": ["real-time search", "agent-based retrieval", "cloud integration"],
+    "impact": ["enhanced search capabilities", "cloud-native architecture"],
+    "links": {"demo": "/work#realtimesearch"}
+  }
+]

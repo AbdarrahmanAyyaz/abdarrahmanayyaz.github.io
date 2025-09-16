@@ -1,195 +1,360 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import projectCards from "../context/project_cards.json";
+import aboutCards from "../context/about_cards.json";
 
-// Check if API key is available
 const apiKey = process.env.REACT_APP_GOOGLE_GEMINI_API_KEY;
-console.log('API Key available:', !!apiKey);
+console.log('Gemini API Key:', apiKey ? `Present (${apiKey.substring(0, 10)}...)` : 'Missing');
+console.log('Full API Key for debugging:', apiKey);
 
-if (!apiKey) {
-  console.warn('Google Gemini API key not found in environment variables');
+// Test API key validity
+const testApiKey = async () => {
+  if (apiKey) {
+    try {
+      console.log('Testing API key:', apiKey);
+      const testAI = new GoogleGenerativeAI(apiKey);
+      const model = testAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const result = await model.generateContent("Hello, are you working?");
+      const text = await result.response.text();
+      console.log('API Key test: SUCCESS - Response:', text);
+      return true;
+    } catch (error) {
+      console.error('API Key test: FAILED', error);
+      console.error('Error details:', error.message);
+      if (error.message.includes('API_KEY_INVALID')) {
+        console.error('The API key is invalid. Please get a new one from Google AI Studio.');
+      }
+      return false;
+    }
+  }
+  console.log('No API key provided');
+  return false;
+};
+
+export const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+
+// Test the API key on load
+if (apiKey) {
+  console.log('Starting immediate API key test...');
+  testApiKey().then(result => {
+    console.log('API Key validation result:', result);
+    if (result) {
+      console.log('✅ API key is working! The issue must be in the chat initialization.');
+    } else {
+      console.log('❌ API key failed the test.');
+    }
+  }).catch(error => {
+    console.error('API Key test crashed:', error);
+  });
+} else {
+  console.log('❌ No API key found in environment variables');
 }
 
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+// ================= System Voice =================
+const SYSTEM_PROMPT = `
+You are **AI Abdarrahman**, a friendly guide to Abdarrahman Ayyaz's work.
+Primary goal: help visitors quickly understand who he is, what he's built, and how to work with him.
 
-// Comprehensive Portfolio Context for Enhanced AI Training
-const COMPREHENSIVE_PORTFOLIO_CONTEXT = `
-You are AI Abdarrahman, representing Abdarrahman Ayyaz - an AI Developer and Cloud Engineer with deep expertise in building intelligent applications and conducting cutting-edge research.
+STYLE
+- Conversational, warm, concise. Prefer plain English; avoid heavy jargon unless requested.
+- Default to short paragraphs; use up to 3 bullets only when they truly help.
+- Emojis are OK sparingly (max 1 per reply).
+- If the user asks for depth (e.g., architecture/stack/schema/RAG), switch to a clear, technical tone.
 
-PERSONAL PHILOSOPHY:
-CONsistency, FOcus, Discipline - These three pillars guide my approach to development, learning, and problem-solving. I believe in building reliable systems, maintaining focused execution, and applying disciplined engineering practices.
+KNOWLEDGE
+- Treat retrieved context as facts. If missing, say "I'm not sure" and offer closest relevant info.
+- Don't invent metrics, dates, or credentials.
+- Key projects: TriagedAI (context-aware troubleshooting), Advancely (goals/habits AI), Brain Tumor Segmentation (BraTS, U-Net), RealTimeSearch.
 
-TECHNICAL EXPERTISE SUMMARY:
-- 4+ years: React, TypeScript, Modern Frontend Development
-- 2+ years: AI/ML, LLM Integration, Intelligent System Design
-- 3+ years: Cloud Engineering, Scalable Architecture, DevOps
+ANSWER MODES (choose the lightest that fits)
+- Chatty (default): 1–3 short paragraphs answering directly.
+- Highlights (if user asks "what/why/how"): ≤3 bullets with outcomes or tools.
+- Deep Dive (only on request): Overview → Key Pieces → Impact → Link/Next Step.
 
-FLAGSHIP PROJECTS:
+GUARDRAILS
+- If uncertain, say so briefly and suggest where to look.
+- Keep project names/links exactly as given in context.
+- Never claim roles/affiliations not present in context.
 
-🚀 **TriagedAI - Intelligent Technical Support System**
-**The Problem**: Developers waste hours debugging production issues without proper guidance
-**My Solution**: AI-powered troubleshooting assistant that provides contextual, step-by-step debugging help
-
-Technical Architecture:
-- **Frontend**: React 18 + TypeScript, Wouter routing, TanStack Query for caching
-- **Backend**: Express.js + TypeScript, RESTful API design
-- **AI Integration**: Perplexity AI API for generating intelligent, contextual responses
-- **Database**: PostgreSQL with Drizzle ORM, complex schema (Users -> Chats -> Messages)
-- **Authentication**: Firebase Auth with token verification middleware
-- **Real-time Features**: Optimistic updates, sentiment analysis, solution tracking
-
-Key Innovations:
-- **Context-Aware AI**: System understands conversation flow and technical context
-- **Solution Tracking**: AI responses can be marked as solutions with user feedback
-- **Interactive Code Examples**: Special tooltip syntax explains technical terms
-- **Multi-conversation Support**: Chat history with conversation management
-- **Smart Routing**: Different response types based on user intent detection
-
-Impact: Helped hundreds of users solve complex production issues with intelligent context understanding
-
-🌟 **Advancely - AI-Powered Personal Development Platform**
-**The Vision**: Help people systematically achieve their 5-year life goals through AI-guided development
-
-Technical Architecture:
-- **Frontend**: React + TypeScript, shadcn/ui components, Tailwind CSS
-- **Backend**: Node.js + Express, comprehensive API layer
-- **Dual AI Integration**: 
-  - OpenAI for smart tips, vision refinement, task prioritization
-  - Perplexity Sonar for curated learning recommendations with free courses
-- **Database**: PostgreSQL with sophisticated schema for goals, habits, progress tracking
-- **Email System**: Mailjet for automated workflows and user engagement
-- **Authentication**: Firebase with Google OAuth integration
-
-Core Features:
-- **5-Year Goal Framework**: Structured approach across Skills, Wealth, Health, Impact
-- **Intelligent Habit Tracking**: Streak management with adaptive recommendations  
-- **Gamification System**: Points, milestones, achievement tracking
-- **AI-Generated Insights**: Personalized tips based on user behavior patterns
-- **Interactive Onboarding**: Feature tours with contextual guidance
-- **Progress Analytics**: Visual tracking with trend analysis
-
-Technical Highlights:
-- **Sophisticated State Management**: TanStack Query with optimistic updates
-- **Automated Email Workflows**: Welcome series, progress updates, engagement campaigns
-- **Points System Architecture**: Prevents duplicates, tracks source attribution
-- **Mobile-Responsive Design**: Progressive disclosure, touch-optimized interactions
-
-Impact: Systematic approach to personal development with measurable progress tracking
-
-🧠 **Brain Tumor Segmentation Research - Medical AI Innovation**
-**Research Question**: How do different MRI modalities perform in automated brain tumor detection?
-**My Contribution**: Comprehensive analysis using deep learning for medical image segmentation
-
-Technical Implementation:
-- **Dataset**: BraTS dataset with 369 patients across 4 MRI modalities (T1, T1CE, T2, FLAIR)
-- **Architecture**: U-Net convolutional neural network for precise medical segmentation
-- **Multi-Class Classification**: No Tumor, Necrotic/Non-Enhancing, Edema, Enhancing Tumor
-- **Experimental Design**: 3 systematic experiments comparing single vs multi-modality approaches
-- **Technology Stack**: Python, PyTorch, TensorFlow, Medical Imaging Libraries, Google Colab
-
-Key Research Findings:
-- **FLAIR Modality Superiority**: Achieved 98.3% Dice Coefficient, 96.66% Jaccard Coefficient
-- **Multi-Modality Benefits**: Combined approaches showed improved performance over single modalities
-- **Binary Classification Analysis**: Determined optimal modalities for specific tumor regions
-- **Overfitting Analysis**: Identified and documented model limitations with mitigation strategies
-
-Academic Impact:
-- **17-Page Research Paper**: Comprehensive documentation of methodology and findings
-- **Conference Presentation**: Presented to hundreds of attendees including industry professionals
-- **Clinical Relevance**: Research guides future medical imaging applications
-- **Reproducible Research**: Detailed methodology for research community
-
-Research Contribution: Advances understanding of MRI modality effectiveness in automated medical diagnosis
-
-🧬 **DNA Sequencing Analysis - Computational Biology Research**
-**Objective**: Apply computational methods to genetic sequence analysis for biological insights
-**Approach**: Bioinformatics algorithms for pattern recognition and data visualization
-
-Technical Scope:
-- **Sequence Analysis**: Applied advanced algorithms for genetic pattern recognition
-- **Data Processing**: Large-scale genomic data handling and preprocessing
-- **Visualization**: Created comprehensive visual representations of genetic variations
-- **Research Methods**: Systematic approach to biological data interpretation
-
-Impact: Contributed to understanding genetic variations with potential medical applications
-
-💼 **Sales Professional Portfolio**
-**Purpose**: Modern portfolio for automotive sales professionals with clean UI and dashboard
-**Technical Features**: React, Tailwind, Dashboard UI/UX, Responsive design
-**Status**: Live at https://abdullahayyaz.com
-
-CURRENT TECHNICAL FOCUS:
-- **Vector Databases**: Embedding systems for enhanced AI applications (ChromaDB, Pinecone)
-- **RAG Optimization**: Advanced retrieval-augmented generation techniques
-- **Next.js 14**: Server components, app router, modern React patterns
-- **Multi-Model AI**: Orchestrating different AI services for optimal results
-- **Cloud-Native AI**: Scalable deployment strategies for AI applications
-
-DEVELOPMENT APPROACH:
-- **Clean Architecture**: Modular, maintainable code with comprehensive documentation
-- **User-Centered Design**: Focus on solving real problems with measurable impact
-- **Research-Driven**: Evidence-based decisions with rigorous testing and validation
-- **Continuous Learning**: Staying current with emerging technologies and best practices
-- **Open Collaboration**: Knowledge sharing through mentorship and code reviews
-
-SERVICES & COLLABORATION:
-- **Custom AI Development**: Full-stack intelligent applications with modern architectures
-- **Technical Consultation**: AI/ML integration strategies and architecture guidance  
-- **Research Collaboration**: Medical AI, bioinformatics, and computational research projects
-- **Mentorship**: Code reviews, technical guidance, and knowledge transfer
-- **Speaking**: Technical presentations on AI development and research findings
-
-COMMUNICATION STYLE:
-I explain complex technical concepts clearly while maintaining precision. I provide specific examples from my actual projects, offer architectural insights, and suggest practical next steps. I'm enthusiastic about technical challenges and always ready to dive deeper into implementation details or research methodologies.
-
-RESPONSE GUIDELINES:
-- Always respond as Abdarrahman in first person
-- Provide specific examples from my actual projects when relevant
-- Offer to show live demos, code repositories, or research papers
-- Guide visitors to relevant portfolio sections or collaboration opportunities
-- Share technical insights about architecture decisions and implementation challenges
-- Maintain enthusiasm for AI development and innovative problem-solving
-- Suggest concrete next steps based on visitor interests and needs
-- Keep responses conversational and engaging, not overly technical unless requested
-- Use emojis occasionally to make responses more friendly and approachable
+CALLS TO ACTION
+- Offer a relevant next step only when useful (e.g., "Want the stack?" "See TriagedAI?" "Grab my resume?").
 `;
 
-export const initializeGeminiChat = () => {
-  if (!genAI) {
-    throw new Error('Gemini API not initialized - API key missing');
-  }
-  
-  const model = genAI.getGenerativeModel({ 
-    model: "gemini-pro",
-    generationConfig: {
-      maxOutputTokens: 1000,
-      temperature: 0.7,
-    }
-  });
-  
-  return model.startChat({
-    history: [
-      {
-        role: "user",
-        parts: [{ text: COMPREHENSIVE_PORTFOLIO_CONTEXT }]
-      },
-      {
-        role: "model", 
-        parts: [{ text: "Hello! I'm AI Abdarrahman 👋 I'm excited to share my work in AI development and cloud engineering. I've built some fascinating projects including TriagedAI (intelligent troubleshooting with Perplexity AI), Advancely (comprehensive personal development platform), and conducted research in medical AI achieving 98.3% accuracy in brain tumor segmentation. Each project showcases different aspects of modern AI application development and research. What would you like to explore first?" }]
-      }
-    ]
-  });
+// ================= Intent Routing =================
+const getIntent = (msg) => {
+  const t = (msg || "").toLowerCase();
+
+  if (/(who are you|about you|tell me about yourself|hobbies|interests|outside work|what do you like|coffee chat|coffee|network|family|community|volunteer)/.test(t))
+    return 'personal';
+
+  if (/(architecture|stack|schema|latency|auth|embedding|rag|drizzle|postgres|firebase|vector|retrieval)/.test(t))
+    return 'deep';
+
+  if (/(triagedai|advancely|brain tumor|portfolio|project|how does|tell me about|what is)/.test(t))
+    return 'project';
+
+  return 'casual';
 };
 
-export const sendMessageToGemini = async (chat, message) => {
+const styleHintFor = (intent) => ({
+  personal: "Use Chatty style. Friendly and brief; avoid technical jargon. Offer a coffee chat if relevant.",
+  casual:  "Use Chatty style. No bullets unless necessary.",
+  project: "Use Chatty style + up to 3 concise Highlights if helpful.",
+  deep:    "Use Deep Dive structure: Overview → Key pieces → Impact → Link/Next step."
+}[intent] || "Use Chatty style.");
+
+// ================= Few-shot Examples =================
+const FEW_SHOTS = [
+  { role: "user",  parts: [{ text: "where are you based?" }]},
+  { role: "model", parts: [{ text: "I'm in the Bay Area and available for remote work. What are you working on?" }]},
+  { role: "user",  parts: [{ text: "who are you?" }]},
+  { role: "model", parts: [{ text: "I'm Abdarrahman—an AI & Cloud engineer. I've shipped TriagedAI (helps dev teams troubleshoot faster) and Advancely (goals + habits with AI insights). I like clear systems, fast feedback loops, and measurable impact. Want a 30-sec tour of a project?" }]},
+  { role: "user",  parts: [{ text: "what's TriagedAI?" }]},
+  { role: "model", parts: [{ text: "It's a support agent that speeds up resolving production issues. Think context-aware chat that tracks solutions and learns from past fixes. Teams use it to cut debugging time and capture \"what worked.\" Want the 3 key features or the stack?" }]},
+  { role: "user",  parts: [{ text: "give me the stack for TriagedAI" }]},
+  { role: "model", parts: [{ text: "Overview: React/TS frontend, Express/TS backend, Postgres + Drizzle. AI: Perplexity API for context-aware suggestions. Auth: Firebase. Extras: optimistic updates, solution tracking, term tooltips. Want the data model next?" }]},
+  { role: "user",  parts: [{ text: "what are you focused on now?" }]},
+  { role: "model", parts: [{ text: "RAG systems, vector databases, and shipping pragmatic AI in modern React/Next. I enjoy turning fuzzy problems into clean, testable components. Want to see a recent RAG prototype?" }]}
+];
+
+// ============== External Context (RAG-lite) ==============
+const CONTEXT_SOURCES = [
+  "/context/aa_portfolio_context.md",
+  "/context/resume_context.md"
+];
+const RAG_VERSION = "v5";                 // bump when the MD changes
+const MAX_CHUNK_CHARS = 1000;              // smaller chunks for better conversation flow
+const TOP_K = 3;
+
+let RAG_STATE = { chunks: [], vectors: [], loaded: false };
+
+const splitIntoChunks = (text, max = MAX_CHUNK_CHARS) => {
+  const paras = text.split(/\n{2,}/);
+  const out = [];
+  let buf = "";
+  for (const p of paras) {
+    if ((buf + "\n\n" + p).length > max) {
+      if (buf) out.push(buf.trim());
+      if (p.length > max) {
+        for (let i = 0; i < p.length; i += max) out.push(p.slice(i, i + max));
+        buf = "";
+      } else buf = p;
+    } else buf = buf ? buf + "\n\n" + p : p;
+  }
+  if (buf) out.push(buf.trim());
+  return out.map((t, i) => ({ id: i, text: t }));
+};
+
+const cosine = (a, b) => {
+  let dot = 0, na = 0, nb = 0;
+  for (let i = 0; i < a.length; i++) { dot += a[i]*b[i]; na += a[i]*a[i]; nb += b[i]*b[i]; }
+  return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8);
+};
+
+const embedModel = () => {
   try {
-    const result = await chat.sendMessage(message);
+    console.log('Creating embedding model with text-embedding-004');
+    return genAI.getGenerativeModel({ model: "text-embedding-004" });
+  } catch (error) {
+    console.warn('text-embedding-004 failed, falling back to embedding-001:', error);
+    try {
+      return genAI.getGenerativeModel({ model: "embedding-001" });
+    } catch (fallbackError) {
+      console.error('Both embedding models failed:', fallbackError);
+      throw fallbackError;
+    }
+  }
+};
+
+const embedText = async (m, text) => {
+  const res = await m.embedContent(text);
+  const arr = res?.embedding?.values || [];
+  return new Float32Array(arr);
+};
+
+export const warmRagFromPublic = async (sources = CONTEXT_SOURCES) => {
+  if (!genAI) {
+    console.log('warmRagFromPublic: No genAI instance, skipping RAG initialization');
+    return;
+  }
+  try {
+    console.log('warmRagFromPublic: Starting RAG initialization with multiple sources...');
+    const cached = localStorage.getItem(`AA_RAG_${RAG_VERSION}`);
+    if (cached) {
+      console.log('warmRagFromPublic: Loading cached RAG data');
+      const { chunks, vectors } = JSON.parse(cached);
+      RAG_STATE.chunks = chunks;
+      RAG_STATE.vectors = vectors.map(v => new Float32Array(v));
+      RAG_STATE.loaded = true;
+      console.log(`warmRagFromPublic: Loaded ${chunks.length} cached chunks`);
+      return;
+    }
+
+    console.log(`warmRagFromPublic: Fetching context from ${sources.length} sources`);
+    let combinedText = '';
+
+    for (const source of sources) {
+      try {
+        const res = await fetch(source);
+        if (!res.ok) {
+          console.warn(`Failed to fetch ${source}: ${res.status}`);
+          continue;
+        }
+        const text = await res.text();
+        combinedText += `\n\n=== ${source} ===\n\n${text}`;
+        console.log(`warmRagFromPublic: Loaded ${source}`);
+      } catch (err) {
+        console.warn(`Error fetching ${source}:`, err);
+      }
+    }
+
+    const chunks = splitIntoChunks(combinedText);
+    console.log(`warmRagFromPublic: Created ${chunks.length} chunks from ${sources.length} sources`);
+
+    const m = embedModel();
+    const vectors = [];
+    for (const c of chunks) {
+      const vector = await embedText(m, c.text);
+      vectors.push(vector);
+    }
+
+    RAG_STATE = { chunks, vectors, loaded: true };
+    localStorage.setItem(`AA_RAG_${RAG_VERSION}`, JSON.stringify({
+      chunks,
+      vectors: vectors.map(v => Array.from(v)),
+    }));
+    console.log('warmRagFromPublic: RAG initialization complete with full context');
+  } catch (e) {
+    console.warn("RAG warm failed; continuing without it.", e);
+    RAG_STATE = { chunks: [], vectors: [], loaded: false };
+  }
+};
+
+// ============== Enhanced RAG Retrieval ==============
+const retrieveTopK = async (query, k = TOP_K) => {
+  if (!genAI || !RAG_STATE.loaded || !RAG_STATE.chunks.length) {
+    console.log('retrieveTopK: RAG not ready, using project cards fallback');
+    // Fallback to project cards with keyword matching
+    const queryLower = query.toLowerCase();
+    const relevant = projectCards.filter(card =>
+      queryLower.includes(card.project.toLowerCase()) ||
+      card.features?.some(f => queryLower.includes(f)) ||
+      card.stack?.some(s => queryLower.includes(s.toLowerCase()))
+    );
+    return relevant.length > 0 ? relevant.slice(0, 2) : projectCards.slice(0, 2);
+  }
+
+  try {
+    console.log('retrieveTopK: Processing query with full RAG:', query.substring(0, 50) + '...');
+    const m = embedModel();
+    const qv = await embedText(m, query);
+    const scored = RAG_STATE.vectors.map((v, i) => ({ i, score: cosine(qv, v) }))
+                                    .sort((a, b) => b.score - a.score)
+                                    .slice(0, k)
+                                    .map(({ i }) => RAG_STATE.chunks[i].text);
+    console.log('retrieveTopK: Found', scored.length, 'relevant passages with RAG');
+    return scored;
+  } catch (error) {
+    console.error('retrieveTopK: Error during RAG retrieval:', error);
+    // Fallback to project cards
+    return projectCards.slice(0, 2);
+  }
+};
+
+const buildCardContext = (cards, k = 3) =>
+  (cards || []).slice(0, k).map(c => `CARD: ${JSON.stringify(c)}`).join("\n");
+
+const buildContextFromSources = (sources) => {
+  if (!sources || sources.length === 0) return '';
+
+  // If sources are objects (project cards), format as before
+  if (sources[0]?.project) {
+    return `Here's what I know:\n\n${sources.map(c => `• ${c.project}: ${c.one_liner}\n  Stack: ${c.stack?.join(', ')}${c.features ? `\n  Features: ${c.features.join(', ')}` : ''}`).join('\n\n')}`;
+  }
+
+  // If sources are text passages (RAG), format for conversation
+  const contextText = sources.slice(0, 3).join('\n\n');
+  return `Context (keep conversational):\n\n${contextText}`;
+};
+
+// Note: Removed rigid structure enforcement and word trimming for more natural conversation
+
+// ============== Chat Lifecycle ==============
+export const initializeGeminiChat = () => {
+  console.log('initializeGeminiChat: Starting chat initialization');
+  console.log('API Key present:', !!apiKey);
+  console.log('genAI instance:', !!genAI);
+
+  if (!genAI) {
+    console.error("initializeGeminiChat: Gemini API not initialized - API key missing");
+    throw new Error("Gemini API not initialized - API key missing");
+  }
+
+  // Initialize RAG system
+  console.log('initializeGeminiChat: Starting RAG initialization...');
+  warmRagFromPublic().catch(err => {
+    console.warn('RAG initialization failed, continuing with basic cards:', err);
+  });
+
+  try {
+    console.log('initializeGeminiChat: Creating model instance with gemini-2.0-flash');
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash",
+      generationConfig: {
+        maxOutputTokens: 550,
+        temperature: 0.6,
+        topP: 0.9
+      },
+    });
+
+    console.log('initializeGeminiChat: Model created, starting chat with history');
+    const chat = model.startChat({
+      history: [
+        { role: "user", parts: [{ text: SYSTEM_PROMPT }]},
+        { role: "model", parts: [{ text: "Got it. I'll be friendly by default and go technical on request. I have access to your full portfolio and resume context." }]},
+        ...FEW_SHOTS
+      ],
+    });
+
+    console.log('initializeGeminiChat: Chat instance created successfully');
+    return chat;
+  } catch (error) {
+    console.error('initializeGeminiChat: Error creating chat instance:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    throw error;
+  }
+};
+
+export const sendMessageToGemini = async (chat, message, retrievedCards = []) => {
+  try {
+    const intent = getIntent(message);
+    const styleHint = styleHintFor(intent);
+
+    // choose which cards to prioritize
+    const baseCards =
+      intent === 'personal' ? aboutCards
+      : intent === 'project' || intent === 'deep' ? projectCards
+      : []; // casual → no extra context unless needed
+
+    // if your retriever returns cards, prefer those; else fall back to base set
+    const cardsToUse = retrievedCards.length ? retrievedCards : baseCards;
+
+    const contextBlock = cardsToUse.length
+      ? `Use these fact cards when helpful:\n${buildCardContext(cardsToUse)}\n`
+      : "";
+
+    const finalPrompt = `${styleHint}\n\n${contextBlock}${message}`;
+
+    console.log('sendMessageToGemini: Intent:', intent, 'Cards:', cardsToUse.length, 'RAG loaded:', RAG_STATE.loaded);
+
+    const result = await chat.sendMessage(finalPrompt);
     const response = await result.response;
     return response.text();
-  } catch (error) {
-    console.error('Gemini API Error:', error);
-    return "I'm having trouble connecting to my AI system right now. You can explore my portfolio sections above, or try asking again in a moment. Feel free to check out my projects directly!";
+  } catch (err) {
+    console.error("Gemini API Error:", err);
+    return "I'm having trouble right now. You can browse the projects above or try again in a moment.";
   }
 };
 
-export const createNewChatSession = () => {
-  return initializeGeminiChat();
-};
+export const createNewChatSession = () => initializeGeminiChat();

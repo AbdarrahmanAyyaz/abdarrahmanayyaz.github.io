@@ -1,0 +1,32 @@
+[
+  {
+    "type": "about",
+    "topic": "interests",
+    "facts": ["martial arts (boxing)", "hiking", "nature", "travel (multiple countries)"],
+    "one_liner": "Outside work: martial arts/boxing, hiking in nature, and travel."
+  },
+  {
+    "type": "about",
+    "topic": "values",
+    "facts": ["family time", "community service", "consistency", "focus", "discipline"],
+    "one_liner": "I value family, giving back, and disciplined learning/building."
+  },
+  {
+    "type": "about",
+    "topic": "community",
+    "facts": ["organized a COVID-era food drive for people experiencing homelessness"],
+    "one_liner": "I organized a community food drive during COVID."
+  },
+  {
+    "type": "about",
+    "topic": "networking",
+    "facts": ["open to coffee chats", "interested in meeting builders and teams"],
+    "one_liner": "Open to coffee chats and networking."
+  },
+  {
+    "type": "about",
+    "topic": "availability",
+    "facts": ["remote collaboration", "project discussions"],
+    "one_liner": "Available for remote collaboration and project discussions."
+  }
+]

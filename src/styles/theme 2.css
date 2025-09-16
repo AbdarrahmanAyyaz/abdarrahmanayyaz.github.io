@@ -63,33 +63,6 @@
   --z-tooltip: 110;
 }
 
-/* Mobile performance optimizations */
-@media (max-width: 768px) {
-  /* Disable complex animations on mobile for better performance */
-  .gradient-border {
-    animation: none !important;
-  }
-
-  /* Reduce motion for users who prefer it */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
-  /* Simplify complex transformations */
-  .complex-animation {
-    transform: none !important;
-  }
-
-  /* Reduce particle effects */
-  .particle-effect {
-    display: none;
-  }
-}
-
 /* Dark mode overrides */
 .dark {
   --bg: 222 47% 11%;           /* slate-900 equivalent */
@@ -177,59 +150,6 @@ body {
   animation: slide-in-left var(--duration-slow) var(--ease-out);
 }
 
-/* Chat Enhancement Animations */
-.glassmorphism {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glassmorphism {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.chat-glow-pulse {
-  animation: chat-glow-pulse 2s ease-in-out 3;
-}
-
-.gradient-border {
-  background: linear-gradient(45deg, #8b5cf6, #3b82f6, #ec4899, #8b5cf6);
-  background-size: 300% 300%;
-  animation: gradient-rotate 4s ease infinite;
-}
-
-.pulse-button {
-  animation: pulse-subtle 3s ease-in-out infinite;
-}
-
-.typewriter-cursor::after {
-  content: '|';
-  animation: blink 1s infinite;
-  color: hsl(var(--accent));
-}
-
-.message-hover {
-  transition: all 0.2s ease;
-}
-
-.message-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.magnetic-hover {
-  transition: transform 0.1s ease;
-}
-
-.animated-mesh {
-  background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-  background-size: 400% 400%;
-  animation: mesh-float 10s ease-in-out infinite;
-}
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -254,69 +174,6 @@ body {
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-
-/* Chat Enhancement Keyframes */
-@keyframes chat-glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4);
-  }
-}
-
-@keyframes gradient-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.02);
-    opacity: 0.9;
-  }
-}
-
-@keyframes blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes mesh-float {
-  0%, 100% {
-    background-position: 0% 50%, 100% 0%, 50% 100%;
-  }
-  33% {
-    background-position: 100% 0%, 50% 100%, 0% 50%;
-  }
-  66% {
-    background-position: 50% 100%, 0% 50%, 100% 0%;
-  }
-}
-
-@keyframes bounce-dots {
-  0%, 60%, 100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-10px);
   }
 }
 
@@ -410,45 +267,29 @@ body {
     overflow-x: hidden;
     max-width: 100vw;
   }
-
+  
   /* Improve touch scrolling */
   * {
     -webkit-overflow-scrolling: touch;
   }
-
+  
   /* Optimize for mobile viewport */
   .mobile-optimized {
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
   }
-
+  
   /* Better carousel snap points */
   .carousel-snap {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-
+  
   .carousel-snap > * {
     scroll-snap-align: center;
     scroll-snap-stop: always;
-  }
-
-  /* Mobile-specific chat improvements */
-  .enhanced-ai-chat {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  /* Improve mobile typography */
-  h1, h2, h3 {
-    line-height: 1.2;
-  }
-
-  /* Better mobile spacing */
-  .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 1rem;
   }
 }
 
@@ -458,20 +299,12 @@ body {
     min-height: 44px;
     min-width: 44px;
   }
-
+  
   /* Enhanced touch feedback */
-  button:active,
+  button:active, 
   a:active,
   [role="button"]:active {
     transform: scale(0.98);
     opacity: 0.8;
-  }
-
-  /* Better mobile focus states */
-  button:focus-visible,
-  a:focus-visible,
-  [role="button"]:focus-visible {
-    outline: 3px solid hsl(var(--accent));
-    outline-offset: 2px;
   }
 }

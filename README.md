@@ -69,26 +69,129 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Portfolio update instructions
+## Home First Impression Upgrade
 
-This folder contains modified files for your React + Tailwind portfolio.  To integrate the changes into your repository (`abdarrahmanayyaz.github.io`):
+This portfolio has been upgraded with a stronger "first 5-10 second impression" for recruiters, focusing on immediate proof of value with improved mobile experience.
 
-1. **Replace component files** — copy the files from `src/components` in this folder into the same location in your repo:
+### What Changed
 
-   * `Home.jsx` — updated hero section that emphasises AI and cloud troubleshooting.
-   * `About.jsx` — updated about section with AI/cloud description and your motto.
+**Home/Hero Section Restructure:**
+- **New layout order**: Name → Subhead → Highlights → CTAs → Project Peek → Scroll Cue
+- **Condensed subhead**: Single line that clearly states "I build AI apps and cut mean-time-to-resolution on OCI"
+- **3 highlight chips**: "3 AI demos", "↓25% MTTR", "5+ tools shipped" for instant proof
+- **Project Peek**: Compact cards showing top 3 projects with thumbnails, metrics, and tech tags
+- **Mobile carousel**: Horizontal snap scroll for project cards on mobile
+- **Scroll cue**: Subtle animated indicator to guide users to work section
 
-2. **Update project data** — replace `src/data/data.js` in your repo with the version in this folder.  It adds your new projects (TriagedAI and Advancely) and imports the new images.
+**Enhanced Mobile Experience:**
+- **BottomDock component**: Replaces left social rail on mobile with expandable bottom dock
+- **Safe area support**: Respects device safe areas (iPhone notches, etc.)
+- **Improved touch targets**: All interactive elements meet accessibility standards
 
-3. **Add new assets** — copy `triagedai.png` and `advancely.png` from `src/assets` in this folder into `src/assets` in your repo.  These images will be used for the new project cards.
+**Light Mode Improvements:**
+- **Better contrast**: Enhanced text/background contrast ratios for WCAG AA compliance
+- **Refined spotlight**: Subtle radial gradient behind name for depth
+- **Reduced dot pattern opacity**: Less visual noise in light mode
 
-4. **Install react‑icons (if not already installed)** — the new `Home.jsx` imports `HiArrowNarrowRight` from `react-icons/hi`.  If your project doesn’t already have `react-icons`, install it with:
+### New Components Added
 
-   ```bash
-   npm install react-icons
-   ```
+1. **`ProjectPeek.jsx`** - Displays 3 featured project cards with responsive grid/carousel
+2. **`ScrollCue.jsx`** - Animated scroll indicator linking to work section  
+3. **`BottomDock.jsx`** - Mobile-only expandable dock with social links + resume CTA
 
-5. **Rebuild and deploy** — run your project locally (`npm start`) to verify that the new sections render correctly.  Then commit the changes and deploy to your GitHub Pages or preferred hosting platform.
+### How to Add/Edit Project Peek Items
 
-These updates will add two new projects, update your hero/about copy to highlight your AI and cloud expertise and lay the groundwork for further design enhancements such as glassmorphism cards and gradient buttons.
+The ProjectPeek component automatically selects the top 3 projects from `src/data/data.js` that have either `live` or `github` URLs. To customize:
+
+1. **Edit project data** in `src/data/data.js`
+2. **Ensure projects have**:
+   - `image`: Thumbnail path (16:10 aspect ratio recommended)
+   - `summary`: Brief description (will be truncated to 2 lines)
+   - `tags`: Array of 1-3 tech keywords
+   - `live` and/or `github`: At least one link required
+3. **Projects automatically get metrics** based on their position (Live demo, Open source, AI-powered)
+
+### Accessibility & Performance Features
+
+- **Keyboard navigation**: All interactive elements are keyboard accessible
+- **Focus-visible rings**: Clear focus indicators for keyboard users
+- **Lazy loading**: Project images load only when needed
+- **Reduced motion support**: Respects `prefers-reduced-motion` setting
+- **WCAG AA compliance**: Enhanced contrast ratios and touch targets
+- **Semantic HTML**: Proper headings, landmarks, and ARIA labels
+
+### Mobile Responsiveness
+
+- **Snap scrolling**: Smooth horizontal scroll on mobile project carousel  
+- **Safe area insets**: Bottom dock respects device-specific safe areas
+- **No horizontal overflow**: Prevents unwanted horizontal scrolling
+- **Touch-friendly**: 44px minimum touch targets throughout
+
+## Contact Form Integration
+
+The contact form uses a **serverless function** with **Resend API** for secure email delivery.
+
+### Environment Setup
+
+**For local development**, create a `.env.local` file:
+
+```bash
+# Resend API Configuration (for serverless functions)
+RESEND_API_KEY=your_resend_api_key_here
+CONTACT_EMAIL=your@email.com
+```
+
+**For Netlify deployment**, set these environment variables in your Netlify dashboard:
+- `RESEND_API_KEY`: Your Resend API key
+- `CONTACT_EMAIL`: Where you want to receive contact form emails
+
+### Architecture
+
+- **Frontend**: React form with validation and UX improvements
+- **Backend**: Netlify serverless function (`/.netlify/functions/contact`)
+- **Email Service**: Resend API for reliable delivery
+- **Security**: API key kept secure on the server side
+
+### Features
+
+- 🔒 **Secure API calls** via serverless functions (no exposed keys)
+- 📧 **Professional HTML emails** with branded styling
+- 🛡️ **Rate limiting** (3 submissions per minute per email)
+- 🚫 **Spam protection** with honeypot fields
+- 📬 **Reply-to headers** for direct responses
+- ⚡ **Error handling** with user-friendly messages
+- 📊 **Email tracking** with unique message IDs
+- 🚀 **CORS compliant** and production ready
+
+### Deployment Setup
+
+1. **Sign up at [resend.com](https://resend.com)**
+2. **Verify your domain** (add DNS records)
+3. **Generate an API key**
+4. **Deploy to Netlify** and set environment variables:
+   - Go to Site settings > Environment variables
+   - Add `RESEND_API_KEY` with your API key
+   - Add `CONTACT_EMAIL` with your email address
+5. **Update domain** in the serverless function if needed
+
+### Local Development
+
+To test the serverless function locally:
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Start local development with functions
+netlify dev
+```
+
+### Email Template
+
+Professional HTML emails include:
+- **Gradient header** with portfolio branding
+- **Structured fields** (Name, Email, Subject, Message)
+- **Timestamp** and easy reply instructions
+- **Plain text fallback** for all email clients
+- **Custom headers** for email organization
 

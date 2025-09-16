@@ -43,7 +43,7 @@ const SectionHeader = ({
       )}
       
       {description && (
-        <p className="text-lg text-muted max-w-2xl {center ? 'mx-auto' : ''}">
+        <p className={`text-lg text-muted max-w-2xl ${center ? 'mx-auto' : ''}`}>
           {description}
         </p>
       )}

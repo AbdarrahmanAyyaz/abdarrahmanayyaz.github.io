@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Section from "./Section";
 import SectionHeader from "./ui/SectionHeader";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/Card";
-import { Badge } from "./ui";
+import { Badge, Button } from "./ui";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -32,16 +32,15 @@ export default function About() {
   ];
 
   return (
-    <Section id="about" className="py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="Get to know me"
-          title="About"
-          description="My background, values, and what drives me in AI and cloud engineering."
-          center
-        />
+    <Section id="about">
+      <SectionHeader
+        eyebrow="Get to know me"
+        title="About"
+        description="My background, values, and what drives me in AI and cloud engineering."
+        center
+      />
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-8 items-start">
+      <div className="mt-12 grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Main About Card */}
           <motion.div
             variants={fadeUpVariants}
@@ -153,33 +152,42 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Call to Action */}
-        <motion.div
-          className="mt-12 text-center"
-          variants={fadeUpVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={3}
-        >
-          <p className="text-muted mb-4">
-            Interested in collaborating or learning more about my work?
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-medium"
-            >
+      {/* Call to Action */}
+      <motion.div
+        className="mt-12 flex flex-col items-center text-center"
+        variants={fadeUpVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        custom={3}
+      >
+        <p className="text-muted mb-6 max-w-2xl">
+          Interested in collaborating or learning more about my work?
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+          <Button
+            asChild
+            variant="primary"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
+            <a href="#contact">
               Get In Touch
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>
             </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
             <a
-              href="/Abdarrahman_Ayyaz_Resume.pdf"
+              href="/AbdarrahmanAyyazResume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border text-text hover:bg-surface/80 rounded-lg transition-colors font-medium"
             >
               View Resume
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -190,9 +198,9 @@ export default function About() {
                 <path d="M10 9H8"/>
               </svg>
             </a>
-          </div>
-        </motion.div>
-      </div>
+          </Button>
+        </div>
+      </motion.div>
     </Section>
   );
 }
