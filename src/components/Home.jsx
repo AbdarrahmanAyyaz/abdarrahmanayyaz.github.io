@@ -62,13 +62,13 @@ export default function Home() {
   const getChatHeight = () => {
     switch (chatSize) {
       case 'compact':
-        return window.innerWidth < 768 ? '400px' : '500px'; // Shorter on mobile
+        return window.innerWidth < 640 ? '50vh' : window.innerWidth < 768 ? '55vh' : '500px';
       case 'expanded':
-        return window.innerWidth < 768 ? '60vh' : '70vh';
+        return window.innerWidth < 640 ? '65vh' : window.innerWidth < 768 ? '70vh' : '75vh';
       case 'fullscreen':
-        return 'calc(100vh - 120px)';
+        return 'calc(100vh - 60px)';
       default:
-        return window.innerWidth < 768 ? '400px' : '500px';
+        return window.innerWidth < 640 ? '50vh' : window.innerWidth < 768 ? '55vh' : '500px';
     }
   };
 
@@ -101,11 +101,11 @@ export default function Home() {
         }} 
       />
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
 
         {/* Hero Section - Centered - Hide in focus mode */}
         {!isFocusMode && (
-          <div className="text-center space-y-6 mb-8">
+          <div className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
 
           {/* Professional Photo */}
           <motion.div
@@ -122,7 +122,7 @@ export default function Home() {
               <motion.img
                 src={profileImage}
                 alt="Abdarrahman Ayyaz"
-                className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl"
+                className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl"
                 style={{ objectPosition: '70% 20%', transform: 'scale(1.6)' }}
                 whileHover={{ scale: 1.65 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
@@ -135,7 +135,7 @@ export default function Home() {
 
           {/* Name */}
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-text"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text"
             custom={1}
             variants={fadeUp}
             initial="hidden"
@@ -146,7 +146,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg sm:text-xl md:text-2xl font-semibold text-muted"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted"
             custom={2}
             variants={fadeUp}
             initial="hidden"
@@ -163,8 +163,8 @@ export default function Home() {
 
         {/* Chat Interface - Full Width */}
         <motion.div
-          className={`w-full mx-auto px-4 md:px-2 lg:px-0 transition-all duration-500 ${
-            isFocusMode ? 'fixed inset-0 z-50 bg-black/80 flex items-center justify-center' : 'max-w-2xl md:max-w-3xl lg:max-w-4xl relative'
+          className={`w-full mx-auto px-2 sm:px-4 md:px-2 lg:px-0 transition-all duration-500 ${
+            isFocusMode ? 'fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4' : 'max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl relative'
           }`}
           custom={3}
           variants={fadeUp}
@@ -173,11 +173,11 @@ export default function Home() {
         >
           {/* Chat Section Header - Only show if not in focus mode */}
           {!isFocusMode && (
-            <div className="text-center mb-4">
-              <h3 className="text-xl font-semibold text-text">
+            <div className="text-center mb-3 sm:mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-text">
                 Ask me something
               </h3>
-              <p className="text-muted text-sm mt-2">
+              <p className="text-muted text-xs sm:text-sm mt-1 sm:mt-2 px-2">
                 Chat about my projects, experience, or technical expertise
               </p>
             </div>
@@ -193,9 +193,9 @@ export default function Home() {
               backdropFilter: 'blur(15px)',
               background: 'rgba(255, 255, 255, 0.05)',
               borderColor: 'rgba(139, 92, 246, 0.3)',
-              height: isFocusMode ? '90vh' : getChatHeight(),
+              height: isFocusMode ? 'calc(100vh - 2rem)' : getChatHeight(),
               transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-              maxWidth: isFocusMode ? '800px' : '100%',
+              maxWidth: isFocusMode ? '100%' : '100%',
               width: '100%'
             }}
           >
@@ -224,15 +224,17 @@ export default function Home() {
         </motion.div>
 
         {/* Scroll Cue */}
-        <motion.div
-          className="mt-16 sm:mt-20 flex justify-center pb-4 sm:pb-0"
-          custom={4}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <ScrollCue />
-        </motion.div>
+        {!isFocusMode && (
+          <motion.div
+            className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex justify-center pb-4 sm:pb-0"
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+          >
+            <ScrollCue />
+          </motion.div>
+        )}
 
       </div>
     </Section>

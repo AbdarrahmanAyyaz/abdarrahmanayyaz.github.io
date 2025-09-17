@@ -275,9 +275,9 @@ const EnhancedAIChatWorking = ({
   const currentMessages = currentChat?.messages || [];
 
   return (
-    <div className="enhanced-ai-chat w-full max-w-none mx-auto px-2 sm:px-4 h-full">
+    <div className="enhanced-ai-chat w-full max-w-none mx-auto px-2 sm:px-4 md:px-6 h-full">
       <div
-        className="backdrop-blur-xl border rounded-xl sm:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col
+        className="backdrop-blur-xl border rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col
                    bg-white/80 border-gray-200
                    dark:bg-slate-800/80 dark:border-slate-700"
       >
@@ -286,35 +286,35 @@ const EnhancedAIChatWorking = ({
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="chat-header p-3 sm:p-6 backdrop-blur-sm border-b relative z-20
+          className="chat-header p-3 sm:p-4 md:p-6 backdrop-blur-sm border-b relative z-20
                      bg-gray-50/80 border-gray-200
                      dark:bg-slate-800/80 dark:border-slate-700"
         >
           {/* Header Controls - Top Right */}
-          <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-2">
+          <div className="absolute top-2 right-2 sm:top-3 md:top-4 sm:right-3 md:right-4 flex items-center gap-1 sm:gap-2">
             {/* Expansion Controls */}
             {(onToggleSize || onToggleFocus) && (
               <div className="flex items-center gap-1">
                 {onToggleSize && (
                   <button
                     onClick={onToggleSize}
-                    className="p-2 rounded-lg border transition-all duration-200
+                    className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
                               bg-gray-100 text-purple-600 border-purple-600/20 hover:bg-gray-200 hover:border-purple-600/40
                               dark:bg-slate-700/50 dark:text-purple-400 dark:border-purple-400/20 dark:hover:bg-slate-600/50 dark:hover:border-purple-400/40"
                     title={chatSize === 'fullscreen' ? 'Minimize chat' : 'Expand chat'}
                   >
-                    {getChatIcon && React.createElement(getChatIcon(), { size: 16 })}
+                    {getChatIcon && React.createElement(getChatIcon(), { size: 14 })}
                   </button>
                 )}
                 {onToggleFocus && (
                   <button
                     onClick={onToggleFocus}
-                    className="p-2 rounded-lg border transition-all duration-200
+                    className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
                               bg-gray-100 text-purple-600 border-purple-600/20 hover:bg-gray-200 hover:border-purple-600/40
                               dark:bg-slate-700/50 dark:text-purple-400 dark:border-purple-400/20 dark:hover:bg-slate-600/50 dark:hover:border-purple-400/40"
                     title="Focus mode"
                   >
-                    <Focus size={16} />
+                    <Focus size={14} />
                   </button>
                 )}
               </div>
@@ -327,9 +327,9 @@ const EnhancedAIChatWorking = ({
             />
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             <div
-              className="w-12 h-12 sm:w-18 sm:h-18 rounded-full border-2 border-white/20 flex-shrink-0 overflow-hidden"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 border-white/20 flex-shrink-0 overflow-hidden"
               style={{
                 boxShadow: `0 0 30px rgba(${theme.colors.accentRgb}, 0.4)`
               }}
@@ -341,11 +341,11 @@ const EnhancedAIChatWorking = ({
                 style={{ objectPosition: '70% 70%', transform: 'scale(1.3)' }}
               />
             </div>
-            <div className="flex-1 min-w-0 pr-16 sm:pr-20">
-              <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-text to-text/80 bg-clip-text text-transparent truncate">
+            <div className="flex-1 min-w-0 pr-14 sm:pr-16 md:pr-20">
+              <h2 className="text-base sm:text-lg md:text-2xl font-bold bg-gradient-to-r from-text to-text/80 bg-clip-text text-transparent truncate">
                 AI Abdarrahman
               </h2>
-              <p className="text-muted mt-1 text-xs sm:text-sm">
+              <p className="text-muted mt-0.5 sm:mt-1 text-xs sm:text-sm">
                 AI & Cloud Engineer
               </p>
             </div>
@@ -354,7 +354,7 @@ const EnhancedAIChatWorking = ({
 
         {/* Chat Messages Area */}
         <div
-          className="chat-messages flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-4 relative z-10
+          className="chat-messages flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-2 sm:space-y-3 md:space-y-4 relative z-10
                      bg-gradient-to-b from-gray-50/30 to-transparent
                      dark:from-slate-800/30 dark:to-transparent"
         >
@@ -380,9 +380,9 @@ const EnhancedAIChatWorking = ({
 
         {/* Quick Action Pills */}
         <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700">
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Category Pills */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {Object.entries(categoryData).map(([key, category]) => {
 
                 return (
@@ -393,7 +393,7 @@ const EnhancedAIChatWorking = ({
                       handleCategoryClick(key);
                     }}
                     className="
-                      relative px-4 py-3 rounded-lg border transition-all duration-200
+                      relative px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                       touch-manipulation min-h-[44px]
                       bg-gray-100 text-purple-600 border-purple-600/20
@@ -407,9 +407,9 @@ const EnhancedAIChatWorking = ({
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                       <span className="text-sm">{category.icon}</span>
-                      <span className="font-medium text-xs sm:text-sm">{category.label}</span>
+                      <span className="font-medium text-xs sm:text-sm truncate">{category.label}</span>
                     </div>
                   </motion.button>
                 );
@@ -432,7 +432,7 @@ const EnhancedAIChatWorking = ({
                         key={index}
                         onClick={() => handleQuestionClick(question)}
                         className="
-                          px-3 py-2.5 rounded-lg border text-sm text-left transition-all duration-200
+                          px-3 py-2.5 rounded-lg border text-xs sm:text-sm text-left transition-all duration-200
                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                           touch-manipulation min-h-[44px]
                           bg-gray-50 text-gray-700 border-purple-600/15

@@ -95,12 +95,13 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
               disabled={disabled}
               rows={1}
               className="
-                w-full py-3 px-3 sm:px-4 border rounded-xl text-base
+                w-full py-3 px-3 sm:px-4 border rounded-xl
                 focus:outline-none focus:ring-2
                 resize-none disabled:opacity-50 disabled:cursor-not-allowed
                 transition-all duration-300 ease-out touch-manipulation
               "
               style={{
+                fontSize: '16px', // Prevents zoom on iOS
                 minHeight: '48px',
                 maxHeight: '120px',
                 backgroundColor: `rgba(255, 255, 255, 0.95)`,
@@ -154,7 +155,8 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
         {/* Enhanced Hint Text */}
         <div className="text-center mt-2 sm:mt-3">
           <p className="text-xs text-muted opacity-75">
-            Press Enter to send • Shift + Enter for new line
+            <span className="hidden sm:inline">Press Enter to send • Shift + Enter for new line</span>
+            <span className="sm:hidden">Tap send button or press Enter</span>
           </p>
           {isFocused && (
             <p className="text-xs text-accent mt-1 animate-pulse">

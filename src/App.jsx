@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Work from './components/Work';
 import Contacts from './components/Contacts';
 import { ToastProvider } from './components/ui/Toast';
+import './styles/responsive.css';
 
 export default function App() {
   return (

@@ -8,8 +8,18 @@ export default function SmartTooltip({ label, children, position = "top" }) {
   const triggerRef = useRef(null);
 
   useEffect(() => {
-    // Detect if device supports touch
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+    // Detect if device supports touch or is mobile
+    const updateTouchDetection = () => {
+      const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+      const isMobile = window.innerWidth < 768;
+      setIsTouch(isTouchDevice || isMobile);
+    };
+
+    updateTouchDetection();
+
+    // Update on resize
+    window.addEventListener('resize', updateTouchDetection);
+    return () => window.removeEventListener('resize', updateTouchDetection);
   }, []);
 
   useEffect(() => {
@@ -56,12 +66,15 @@ export default function SmartTooltip({ label, children, position = "top" }) {
   const handleClick = (event) => {
     if (isTouch) {
       event.preventDefault();
-      setIsVisible(!isVisible);
+      // Don't show tooltips on mobile/touch devices at all
+      setIsVisible(false);
     }
   };
 
   const handleFocus = () => {
-    setIsVisible(true);
+    if (!isTouch) {
+      setIsVisible(true);
+    }
   };
 
   const handleBlur = () => {

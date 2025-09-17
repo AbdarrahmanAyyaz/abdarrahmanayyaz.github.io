@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 import ThemeToggle from "./themeToggle";
 import { Button } from "./ui";
 import MenuButton from "./MenuButton";
@@ -12,6 +14,12 @@ const ITEMS = [
   { id: "skills", label: "Skills" },
   { id: "work", label: "Work" },
   { id: "contact", label: "Contact" },
+];
+
+const SOCIAL_LINKS = [
+  { href: "https://www.linkedin.com/in/abdarrahman-ayyaz/", label: "LinkedIn", Icon: FaLinkedinIn, newTab: true },
+  { href: "https://github.com/AbdarrahmanAyyaz", label: "GitHub", Icon: FaGithub, newTab: true },
+  { href: "mailto:abdarrahmanayyaz00@gmail.com", label: "Email", Icon: HiOutlineMail, newTab: false },
 ];
 
 export default function Navbar() {
@@ -134,12 +142,33 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <MenuButton 
-            open={open} 
-            onToggle={() => setOpen(!open)}
-            aria-controls="mobile-navigation"
-          />
+          {/* Mobile Social Icons + Menu Button */}
+          <div className="flex items-center gap-2 md:hidden">
+            {/* Social Icons - Mobile Only */}
+            <div className="flex items-center gap-2">
+              {SOCIAL_LINKS.map(({ href, label, Icon, newTab }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={newTab ? "_blank" : "_self"}
+                  rel={newTab ? "noopener noreferrer" : undefined}
+                  className="p-2 rounded-lg text-muted hover:text-text hover:bg-surface/50 transition-all duration-200 touch-manipulation min-w-[40px] min-h-[40px] flex items-center justify-center"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={label}
+                >
+                  <Icon size={16} />
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Menu Button */}
+            <MenuButton
+              open={open}
+              onToggle={() => setOpen(!open)}
+              aria-controls="mobile-navigation"
+            />
+          </div>
         </div>
       </div>
       </motion.header>

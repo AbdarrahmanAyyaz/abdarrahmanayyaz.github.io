@@ -35,8 +35,8 @@ const BottomDock = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div 
-      className="sm:hidden fixed bottom-0 left-0 right-0 z-nav pointer-events-none"
+    <div
+      className="hidden fixed bottom-0 left-0 right-0 z-nav pointer-events-none"
       style={{ 
         paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' 
       }}
