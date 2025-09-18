@@ -64,10 +64,10 @@ export default function Navbar() {
 
   const headerClass = useMemo(
     () =>
-      `sticky top-0 backdrop-blur-md transition-all duration-200 ${
-        scrolled 
-          ? "bg-surface/90 border-b border-border shadow-soft" 
-          : "bg-surface/40"
+      `fixed top-0 left-0 right-0 w-full backdrop-blur-md transition-all duration-200 ${
+        scrolled
+          ? "bg-surface/95 border-b border-border shadow-soft"
+          : "bg-surface/70"
       }`,
     [scrolled]
   );
@@ -81,8 +81,9 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header 
-        className={`${headerClass} z-nav`}
+      <motion.header
+        className={headerClass}
+        style={{ zIndex: 50 }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
@@ -129,9 +130,9 @@ export default function Navbar() {
                 asChild
                 variant="primary"
                 size="sm"
-                className="font-medium"
+                className="font-medium bg-accent hover:bg-accent/90 text-white shadow-md hover:shadow-lg transition-all duration-200"
               >
-                <a 
+                <a
                   href="/AbdarrahmanAyyazResume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -261,9 +262,9 @@ export default function Navbar() {
                     asChild
                     variant="primary"
                     size="lg"
-                    className="w-full h-14 text-lg font-semibold rounded-2xl"
+                    className="w-full h-14 text-lg font-semibold rounded-2xl bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                   >
-                    <a 
+                    <a
                       href="/AbdarrahmanAyyazResume.pdf"
                       onClick={() => setOpen(false)}
                       target="_blank"

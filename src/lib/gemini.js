@@ -3,51 +3,35 @@ import projectCards from "../context/project_cards.json";
 import aboutCards from "../context/about_cards.json";
 
 const apiKey = process.env.REACT_APP_GOOGLE_GEMINI_API_KEY;
-console.log('Gemini API Key:', apiKey ? `Present (${apiKey.substring(0, 10)}...)` : 'Missing');
-console.log('Full API Key for debugging:', apiKey);
+
+// Debug logging for API key (without exposing the key)
+if (apiKey) {
+  console.log('✅ API key detected, length:', apiKey.length, 'prefix:', apiKey.substring(0, 6) + '...');
+} else {
+  console.warn('❌ No API key found in environment variables');
+}
 
 // Test API key validity
 const testApiKey = async () => {
   if (apiKey) {
     try {
-      console.log('Testing API key:', apiKey);
       const testAI = new GoogleGenerativeAI(apiKey);
-      const model = testAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const model = testAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const result = await model.generateContent("Hello, are you working?");
       const text = await result.response.text();
-      console.log('API Key test: SUCCESS - Response:', text);
       return true;
     } catch (error) {
-      console.error('API Key test: FAILED', error);
-      console.error('Error details:', error.message);
       if (error.message.includes('API_KEY_INVALID')) {
-        console.error('The API key is invalid. Please get a new one from Google AI Studio.');
+        console.error('Invalid API key provided');
       }
       return false;
     }
   }
-  console.log('No API key provided');
   return false;
 };
 
 export const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
-// Test the API key on load
-if (apiKey) {
-  console.log('Starting immediate API key test...');
-  testApiKey().then(result => {
-    console.log('API Key validation result:', result);
-    if (result) {
-      console.log('✅ API key is working! The issue must be in the chat initialization.');
-    } else {
-      console.log('❌ API key failed the test.');
-    }
-  }).catch(error => {
-    console.error('API Key test crashed:', error);
-  });
-} else {
-  console.log('❌ No API key found in environment variables');
-}
 
 // ================= System Voice =================
 const SYSTEM_PROMPT = `
@@ -86,6 +70,9 @@ const getIntent = (msg) => {
   if (/(who are you|about you|tell me about yourself|hobbies|interests|outside work|what do you like|coffee chat|coffee|network|family|community|volunteer)/.test(t))
     return 'personal';
 
+  if (/(where do you work|current work|current job|current role|employment|work at|working at|job at|oracle|employer|current company|work experience|career|professional background)/.test(t))
+    return 'work';
+
   if (/(architecture|stack|schema|latency|auth|embedding|rag|drizzle|postgres|firebase|vector|retrieval)/.test(t))
     return 'deep';
 
@@ -97,6 +84,7 @@ const getIntent = (msg) => {
 
 const styleHintFor = (intent) => ({
   personal: "Use Chatty style. Friendly and brief; avoid technical jargon. Offer a coffee chat if relevant.",
+  work: "Use Chatty style. Focus on current role, responsibilities, and professional experience.",
   casual:  "Use Chatty style. No bullets unless necessary.",
   project: "Use Chatty style + up to 3 concise Highlights if helpful.",
   deep:    "Use Deep Dive structure: Overview → Key pieces → Impact → Link/Next step."
@@ -113,7 +101,9 @@ const FEW_SHOTS = [
   { role: "user",  parts: [{ text: "give me the stack for TriagedAI" }]},
   { role: "model", parts: [{ text: "Overview: React/TS frontend, Express/TS backend, Postgres + Drizzle. AI: Perplexity API for context-aware suggestions. Auth: Firebase. Extras: optimistic updates, solution tracking, term tooltips. Want the data model next?" }]},
   { role: "user",  parts: [{ text: "what are you focused on now?" }]},
-  { role: "model", parts: [{ text: "RAG systems, vector databases, and shipping pragmatic AI in modern React/Next. I enjoy turning fuzzy problems into clean, testable components. Want to see a recent RAG prototype?" }]}
+  { role: "model", parts: [{ text: "RAG systems, vector databases, and shipping pragmatic AI in modern React/Next. I enjoy turning fuzzy problems into clean, testable components. Want to see a recent RAG prototype?" }]},
+  { role: "user",  parts: [{ text: "where do you work?" }]},
+  { role: "model", parts: [{ text: "I'm a Technical Support Engineer at Oracle, where I help enterprise developers with debugging JavaScript, Java, and REST API issues. I also support CI/CD pipeline configuration using Oracle Cloud Developer Tools. Want to know more about my role or projects?" }]}
 ];
 
 // ============== External Context (RAG-lite) ==============
@@ -121,7 +111,7 @@ const CONTEXT_SOURCES = [
   "/context/aa_portfolio_context.md",
   "/context/resume_context.md"
 ];
-const RAG_VERSION = "v5";                 // bump when the MD changes
+const RAG_VERSION = "v6";                 // bump when the MD changes
 const MAX_CHUNK_CHARS = 1000;              // smaller chunks for better conversation flow
 const TOP_K = 3;
 
@@ -152,14 +142,11 @@ const cosine = (a, b) => {
 
 const embedModel = () => {
   try {
-    console.log('Creating embedding model with text-embedding-004');
     return genAI.getGenerativeModel({ model: "text-embedding-004" });
   } catch (error) {
-    console.warn('text-embedding-004 failed, falling back to embedding-001:', error);
     try {
       return genAI.getGenerativeModel({ model: "embedding-001" });
     } catch (fallbackError) {
-      console.error('Both embedding models failed:', fallbackError);
       throw fallbackError;
     }
   }
@@ -173,23 +160,18 @@ const embedText = async (m, text) => {
 
 export const warmRagFromPublic = async (sources = CONTEXT_SOURCES) => {
   if (!genAI) {
-    console.log('warmRagFromPublic: No genAI instance, skipping RAG initialization');
     return;
   }
   try {
-    console.log('warmRagFromPublic: Starting RAG initialization with multiple sources...');
     const cached = localStorage.getItem(`AA_RAG_${RAG_VERSION}`);
     if (cached) {
-      console.log('warmRagFromPublic: Loading cached RAG data');
       const { chunks, vectors } = JSON.parse(cached);
       RAG_STATE.chunks = chunks;
       RAG_STATE.vectors = vectors.map(v => new Float32Array(v));
       RAG_STATE.loaded = true;
-      console.log(`warmRagFromPublic: Loaded ${chunks.length} cached chunks`);
       return;
     }
 
-    console.log(`warmRagFromPublic: Fetching context from ${sources.length} sources`);
     let combinedText = '';
 
     for (const source of sources) {
@@ -201,14 +183,12 @@ export const warmRagFromPublic = async (sources = CONTEXT_SOURCES) => {
         }
         const text = await res.text();
         combinedText += `\n\n=== ${source} ===\n\n${text}`;
-        console.log(`warmRagFromPublic: Loaded ${source}`);
       } catch (err) {
         console.warn(`Error fetching ${source}:`, err);
       }
     }
 
     const chunks = splitIntoChunks(combinedText);
-    console.log(`warmRagFromPublic: Created ${chunks.length} chunks from ${sources.length} sources`);
 
     const m = embedModel();
     const vectors = [];
@@ -222,7 +202,6 @@ export const warmRagFromPublic = async (sources = CONTEXT_SOURCES) => {
       chunks,
       vectors: vectors.map(v => Array.from(v)),
     }));
-    console.log('warmRagFromPublic: RAG initialization complete with full context');
   } catch (e) {
     console.warn("RAG warm failed; continuing without it.", e);
     RAG_STATE = { chunks: [], vectors: [], loaded: false };
@@ -232,7 +211,6 @@ export const warmRagFromPublic = async (sources = CONTEXT_SOURCES) => {
 // ============== Enhanced RAG Retrieval ==============
 const retrieveTopK = async (query, k = TOP_K) => {
   if (!genAI || !RAG_STATE.loaded || !RAG_STATE.chunks.length) {
-    console.log('retrieveTopK: RAG not ready, using project cards fallback');
     // Fallback to project cards with keyword matching
     const queryLower = query.toLowerCase();
     const relevant = projectCards.filter(card =>
@@ -244,14 +222,12 @@ const retrieveTopK = async (query, k = TOP_K) => {
   }
 
   try {
-    console.log('retrieveTopK: Processing query with full RAG:', query.substring(0, 50) + '...');
     const m = embedModel();
     const qv = await embedText(m, query);
     const scored = RAG_STATE.vectors.map((v, i) => ({ i, score: cosine(qv, v) }))
                                     .sort((a, b) => b.score - a.score)
                                     .slice(0, k)
                                     .map(({ i }) => RAG_STATE.chunks[i].text);
-    console.log('retrieveTopK: Found', scored.length, 'relevant passages with RAG');
     return scored;
   } catch (error) {
     console.error('retrieveTopK: Error during RAG retrieval:', error);
@@ -280,9 +256,6 @@ const buildContextFromSources = (sources) => {
 
 // ============== Chat Lifecycle ==============
 export const initializeGeminiChat = () => {
-  console.log('initializeGeminiChat: Starting chat initialization');
-  console.log('API Key present:', !!apiKey);
-  console.log('genAI instance:', !!genAI);
 
   if (!genAI) {
     console.error("initializeGeminiChat: Gemini API not initialized - API key missing");
@@ -290,15 +263,13 @@ export const initializeGeminiChat = () => {
   }
 
   // Initialize RAG system
-  console.log('initializeGeminiChat: Starting RAG initialization...');
   warmRagFromPublic().catch(err => {
     console.warn('RAG initialization failed, continuing with basic cards:', err);
   });
 
   try {
-    console.log('initializeGeminiChat: Creating model instance with gemini-2.0-flash');
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
+      model: "gemini-1.5-flash",
       generationConfig: {
         maxOutputTokens: 550,
         temperature: 0.6,
@@ -306,7 +277,6 @@ export const initializeGeminiChat = () => {
       },
     });
 
-    console.log('initializeGeminiChat: Model created, starting chat with history');
     const chat = model.startChat({
       history: [
         { role: "user", parts: [{ text: SYSTEM_PROMPT }]},
@@ -315,7 +285,6 @@ export const initializeGeminiChat = () => {
       ],
     });
 
-    console.log('initializeGeminiChat: Chat instance created successfully');
     return chat;
   } catch (error) {
     console.error('initializeGeminiChat: Error creating chat instance:', error);
@@ -326,33 +295,58 @@ export const initializeGeminiChat = () => {
   }
 };
 
-export const sendMessageToGemini = async (chat, message, retrievedCards = []) => {
+export const sendMessageToGemini = async (chat, message, options = {}) => {
+  const { expand = false, retrievedCards = [] } = typeof options === 'object' && !Array.isArray(options) ? options : { retrievedCards: options };
   try {
     const intent = getIntent(message);
     const styleHint = styleHintFor(intent);
 
-    // choose which cards to prioritize
-    const baseCards =
-      intent === 'personal' ? aboutCards
-      : intent === 'project' || intent === 'deep' ? projectCards
-      : []; // casual → no extra context unless needed
+    // Use RAG for work, personal, and deep questions
+    let contextBlock = "";
 
-    // if your retriever returns cards, prefer those; else fall back to base set
-    const cardsToUse = retrievedCards.length ? retrievedCards : baseCards;
+    if (intent === 'work' || intent === 'personal' || intent === 'deep') {
+      try {
+        const ragResults = await retrieveTopK(message, TOP_K);
+        if (ragResults && ragResults.length > 0) {
+          contextBlock = buildContextFromSources(ragResults);
+        }
+      } catch (error) {
+        console.warn('RAG retrieval failed, falling back to cards:', error);
+      }
+    }
 
-    const contextBlock = cardsToUse.length
-      ? `Use these fact cards when helpful:\n${buildCardContext(cardsToUse)}\n`
-      : "";
+    // Fallback to card-based context if RAG didn't provide results
+    if (!contextBlock) {
+      const baseCards =
+        intent === 'personal' ? aboutCards
+        : intent === 'project' || intent === 'deep' ? projectCards
+        : []; // casual → no extra context unless needed
+
+      // if your retriever returns cards, prefer those; else fall back to base set
+      const cardsToUse = retrievedCards.length ? retrievedCards : baseCards;
+
+      contextBlock = cardsToUse.length
+        ? `Use these fact cards when helpful:\n${buildCardContext(cardsToUse)}\n`
+        : "";
+    }
 
     const finalPrompt = `${styleHint}\n\n${contextBlock}${message}`;
-
-    console.log('sendMessageToGemini: Intent:', intent, 'Cards:', cardsToUse.length, 'RAG loaded:', RAG_STATE.loaded);
 
     const result = await chat.sendMessage(finalPrompt);
     const response = await result.response;
     return response.text();
   } catch (err) {
     console.error("Gemini API Error:", err);
+
+    // More specific error handling
+    if (err.message?.includes('API_KEY_INVALID')) {
+      return "I'm having trouble with authentication right now. You can browse the projects above while I work on this.";
+    } else if (err.message?.includes('PERMISSION_DENIED')) {
+      return "I'm having permission issues right now. You can explore the portfolio sections above.";
+    } else if (err.message?.includes('QUOTA_EXCEEDED')) {
+      return "I've reached my usage limit for now. Feel free to browse the projects above or try again later.";
+    }
+
     return "I'm having trouble right now. You can browse the projects above or try again in a moment.";
   }
 };

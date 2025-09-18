@@ -82,7 +82,7 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
 
   return (
     <div className="space-y-3">
-      <form onSubmit={handleSubmit} className="p-3 sm:p-6 border-t" style={{ borderTopColor: `rgba(${theme?.colors?.accentRgb || '99, 102, 241'}, 0.2)` }}>
+      <form onSubmit={handleSubmit} className="p-3 sm:p-6 border-t" style={{ borderTopColor: `rgba(${theme?.colors?.accentRgb || '31, 41, 55'}, 0.2)` }}>
         <div className="flex gap-2 sm:gap-3 items-end">
           <div className="flex-1">
             <textarea
@@ -105,11 +105,11 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
                 minHeight: '48px',
                 maxHeight: '120px',
                 backgroundColor: `rgba(255, 255, 255, 0.95)`,
-                borderColor: `rgba(${theme?.colors?.accentRgb || '99, 102, 241'}, 0.4)`,
+                borderColor: `rgba(${theme?.colors?.accentRgb || '31, 41, 55'}, 0.4)`,
                 color: '#1f2937',
-                '--tw-ring-color': `rgba(${theme?.colors?.accentRgb || '99, 102, 241'}, 0.6)`,
+                '--tw-ring-color': `rgba(${theme?.colors?.accentRgb || '31, 41, 55'}, 0.6)`,
                 transform: isFocused ? 'scale(1.02)' : 'scale(1)',
-                boxShadow: isFocused ? '0 8px 25px rgba(139, 92, 246, 0.2)' : 'none'
+                boxShadow: isFocused ? '0 8px 25px rgba(31, 41, 55, 0.2)' : 'none'
               }}
             />
           </div>
@@ -136,16 +136,16 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
               shadow-soft hover:shadow-hover active:scale-95
             "
             style={{
-              backgroundColor: theme?.colors?.button || '#6366f1',
+              backgroundColor: theme?.colors?.button || '#1f2937',
               ':hover': {
-                backgroundColor: theme?.colors?.buttonHover || '#5b5bd6'
+                backgroundColor: theme?.colors?.buttonHover || '#374151'
               }
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = theme?.colors?.buttonHover || '#5b5bd6';
+              e.target.style.backgroundColor = theme?.colors?.buttonHover || '#374151';
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = theme?.colors?.button || '#6366f1';
+              e.target.style.backgroundColor = theme?.colors?.button || '#1f2937';
             }}
           >
             <Send size={18} className="text-white" />

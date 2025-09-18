@@ -86,8 +86,8 @@ const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
               {formatTimestamp(timestamp)}
             </span>
             <div className="flex items-center gap-1 ml-1 sm:ml-2">
-              <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-xs text-green-400 font-medium">Online</span>
+              <div className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">Online</span>
             </div>
           </motion.div>
         )}
@@ -118,7 +118,7 @@ const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
         >
           {/* Subtle animated background effect for AI messages */}
           {isAI && (
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-800/5 to-gray-700/5 animate-pulse"></div>
           )}
 
           <div className="relative z-10">
@@ -171,8 +171,8 @@ const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
             >
               {copied ? (
                 <>
-                  <Check size={12} className="text-green-400" />
-                  <span className="text-xs text-green-400 font-medium hidden sm:inline">Copied!</span>
+                  <Check size={12} className="text-gray-600 dark:text-gray-400" />
+                  <span className="text-xs text-gray-600 dark:text-gray-400 font-medium hidden sm:inline">Copied!</span>
                 </>
               ) : (
                 <>

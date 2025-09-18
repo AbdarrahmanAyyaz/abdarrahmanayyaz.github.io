@@ -17,13 +17,19 @@ module.exports = {
         accent: "hsl(var(--accent))",
         accent2: "hsl(var(--accent-2))",
         ring: "hsl(var(--ring))",
-        
+
         // Semantic colors
         success: "hsl(var(--success))",
         info: "hsl(var(--info))",
         warning: "hsl(var(--warning))",
         danger: "hsl(var(--danger))",
-        
+
+        // Design system color tokens for Button component
+        primary: "hsl(var(--accent))",
+        "primary-foreground": "hsl(var(--surface))",
+        "card-foreground": "hsl(var(--text))",
+        "muted-foreground": "hsl(var(--muted))",
+
         // Legacy support (keep existing vars for backwards compatibility)
         background: "hsl(var(--bg))",
         card: "hsl(var(--surface))",

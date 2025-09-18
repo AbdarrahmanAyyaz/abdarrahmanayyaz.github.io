@@ -1,92 +1,86 @@
-import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/Card";
-import { Badge, Button } from "./ui";
+import React from 'react';
+import { ExternalLink, Github } from 'lucide-react';
+import { Badge, Button } from './ui';
 
-export default function ProjectCard({ title, img, summary, tags = [], live, code }) {
-  return (
-    <Card className="group overflow-hidden h-full flex flex-col" hover animate>
-      {/* Image */}
-      <div className="aspect-card overflow-hidden rounded-t-xl -m-6 mb-0">
-        <img 
-          src={img} 
-          alt={title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" 
-        />
-      </div>
-      
-      {/* Content */}
-      <CardHeader className="pb-3">
-        <CardTitle className="text-text group-hover:text-accent transition-colors">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-muted line-clamp-2">
-          {summary}
-        </CardDescription>
-      </CardHeader>
-
-      {/* Tags */}
-      <CardContent className="pt-0 flex-1">
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Badge
-              key={tag}
-              variant="secondary"
-              size="sm"
-              className="text-xs"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      </CardContent>
-
-      {/* Actions */}
-      <CardFooter className="pt-4 gap-3">
-        {live && (
-          <Button
-            asChild
-            variant="primary"
-            size="sm"
-            className="flex-1"
-          >
-            <a 
-              href={live} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </svg>
-              Live Demo
-            </a>
-          </Button>
-        )}
-        {code && (
-          <Button
-            asChild
-            variant="secondary"
-            size="sm"
-            className="flex-1"
-          >
-            <a 
-              href={code} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="m10 13 5 5 5-5"/>
-                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
-                <path d="M12 12v9"/>
-              </svg>
-              Code
-            </a>
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
-  );
+function shortDesc(p) {
+  const metric = p.highlights?.[0] ? `${p.highlights[0]} • ` : "";
+  const base = p.description ?? p.raw ?? "";
+  const oneLine = base.replace(/\s+/g, " ").trim();
+  const out = `${metric}${oneLine}`;
+  return out.length > 140 ? out.slice(0, 137) + "…" : out;
 }
+
+const ProjectCard = ({ project, className = "" }) => {
+  return (
+    <div className={`bg-card border border-border rounded-2xl shadow-lg overflow-hidden group hover:shadow-hover transition-shadow duration-300 ${className}`}>
+      {/* Cover Image */}
+      {project.image && (
+        <div className="h-40 sm:h-48 overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="p-4 sm:p-6">
+        {/* Title & Subtitle */}
+        <div className="mb-3">
+          <h3 className="text-xl font-semibold text-card-foreground mb-1 line-clamp-1">
+            {project.title}
+          </h3>
+          {project.subtitle && (
+            <p className="text-sm text-muted-foreground line-clamp-1">
+              {project.subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-card-foreground/80 mb-4 line-clamp-3">
+          {shortDesc(project)}
+        </p>
+
+        {/* Tags */}
+        {project.tags && project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.tags.slice(0, 3).map((tag) => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                size="sm"
+                className="text-xs"
+              >
+                {tag}
+              </Badge>
+            ))}
+            {project.tags.length > 3 && (
+              <Badge variant="secondary" size="sm" className="text-xs">
+                +{project.tags.length - 3}
+              </Badge>
+            )}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3">
+          {project.liveUrl && (
+            <Button asChild className="w-full sm:w-auto">
+              <a href={project.liveUrl} target="_blank" rel="noreferrer noopener">Live Demo</a>
+            </Button>
+          )}
+          {project.sourceUrl && (
+            <Button asChild variant="secondary" className="w-full sm:w-auto">
+              <a href={project.sourceUrl} target="_blank" rel="noreferrer noopener">Code</a>
+            </Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectCard;

@@ -99,19 +99,19 @@ const MessageFormatter = ({ text, className = "" }) => {
 
     // Format inline code with backticks
     formatted = formatted.replace(/`([^`]+)`/g,
-      '<code class="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 px-2 py-0.5 rounded-md text-purple-300 font-mono text-sm mx-1">$1</code>'
+      '<code class="bg-gray-800/30 border border-gray-600/30 px-2 py-0.5 rounded-md text-gray-200 font-mono text-sm mx-1">$1</code>'
     );
 
     // Auto-bold technical terms
     technicalTerms.forEach(term => {
       const regex = new RegExp(`\\b(${term})\\b`, 'g');
-      formatted = formatted.replace(regex, '<strong class="font-semibold text-purple-300 bg-gradient-to-r from-purple-500/5 to-blue-500/5 px-1 rounded">$1</strong>');
+      formatted = formatted.replace(regex, '<strong class="font-bold text-white bg-gray-800/20 px-1 rounded">$1</strong>');
     });
 
     // Highlight project names with special styling
     projectNames.forEach(project => {
       const regex = new RegExp(`\\b(${project})\\b`, 'g');
-      formatted = formatted.replace(regex, '<span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-400 after:to-blue-400 after:opacity-30">$1</span>');
+      formatted = formatted.replace(regex, '<span class="font-bold text-white relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black after:opacity-60">$1</span>');
     });
 
     // Format markdown-style bold **text**
@@ -122,17 +122,17 @@ const MessageFormatter = ({ text, className = "" }) => {
 
     // Format links [text](url)
     formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 underline underline-offset-2 decoration-purple-400/50 hover:decoration-purple-300 transition-colors">$1</a>'
+      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-white underline underline-offset-2 decoration-gray-400/50 hover:decoration-white transition-colors">$1</a>'
     );
 
     // Format bullet points with custom styling
     formatted = formatted.replace(/^• (.+)$/gm,
-      '<div class="flex items-start gap-3 my-2"><div class="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full mt-2 flex-shrink-0"></div><span class="text-gray-200 leading-relaxed">$1</span></div>'
+      '<div class="flex items-start gap-3 my-2"><div class="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0"></div><span class="text-gray-200 leading-relaxed">$1</span></div>'
     );
 
     // Format numbered lists
     formatted = formatted.replace(/^\d+\.\s+(.+)$/gm,
-      '<div class="flex items-start gap-3 my-2"><div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">•</div><span class="text-gray-200 leading-relaxed">$1</span></div>'
+      '<div class="flex items-start gap-3 my-2"><div class="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">•</div><span class="text-gray-200 leading-relaxed">$1</span></div>'
     );
 
     // Convert line breaks
@@ -169,9 +169,9 @@ const MessageFormatter = ({ text, className = "" }) => {
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 bg-red-500/80 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-500/80 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500/80 rounded-full"></div>
+                    <div className="w-3 h-3 bg-gray-500/80 rounded-full"></div>
                   </div>
-                  <span className="text-xs font-mono text-purple-300 bg-purple-500/10 px-2 py-1 rounded-md border border-purple-500/20 uppercase tracking-wider">
+                  <span className="text-xs font-mono text-gray-400 bg-gray-500/10 px-2 py-1 rounded-md border border-gray-500/20 uppercase tracking-wider">
                     {language}
                   </span>
                 </div>
@@ -183,8 +183,8 @@ const MessageFormatter = ({ text, className = "" }) => {
                 >
                   {isCopied ? (
                     <>
-                      <Check size={14} className="text-green-400" />
-                      <span className="text-green-400">Copied!</span>
+                      <Check size={14} className="text-gray-600 dark:text-gray-400" />
+                      <span className="text-gray-600 dark:text-gray-400">Copied!</span>
                     </>
                   ) : (
                     <>

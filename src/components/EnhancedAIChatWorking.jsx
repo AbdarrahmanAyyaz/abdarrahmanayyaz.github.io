@@ -6,7 +6,6 @@ import { useChatThemeStandalone } from '../hooks/useChatTheme';
 import ChatMessageSimple from './ChatMessageSimple';
 import ChatInput from './ChatInput';
 import TypingIndicator from './TypingIndicator';
-import ChatThemeSelector from './ChatThemeSelector';
 import profileImage from '../assets/NewPic.png';
 
 const categoryData = {
@@ -60,7 +59,7 @@ const EnhancedAIChatWorking = ({
   onToggleFocus,
   getChatIcon
 }) => {
-  const { currentTheme, theme, changeTheme } = useChatThemeStandalone();
+  const { theme } = useChatThemeStandalone();
   const [chatSessions, setChatSessions] = useState({});
   const [currentChatId] = useState(1);
   const [isTyping, setIsTyping] = useState(false);
@@ -299,8 +298,8 @@ const EnhancedAIChatWorking = ({
                   <button
                     onClick={onToggleSize}
                     className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
-                              bg-gray-100 text-purple-600 border-purple-600/20 hover:bg-gray-200 hover:border-purple-600/40
-                              dark:bg-slate-700/50 dark:text-purple-400 dark:border-purple-400/20 dark:hover:bg-slate-600/50 dark:hover:border-purple-400/40"
+                              bg-gray-100 text-gray-700 border-gray-400/30 hover:bg-gray-200 hover:border-gray-500/40
+                              dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20 dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40"
                     title={chatSize === 'fullscreen' ? 'Minimize chat' : 'Expand chat'}
                   >
                     {getChatIcon && React.createElement(getChatIcon(), { size: 14 })}
@@ -310,8 +309,8 @@ const EnhancedAIChatWorking = ({
                   <button
                     onClick={onToggleFocus}
                     className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
-                              bg-gray-100 text-purple-600 border-purple-600/20 hover:bg-gray-200 hover:border-purple-600/40
-                              dark:bg-slate-700/50 dark:text-purple-400 dark:border-purple-400/20 dark:hover:bg-slate-600/50 dark:hover:border-purple-400/40"
+                              bg-gray-100 text-gray-700 border-gray-400/30 hover:bg-gray-200 hover:border-gray-500/40
+                              dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20 dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40"
                     title="Focus mode"
                   >
                     <Focus size={14} />
@@ -320,18 +319,13 @@ const EnhancedAIChatWorking = ({
               </div>
             )}
 
-            {/* Theme Selector */}
-            <ChatThemeSelector
-              currentTheme={currentTheme}
-              onThemeChange={changeTheme}
-            />
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             <div
               className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 border-white/20 flex-shrink-0 overflow-hidden"
               style={{
-                boxShadow: `0 0 30px rgba(${theme.colors.accentRgb}, 0.4)`
+                boxShadow: `0 0 30px rgba(100, 100, 100, 0.3)`
               }}
             >
               <img
@@ -396,10 +390,10 @@ const EnhancedAIChatWorking = ({
                       relative px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                       touch-manipulation min-h-[44px]
-                      bg-gray-100 text-purple-600 border-purple-600/20
-                      hover:bg-gray-200 hover:border-purple-600/40
-                      dark:bg-slate-700/50 dark:text-purple-400 dark:border-purple-400/20
-                      dark:hover:bg-slate-600/50 dark:hover:border-purple-400/40
+                      bg-gray-100 text-gray-700 border-gray-400/30
+                      hover:bg-gray-200 hover:border-gray-500/40
+                      dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
+                      dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
                     "
                     whileHover={{
                       scale: 1.02,
@@ -435,10 +429,10 @@ const EnhancedAIChatWorking = ({
                           px-3 py-2.5 rounded-lg border text-xs sm:text-sm text-left transition-all duration-200
                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                           touch-manipulation min-h-[44px]
-                          bg-gray-50 text-gray-700 border-purple-600/15
-                          hover:bg-gray-100 hover:border-purple-600/30 hover:text-gray-900
-                          dark:bg-slate-700/30 dark:text-gray-300 dark:border-purple-400/15
-                          dark:hover:bg-slate-600/40 dark:hover:border-purple-400/30 dark:hover:text-white
+                          bg-gray-50 text-gray-700 border-gray-400/20
+                          hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
+                          dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
+                          dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
                         "
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}

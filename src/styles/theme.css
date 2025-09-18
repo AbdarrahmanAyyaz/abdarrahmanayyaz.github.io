@@ -6,13 +6,13 @@
   --text: 222 47% 8%;          /* darker text for better readability */
   --muted: 215 25% 28%;        /* darker muted text for better contrast */
   --border: 214 32% 88%;       /* slightly more prominent borders */
-  --accent: 245 58% 48%;       /* slightly darker for better contrast */
-  --accent-2: 262 83% 55%;     /* slightly darker violet */
+  --accent: 220 13% 18%;       /* dark gray for professional look */
+  --accent-2: 220 13% 25%;     /* slightly lighter gray */
   --ring: 236 83% 70%;         /* focus ring color */
   --shadow: 220 40% 2%;        /* shadow color base */
   
   /* Semantic colors */
-  --success: 142 76% 36%;      /* emerald-500 */
+  --success: 220 13% 40%;      /* gray-600 */
   --info: 199 89% 48%;         /* sky-500 */
   --warning: 38 92% 50%;       /* amber-500 */
   --danger: 0 84% 60%;         /* red-500 */
@@ -97,13 +97,13 @@
   --text: 210 40% 98%;         /* slate-50 equivalent */
   --muted: 215 20% 65%;        /* slate-400 equivalent */
   --border: 217 19% 27%;       /* slate-700 equivalent */
-  --accent: 245 58% 60%;       /* lighter indigo in dark */
-  --accent-2: 262 83% 66%;     /* lighter violet in dark */
+  --accent: 220 13% 70%;       /* light gray for dark mode */
+  --accent-2: 220 13% 75%;     /* lighter gray for dark mode */
   --ring: 236 83% 75%;         /* same focus ring */
   --shadow: 220 40% 2%;        /* deeper shadow in dark */
   
   /* Adjusted semantic colors for dark mode */
-  --success: 142 76% 46%;      /* emerald-400 */
+  --success: 220 13% 50%;      /* gray-500 */
   --info: 199 89% 58%;         /* sky-400 */
   --warning: 38 92% 60%;       /* amber-400 */
   --danger: 0 84% 70%;         /* red-400 */

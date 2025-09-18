@@ -6,14 +6,14 @@ export const CHAT_THEMES = {
   default: {
     name: 'Professional',
     colors: {
-      primary: '#6366f1, #8b5cf6',
+      primary: '#1f2937, #374151',
       surface: 'rgba(255,255,255,0.98), rgba(248,250,252,0.95), rgba(255,255,255,0.98)',
-      header: 'rgba(255,255,255,0.85), rgba(99,102,241,0.08), rgba(255,255,255,0.85)',
-      accent: '6366f1',
-      accentRgb: '99, 102, 241',
-      avatar: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
-      button: '#6366f1',
-      buttonHover: '#5b5bd6'
+      header: 'rgba(255,255,255,0.85), rgba(31,41,59,0.05), rgba(255,255,255,0.85)',
+      accent: '1f2937',
+      accentRgb: '31, 41, 55',
+      avatar: 'linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%)',
+      button: '#1f2937',
+      buttonHover: '#374151'
     }
   },
   ocean: {
@@ -98,12 +98,10 @@ export const ChatThemeProvider = ({ children }) => {
 
     if (isManual && savedTheme && CHAT_THEMES[savedTheme]) {
       setCurrentTheme(savedTheme);
-      setIsManualSelection(true);
     } else {
       // Auto-select based on system theme
       const autoTheme = systemTheme === 'dark' ? 'minimal' : 'default';
       setCurrentTheme(autoTheme);
-      setIsManualSelection(false);
       console.log('ChatThemeProvider: Setting theme to:', autoTheme, 'for system theme:', systemTheme);
     }
   }, [systemTheme]);
@@ -112,7 +110,6 @@ export const ChatThemeProvider = ({ children }) => {
   const changeTheme = (themeId) => {
     if (CHAT_THEMES[themeId]) {
       setCurrentTheme(themeId);
-      setIsManualSelection(true);
       localStorage.setItem('chat-theme', themeId);
       localStorage.setItem('chat-theme-manual', 'true');
     }
@@ -149,7 +146,6 @@ export const useChatTheme = () => {
 export const useChatThemeStandalone = () => {
   const { theme: systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState('default');
-  const [isManualSelection, setIsManualSelection] = useState(false);
 
   // Single effect to handle both initialization and system theme changes
   useEffect(() => {
@@ -158,12 +154,10 @@ export const useChatThemeStandalone = () => {
 
     if (isManual && savedTheme && CHAT_THEMES[savedTheme]) {
       setCurrentTheme(savedTheme);
-      setIsManualSelection(true);
     } else {
       // Auto-select based on system theme
       const autoTheme = systemTheme === 'dark' ? 'minimal' : 'default';
       setCurrentTheme(autoTheme);
-      setIsManualSelection(false);
       console.log('useChatThemeStandalone: Setting theme to:', autoTheme, 'for system theme:', systemTheme);
     }
   }, [systemTheme]);
@@ -171,7 +165,6 @@ export const useChatThemeStandalone = () => {
   const changeTheme = (themeId) => {
     if (CHAT_THEMES[themeId]) {
       setCurrentTheme(themeId);
-      setIsManualSelection(true);
       localStorage.setItem('chat-theme', themeId);
       localStorage.setItem('chat-theme-manual', 'true');
     }
