@@ -49,12 +49,20 @@ const TypewriterText = ({
 
   return (
     <motion.span
-      className={`${className} ${showCursor ? 'typewriter-cursor' : ''}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5 }}
+      className={`${className} ${showCursor ? 'typewriter-cursor' : ''} inline-block`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
     >
-      {currentText}
+      <motion.span
+        key={currentTextIndex}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="inline-block"
+      >
+        {currentText}
+      </motion.span>
     </motion.span>
   );
 };

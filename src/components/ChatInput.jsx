@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import VoiceInput from './VoiceInput';
 
-const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my projects, skills, or experience...", theme }) => {
+const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my projects, skills, or experience...", theme, onFocus, onInputChange }) => {
   const [message, setMessage] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [currentPlaceholder, setCurrentPlaceholder] = useState('');
 
   const placeholders = [
-    "Ask about my projects...",
-    "Try: 'Show me TriagedAI'",
-    "What would you like to know?",
-    "Tell me about Oracle",
-    "How do you build AI?"
+    "Try: 'Show me your AI work'",
+    "What's your experience?",
+    "Tell me about your projects",
+    "Show me your best work",
+    "What technologies do you use?"
   ];
 
   // Rotating placeholder effect
@@ -26,7 +26,7 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [placeholders]);
 
   // Listen for auto-fill events from both quick actions and expandable pills
   useEffect(() => {
@@ -87,9 +87,15 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
           <div className="flex-1">
             <textarea
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => {
+                setMessage(e.target.value);
+                onInputChange?.(e.target.value);
+              }}
               onKeyDown={handleKeyPress}
-              onFocus={() => setIsFocused(true)}
+              onFocus={() => {
+                setIsFocused(true);
+                onFocus?.();
+              }}
               onBlur={() => setIsFocused(false)}
               placeholder={currentPlaceholder}
               disabled={disabled}

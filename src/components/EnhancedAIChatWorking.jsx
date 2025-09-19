@@ -57,7 +57,9 @@ const EnhancedAIChatWorking = ({
   isFocusMode = false,
   onToggleSize,
   onToggleFocus,
-  getChatIcon
+  getChatIcon,
+  onInputFocus,
+  onInputChange
 }) => {
   const { theme } = useChatThemeStandalone();
   const [chatSessions, setChatSessions] = useState({});
@@ -83,7 +85,7 @@ const EnhancedAIChatWorking = ({
           console.log('EnhancedAIChatWorking: Chat instance created successfully');
           const initialMessage = {
             id: 1,
-            text: "**Quick answer:** Hey! I'm Abdarrahman—AI & Cloud engineer. I can walk you through my work fast.\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, analytics\n• TriagedAI: context-aware troubleshooting\n• Brain Tumor Segmentation: BraTS, U-Net\n**Next step:** Ask about any project or say \"skills\".",
+            text: "**Quick answer:** Hey! I'm Abdarrahman—AI & Cloud engineer. I can walk you through my work fast.\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n**Next step:** Ask about any project or say \"skills\".",
             type: 'ai',
             timestamp: new Date()
           };
@@ -200,15 +202,25 @@ const EnhancedAIChatWorking = ({
         // Simple keyword-based responses for demo mode
         const lowerMessage = messageText.toLowerCase();
         if (lowerMessage.includes('triaged')) {
-          response = "TriagedAI is one of my flagship projects - an AI-powered technical support system that has helped hundreds of users solve production issues! It uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
+          response = "TriagedAI is one of my flagship projects - an AI-powered technical support system enabling **60% faster debugging** for production issues! It has helped hundreds of users and uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
         } else if (lowerMessage.includes('advancely')) {
-          response = "Advancely is my AI-powered personal development platform that helps people achieve their 5-year goals through intelligent habit tracking and personalized recommendations. Check out the Work section for more details!";
+          response = "Advancely is my AI-powered personal development platform with **1000+ users** achieving **40% habit improvement rates**. It helps people reach their 5-year goals through intelligent habit tracking and personalized recommendations. Check out the Work section for more details!";
         } else if (lowerMessage.includes('research') || lowerMessage.includes('brain') || lowerMessage.includes('tumor')) {
           response = "My brain tumor segmentation research achieved 98.3% accuracy using deep learning on MRI data. It's fascinating work combining AI with medical imaging - you can see the full details in my Work section!";
         } else if (lowerMessage.includes('skills') || lowerMessage.includes('technology') || lowerMessage.includes('tech')) {
           response = "I work with AI technologies like OpenAI and LangChain, frontend with React & Tailwind (4+ years), cloud platforms especially Oracle Cloud Infrastructure, and I'm currently exploring Vector DBs and RAG optimization. Check out my Skills section for the full breakdown!";
         } else if (lowerMessage.includes('collaborate') || lowerMessage.includes('work together') || lowerMessage.includes('hire')) {
           response = "I'd love to collaborate! I'm available for AI development projects, cloud infrastructure work, and frontend development. Feel free to reach out through my Contact form above or email me directly. Let's build something amazing together! 🚀";
+        } else if (lowerMessage.includes('experience') || lowerMessage.includes('background')) {
+          response = "I have **4+ years** of professional development experience, specializing in AI integration and cloud platforms. I've worked with React/TypeScript extensively, built production AI systems, and have experience with Oracle Cloud Infrastructure. My background spans both frontend development and machine learning research.";
+        } else if (lowerMessage.includes('education') || lowerMessage.includes('degree') || lowerMessage.includes('study')) {
+          response = "I have completed my Computer Science degree with a focus on AI and machine learning. My academic work included research in medical imaging AI, particularly brain tumor segmentation using deep learning techniques with 98.3% accuracy.";
+        } else if (lowerMessage.includes('location') || lowerMessage.includes('where') || lowerMessage.includes('remote')) {
+          response = "I'm based in [Location] and open to both remote and on-site opportunities. I have experience working with distributed teams and am comfortable with various collaboration tools.";
+        } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
+          response = "You can reach me through the quick action buttons above! 📧 Email me directly, connect on LinkedIn, or check out my GitHub. I typically respond within 24 hours and love discussing new opportunities and interesting projects.";
+        } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('website') || lowerMessage.includes('projects')) {
+          response = "This portfolio showcases my key projects: **Advancely** (1000+ users, habit tracking), **TriagedAI** (60% faster debugging), and my **research in medical AI** (98.3% accuracy). Each project demonstrates different aspects of my full-stack and AI capabilities.";
         }
         
         addMessage(currentChatId, response, 'ai');
@@ -457,6 +469,8 @@ const EnhancedAIChatWorking = ({
             disabled={isTyping}
             placeholder="Ask about my projects, skills, or experience..."
             theme={theme}
+            onFocus={onInputFocus}
+            onInputChange={onInputChange}
           />
         </div>
       </div>

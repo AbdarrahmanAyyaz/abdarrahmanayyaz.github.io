@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Maximize2, Minimize2 } from "lucide-react";
+import { Maximize2, Minimize2, Download, Github, Linkedin, Mail, FileText } from "lucide-react";
 import Section from "./Section";
 import ScrollCue from "./ScrollCue";
 import EnhancedAIChatWorking from "./EnhancedAIChatWorking";
@@ -39,8 +39,12 @@ const chatBubbleSpring = {
 };
 
 export default function Home() {
-  const [chatSize, setChatSize] = useState('compact'); // 'compact', 'expanded', 'fullscreen'
+  const [chatSize, setChatSize] = useState(() => {
+    // Initialize from localStorage, default to 'compact'
+    return localStorage.getItem('chatSize') || 'compact';
+  }); // 'compact', 'expanded', 'fullscreen'
   const [isFocusMode, setIsFocusMode] = useState(false);
+  const [hasUserTyped, setHasUserTyped] = useState(false);
 
   const handleQuestionSelect = (question) => {
     // This will be passed to the chat component to auto-fill the input
@@ -52,7 +56,9 @@ export default function Home() {
     const sizes = ['compact', 'expanded', 'fullscreen'];
     const currentIndex = sizes.indexOf(chatSize);
     const nextIndex = (currentIndex + 1) % sizes.length;
-    setChatSize(sizes[nextIndex]);
+    const newSize = sizes[nextIndex];
+    setChatSize(newSize);
+    localStorage.setItem('chatSize', newSize);
   };
 
   const toggleFocusMode = () => {
@@ -60,14 +66,19 @@ export default function Home() {
   };
 
   const getChatHeight = () => {
+    const isLandscape = window.innerHeight < window.innerWidth && window.innerHeight < 600;
+
     switch (chatSize) {
       case 'compact':
+        if (isLandscape) return '75vh'; // More height in landscape
         return window.innerWidth < 640 ? '50vh' : window.innerWidth < 768 ? '55vh' : '500px';
       case 'expanded':
+        if (isLandscape) return '85vh'; // More height in landscape
         return window.innerWidth < 640 ? '65vh' : window.innerWidth < 768 ? '70vh' : '75vh';
       case 'fullscreen':
-        return 'calc(100vh - 60px)';
+        return 'calc(100vh - 60px - env(safe-area-inset-top) - env(safe-area-inset-bottom))';
       default:
+        if (isLandscape) return '75vh';
         return window.innerWidth < 640 ? '50vh' : window.innerWidth < 768 ? '55vh' : '500px';
     }
   };
@@ -76,10 +87,32 @@ export default function Home() {
     return chatSize === 'fullscreen' ? Minimize2 : Maximize2;
   };
 
+  // Auto-expand handlers
+  const handleChatInputFocus = () => {
+    const isMobile = window.innerWidth < 768;
+
+    if (chatSize === 'compact') {
+      // On mobile, expand more aggressively after first interaction
+      const targetSize = isMobile && hasUserTyped ? 'expanded' : 'expanded';
+      setChatSize(targetSize);
+      localStorage.setItem('chatSize', targetSize);
+    }
+  };
+
+  const handleChatInputChange = (value) => {
+    if (value.length > 0 && !hasUserTyped) {
+      setHasUserTyped(true);
+      if (chatSize === 'compact') {
+        setChatSize('expanded');
+        localStorage.setItem('chatSize', 'expanded');
+      }
+    }
+  };
+
   return (
     <Section
       id="home"
-      className="relative w-full min-h-[95vh] text-text overflow-hidden animated-mesh"
+      className="relative w-full min-h-[95vh] text-text overflow-hidden animated-mesh floating-orbs"
     >
       {/* Subtle grid pattern - theme aware with reduced opacity in light mode */}
       <div
@@ -103,60 +136,112 @@ export default function Home() {
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
 
-        {/* Hero Section - Centered - Hide in focus mode */}
+        {/* Hero Section - Responsive Layout - Hide in focus mode */}
         {!isFocusMode && (
-          <div className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+          <div className="text-center md:text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
 
-          {/* Professional Photo */}
+          {/* Profile Section - Responsive Layout */}
           <motion.div
-            className="flex justify-center"
+            className="flex flex-col md:flex-col items-center justify-center mobile-profile-horizontal"
             variants={fadeUp}
             initial="hidden"
             animate="show"
           >
-            <div className="relative">
-              {/* Animated gradient border */}
-              <div className="absolute -inset-1 gradient-border rounded-full opacity-75"></div>
+            {/* Professional Photo Container */}
+            <div className="profile-image-container flex justify-center md:justify-center">
+              <div className="relative">
+                {/* Animated gradient border */}
+                <div className="absolute -inset-1 gradient-border rounded-full opacity-75"></div>
 
-              {/* Profile image with hover effect */}
-              <motion.img
-                src={profileImage}
-                alt="Abdarrahman Ayyaz"
-                className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl"
-                style={{ objectPosition: '70% 20%', transform: 'scale(1.6)' }}
-                whileHover={{ scale: 1.65 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              />
+                {/* Profile image with hover effect - Enhanced responsiveness */}
+                <motion.img
+                  src={profileImage}
+                  alt="Abdarrahman Ayyaz"
+                  className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full profile-image-responsive shadow-2xl"
+                  style={{
+                    objectPosition: '70% 20%',
+                    transform: 'scale(1.6)'
+                  }}
+                  whileHover={{ scale: 1.65 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                />
 
-              {/* Soft glow effect */}
-              <div className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(139,92,246,0.4)] pointer-events-none"></div>
+                {/* Enhanced glow effect */}
+                <div className="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(99,102,241,0.5)] pointer-events-none"></div>
+              </div>
+            </div>
+
+            {/* Profile Info */}
+            <div className="profile-info space-y-2 md:space-y-4">
+              {/* Name */}
+              <motion.h1
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text"
+                custom={1}
+                variants={fadeUp}
+                initial="hidden"
+                animate="show"
+              >
+                Abdarrahman Ayyaz
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted"
+                custom={2}
+                variants={fadeUp}
+                initial="hidden"
+                animate="show"
+              >
+                <TypewriterText
+                  texts={["AI & Cloud Engineer", "Full Stack Developer", "Problem Solver", "ML Enthusiast"]}
+                  className="text-muted"
+                  typingSpeed={80}
+                  deletingSpeed={40}
+                  pauseTime={2500}
+                />
+              </motion.p>
+
+              {/* Quick Action Buttons */}
+              <motion.div
+                className="flex justify-center md:justify-center gap-3 mt-4 md:mt-6"
+                custom={3}
+                variants={fadeUp}
+                initial="hidden"
+                animate="show"
+              >
+                {[
+                  { icon: FileText, label: "Resume", action: () => window.open('/AbdarrahmanAyyazResume.pdf', '_blank') },
+                  { icon: Linkedin, label: "LinkedIn", action: () => window.open('https://www.linkedin.com/in/abdarrahman-ayyaz/', '_blank') },
+                  { icon: Github, label: "GitHub", action: () => window.open('https://github.com/AbdarrahmanAyyaz', '_blank') },
+                  { icon: Mail, label: "Email", action: () => window.location.href = 'mailto:abdarrahmanayyaz00@gmail.com' }
+                ].map((item, index) => (
+                  <motion.button
+                    key={item.label}
+                    onClick={item.action}
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 quick-action-btn group relative"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 1.5 + index * 0.1, duration: 0.5, ease: "backOut" }}
+                    whileHover={{
+                      scale: 1.1,
+                      y: -5,
+                      boxShadow: "0 20px 25px -5px rgba(139, 92, 246, 0.4), 0 10px 10px -5px rgba(139, 92, 246, 0.04)"
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    title={item.label}
+                    aria-label={item.label}
+                  >
+                    <item.icon size={18} />
+                    {/* Responsive Tooltip */}
+                    <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                      {item.label}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
+                    </div>
+                  </motion.button>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
-
-          {/* Name */}
-          <motion.h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text"
-            custom={1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-          >
-            Abdarrahman Ayyaz
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted"
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-          >
-            <TypewriterText
-              texts={["AI & Cloud Engineer", "Problem Solver", "Full Stack Developer"]}
-              className="text-muted"
-            />
-          </motion.p>
 
         </div>
         )}
@@ -164,8 +249,13 @@ export default function Home() {
         {/* Chat Interface - Full Width */}
         <motion.div
           className={`w-full mx-auto px-2 sm:px-4 md:px-2 lg:px-0 transition-all duration-500 ${
-            isFocusMode ? 'fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4' : 'max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl relative'
+            isFocusMode ? 'fixed inset-0 z-50 bg-black/80 dark:bg-black/90 flex items-center justify-center p-4' : 'max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl relative'
           }`}
+          style={{
+            paddingBottom: isFocusMode || chatSize === 'fullscreen'
+              ? 'max(1rem, env(safe-area-inset-bottom))'
+              : undefined
+          }}
           custom={3}
           variants={fadeUp}
           initial="hidden"
@@ -174,12 +264,41 @@ export default function Home() {
           {/* Chat Section Header - Only show if not in focus mode */}
           {!isFocusMode && (
             <div className="text-center mb-3 sm:mb-4">
-              <h3 className="text-lg sm:text-xl font-semibold text-text">
-                Ask me something
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-text flex items-center justify-center gap-2">
+                Let's talk about me
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse online-indicator" title="Online"></span>
               </h3>
-              <p className="text-muted text-xs sm:text-sm mt-1 sm:mt-2 px-2">
-                Chat about my projects, experience, or technical expertise
+              <p className="text-muted text-xs sm:text-sm mt-1 sm:mt-2 px-2 max-w-sm mx-auto">
+                Ask about my projects, stack, or experience
               </p>
+
+              {/* Quick prompt chips - only show when compact */}
+              {chatSize === 'compact' && (
+                <motion.div
+                  className="flex flex-wrap justify-center gap-2 mt-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                >
+                  {['Best project?', 'Your stack?', 'AI experience?'].map((prompt, index) => (
+                    <motion.button
+                      key={prompt}
+                      onClick={() => {
+                        const event = new CustomEvent('autoFillQuestion', { detail: prompt });
+                        window.dispatchEvent(event);
+                      }}
+                      className="px-3 py-2 text-xs bg-accent/10 text-accent border border-accent/20 rounded-full hover:bg-accent/20 transition-all duration-200 touch-manipulation min-h-[44px] flex items-center justify-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.2 + index * 0.1, duration: 0.3 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {prompt}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              )}
             </div>
           )}
 
@@ -194,9 +313,12 @@ export default function Home() {
               background: 'rgba(255, 255, 255, 0.05)',
               borderColor: 'rgba(139, 92, 246, 0.3)',
               height: isFocusMode ? 'calc(100vh - 2rem)' : getChatHeight(),
-              transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "height 220ms ease-out, box-shadow 220ms ease-out",
               maxWidth: isFocusMode ? '100%' : '100%',
-              width: '100%'
+              width: '100%',
+              boxShadow: chatSize === 'expanded' || chatSize === 'fullscreen'
+                ? '0 25px 50px -12px rgba(139, 92, 246, 0.25)'
+                : '0 10px 25px -5px rgba(139, 92, 246, 0.1)'
             }}
           >
             <div className={`flex flex-col h-full transition-all duration-300`}>
@@ -207,6 +329,8 @@ export default function Home() {
                 onToggleSize={toggleChatSize}
                 onToggleFocus={toggleFocusMode}
                 getChatIcon={getChatIcon}
+                onInputFocus={handleChatInputFocus}
+                onInputChange={handleChatInputChange}
               />
             </div>
           </motion.div>
@@ -216,18 +340,51 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="absolute top-4 right-4 text-white/70 text-sm"
+              className="absolute top-4 right-4 text-white/70 dark:text-white/80 text-sm"
             >
               Press ESC to exit focus mode
             </motion.div>
           )}
         </motion.div>
 
+        {/* Work Preview Section */}
+        {!isFocusMode && (
+          <motion.div
+            className="work-preview mt-8 sm:mt-12 w-full max-w-4xl"
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+          >
+            <h2>See My Impact</h2>
+            <p>From solving enterprise production issues to serving thousands with AI solutions</p>
+
+            <button className="explore-work-btn" onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}>
+              Explore My Work →
+            </button>
+
+            <div className="impact-stats">
+              <div className="stat">
+                <span className="number">3+</span>
+                <span className="label">AI Products</span>
+              </div>
+              <div className="stat">
+                <span className="number">1K+</span>
+                <span className="label">Users Impacted</span>
+              </div>
+              <div className="stat">
+                <span className="number">60%</span>
+                <span className="label">Efficiency Gains</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Scroll Cue */}
         {!isFocusMode && (
           <motion.div
             className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex justify-center pb-4 sm:pb-0"
-            custom={4}
+            custom={5}
             variants={fadeUp}
             initial="hidden"
             animate="show"
@@ -235,6 +392,21 @@ export default function Home() {
             <ScrollCue />
           </motion.div>
         )}
+
+
+        {/* Mobile Contact FAB */}
+        <button
+          className="fab-resume group"
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          aria-label="Contact"
+        >
+          💬
+          {/* Responsive Tooltip */}
+          <div className="absolute bottom-full mb-2 right-0 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+            Contact
+            <div className="absolute top-full right-2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
+          </div>
+        </button>
 
       </div>
     </Section>
