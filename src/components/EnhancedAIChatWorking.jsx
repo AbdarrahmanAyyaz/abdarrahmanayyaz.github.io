@@ -81,11 +81,11 @@ const EnhancedAIChatWorking = ({
           // Warm external context (fetch + embed + cache all sources)
           await warmRagFromPublic();
           console.log('EnhancedAIChatWorking: RAG warming complete, creating chat instance...');
-          const chatInstance = initializeGeminiChat();
+          const chatInstance = await initializeGeminiChat();
           console.log('EnhancedAIChatWorking: Chat instance created successfully');
           const initialMessage = {
             id: 1,
-            text: "**Quick answer:** Hey! I'm Abdarrahman—AI & Cloud engineer. I can walk you through my work fast.\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n**Next step:** Ask about any project or say \"skills\".",
+            text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask about any project or say \"skills\".",
             type: 'ai',
             timestamp: new Date()
           };
@@ -133,12 +133,19 @@ const EnhancedAIChatWorking = ({
     initializeFirstChat();
   }, []);
 
-  // Auto-scroll to bottom within chat container only
+  // Auto-scroll to top for initial message, bottom for new messages
   useEffect(() => {
     if (messagesEndRef.current) {
       const chatContainer = messagesEndRef.current.closest('.chat-messages');
       if (chatContainer) {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+        const currentMessages = chatSessions[currentChatId]?.messages || [];
+        // If this is the first message (welcome), scroll to top
+        if (currentMessages.length === 1) {
+          chatContainer.scrollTop = 0;
+        } else {
+          // For new messages, scroll to bottom
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
       }
     }
   }, [chatSessions, currentChatId, isTyping]);
@@ -352,7 +359,7 @@ const EnhancedAIChatWorking = ({
                 AI Abdarrahman
               </h2>
               <p className="text-muted mt-0.5 sm:mt-1 text-xs sm:text-sm">
-                AI & Cloud Engineer
+                AI & Cloud Support Engineer
               </p>
             </div>
           </div>
@@ -384,83 +391,85 @@ const EnhancedAIChatWorking = ({
         </div>
 
 
-        {/* Quick Action Pills */}
-        <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700">
-          <div className="space-y-3 sm:space-y-4">
-            {/* Category Pills */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {Object.entries(categoryData).map(([key, category]) => {
+        {/* Show Quick Action Pills above input only when no conversation has started */}
+        {currentMessages.length <= 1 && (
+          <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700">
+            <div className="space-y-3 sm:space-y-4">
+              {/* Category Pills */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {Object.entries(categoryData).map(([key, category]) => {
 
-                return (
-                  <motion.button
-                    key={key}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCategoryClick(key);
-                    }}
-                    className="
-                      relative px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200
-                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                      touch-manipulation min-h-[44px]
-                      bg-gray-100 text-gray-700 border-gray-400/30
-                      hover:bg-gray-200 hover:border-gray-500/40
-                      dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
-                      dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
-                    "
-                    whileHover={{
-                      scale: 1.02,
-                      transition: { duration: 0.2, ease: "easeOut" }
-                    }}
-                    whileTap={{ scale: 0.98 }}
+                  return (
+                    <motion.button
+                      key={key}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCategoryClick(key);
+                      }}
+                      className="
+                        relative px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                        touch-manipulation min-h-[44px]
+                        bg-gray-100 text-gray-700 border-gray-400/30
+                        hover:bg-gray-200 hover:border-gray-500/40
+                        dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
+                        dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
+                      "
+                      whileHover={{
+                        scale: 1.02,
+                        transition: { duration: 0.2, ease: "easeOut" }
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div className="flex items-center justify-center gap-1.5 sm:gap-2">
+                        <span className="text-sm">{category.icon}</span>
+                        <span className="font-medium text-xs sm:text-sm truncate">{category.label}</span>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Expanded Questions */}
+              <AnimatePresence>
+                {expandedCategory && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
                   >
-                    <div className="flex items-center justify-center gap-1.5 sm:gap-2">
-                      <span className="text-sm">{category.icon}</span>
-                      <span className="font-medium text-xs sm:text-sm truncate">{category.label}</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                      {categoryData[expandedCategory].questions.map((question, index) => (
+                        <motion.button
+                          key={index}
+                          onClick={() => handleQuestionClick(question)}
+                          className="
+                            px-3 py-2.5 rounded-lg border text-xs sm:text-sm text-left transition-all duration-200
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                            touch-manipulation min-h-[44px]
+                            bg-gray-50 text-gray-700 border-gray-400/20
+                            hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
+                            dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
+                            dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
+                          "
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          whileHover={{ scale: 1.01 }}
+                          whileTap={{ scale: 0.99 }}
+                        >
+                          {question}
+                        </motion.button>
+                      ))}
                     </div>
-                  </motion.button>
-                );
-              })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-
-            {/* Expanded Questions */}
-            <AnimatePresence>
-              {expandedCategory && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className="overflow-hidden"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
-                    {categoryData[expandedCategory].questions.map((question, index) => (
-                      <motion.button
-                        key={index}
-                        onClick={() => handleQuestionClick(question)}
-                        className="
-                          px-3 py-2.5 rounded-lg border text-xs sm:text-sm text-left transition-all duration-200
-                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                          touch-manipulation min-h-[44px]
-                          bg-gray-50 text-gray-700 border-gray-400/20
-                          hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
-                          dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
-                          dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
-                        "
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                      >
-                        {question}
-                      </motion.button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
-        </div>
+        )}
 
         {/* Chat Input */}
         <div className="flex-shrink-0">
@@ -473,6 +482,91 @@ const EnhancedAIChatWorking = ({
             onInputChange={onInputChange}
           />
         </div>
+
+        {/* Show Quick Action Pills below input when conversation has started */}
+        {currentMessages.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700"
+          >
+            <div className="space-y-3 sm:space-y-4">
+              {/* Category Pills */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {Object.entries(categoryData).map(([key, category]) => {
+
+                  return (
+                    <motion.button
+                      key={key}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCategoryClick(key);
+                      }}
+                      className="
+                        relative px-2 py-2 sm:px-3 sm:py-2.5 rounded-lg border transition-all duration-200
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                        touch-manipulation min-h-[40px]
+                        bg-gray-100 text-gray-700 border-gray-400/30
+                        hover:bg-gray-200 hover:border-gray-500/40
+                        dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
+                        dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
+                      "
+                      whileHover={{
+                        scale: 1.02,
+                        transition: { duration: 0.2, ease: "easeOut" }
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div className="flex items-center justify-center gap-1 sm:gap-1.5">
+                        <span className="text-xs">{category.icon}</span>
+                        <span className="font-medium text-xs truncate">{category.label}</span>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Expanded Questions */}
+              <AnimatePresence>
+                {expandedCategory && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                      {categoryData[expandedCategory].questions.map((question, index) => (
+                        <motion.button
+                          key={index}
+                          onClick={() => handleQuestionClick(question)}
+                          className="
+                            px-2 py-2 sm:px-3 sm:py-2.5 rounded-lg border text-xs text-left transition-all duration-200
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                            touch-manipulation min-h-[40px]
+                            bg-gray-50 text-gray-700 border-gray-400/20
+                            hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
+                            dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
+                            dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
+                          "
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          whileHover={{ scale: 1.01 }}
+                          whileTap={{ scale: 0.99 }}
+                        >
+                          {question}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
