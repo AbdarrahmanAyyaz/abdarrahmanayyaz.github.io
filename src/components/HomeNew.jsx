@@ -116,7 +116,7 @@ function HomeNew() {
               <span className="label">AI Products</span>
             </div>
             <div className="stat">
-              <span className="number">1K+</span>
+              <span className="number">10K+</span>
               <span className="label">Users Impacted</span>
             </div>
             <div className="stat">
