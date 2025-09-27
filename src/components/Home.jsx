@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Maximize2, Minimize2, Download, Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Maximize2, Minimize2, Github, Linkedin, Mail, FileText } from "lucide-react";
 import Section from "./Section";
 import ScrollCue from "./ScrollCue";
 import EnhancedAIChatWorking from "./EnhancedAIChatWorking";
@@ -45,6 +45,7 @@ export default function Home() {
   }); // 'compact', 'expanded', 'fullscreen'
   const [isFocusMode, setIsFocusMode] = useState(false);
   const [hasUserTyped, setHasUserTyped] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
 
   const handleQuestionSelect = (question) => {
     // This will be passed to the chat component to auto-fill the input
@@ -109,6 +110,16 @@ export default function Home() {
     }
   };
 
+  // Handle window resize for mobile detection
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 430);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Section
       id="home"
@@ -138,7 +149,7 @@ export default function Home() {
 
         {/* Hero Section - Responsive Layout - Hide in focus mode */}
         {!isFocusMode && (
-          <div className="text-center md:text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+          <div className="text-center md:text-center space-y-6 sm:space-y-8 mb-8 sm:mb-10">
 
           {/* Profile Section - Responsive Layout */}
           <motion.div
@@ -157,12 +168,14 @@ export default function Home() {
                 <motion.img
                   src={profileImage}
                   alt="Abdarrahman Ayyaz"
-                  className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full profile-image-responsive shadow-2xl"
+                  className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 rounded-full profile-image-responsive shadow-2xl"
                   style={{
                     objectPosition: '70% 20%',
-                    transform: 'scale(1.6)'
+                    transform: isMobile ? 'scale(1.3)' : 'scale(1.6)'
                   }}
-                  whileHover={{ scale: 1.65 }}
+                  whileHover={{
+                    scale: isMobile ? 1.35 : 1.65
+                  }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 />
 
@@ -172,7 +185,7 @@ export default function Home() {
             </div>
 
             {/* Profile Info */}
-            <div className="profile-info space-y-2 md:space-y-4">
+            <div className="profile-info space-y-4 md:space-y-6 mt-6 md:mt-8">
               {/* Name */}
               <motion.h1
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text"
@@ -186,7 +199,7 @@ export default function Home() {
 
               {/* Subtitle */}
               <motion.p
-                className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted mt-3 md:mt-4"
                 custom={2}
                 variants={fadeUp}
                 initial="hidden"
@@ -203,7 +216,7 @@ export default function Home() {
 
               {/* Quick Action Buttons */}
               <motion.div
-                className="flex justify-center md:justify-center gap-3 mt-4 md:mt-6"
+                className="flex justify-center md:justify-center gap-3 mt-6 md:mt-8"
                 custom={3}
                 variants={fadeUp}
                 initial="hidden"
@@ -269,36 +282,9 @@ export default function Home() {
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse online-indicator" title="Online"></span>
               </h3>
               <p className="text-muted text-xs sm:text-sm mt-1 sm:mt-2 px-2 max-w-sm mx-auto">
-                Ask about my projects, stack, or experience
+                Ask about my projects, experience, or skills
               </p>
 
-              {/* Quick prompt chips - only show when compact */}
-              {chatSize === 'compact' && (
-                <motion.div
-                  className="flex flex-wrap justify-center gap-2 mt-3"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                >
-                  {['Best project?', 'Your stack?', 'AI experience?'].map((prompt, index) => (
-                    <motion.button
-                      key={prompt}
-                      onClick={() => {
-                        const event = new CustomEvent('autoFillQuestion', { detail: prompt });
-                        window.dispatchEvent(event);
-                      }}
-                      className="px-3 py-2 text-xs bg-accent/10 text-accent border border-accent/20 rounded-full hover:bg-accent/20 transition-all duration-200 touch-manipulation min-h-[44px] flex items-center justify-center"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1.2 + index * 0.1, duration: 0.3 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {prompt}
-                    </motion.button>
-                  ))}
-                </motion.div>
-              )}
             </div>
           )}
 

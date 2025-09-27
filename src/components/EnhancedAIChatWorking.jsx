@@ -367,7 +367,7 @@ const EnhancedAIChatWorking = ({
 
         {/* Chat Messages Area */}
         <div
-          className="chat-messages flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-2 sm:space-y-3 md:space-y-4 relative z-10
+          className="chat-messages flex-1 overflow-y-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 md:space-y-6 relative z-10 max-h-[65vh]
                      bg-gradient-to-b from-gray-50/30 to-transparent
                      dark:from-slate-800/30 dark:to-transparent"
         >
@@ -393,7 +393,7 @@ const EnhancedAIChatWorking = ({
 
         {/* Show Quick Action Pills above input only when no conversation has started */}
         {currentMessages.length <= 1 && (
-          <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700">
+          <div className="flex-shrink-0 p-4 sm:p-5 border-t border-gray-200 dark:border-slate-700">
             <div className="space-y-3 sm:space-y-4">
               {/* Category Pills */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -472,7 +472,7 @@ const EnhancedAIChatWorking = ({
         )}
 
         {/* Chat Input */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 mt-4 mb-2">
           <ChatInput
             onSend={handleSendMessage}
             disabled={isTyping}
@@ -489,7 +489,7 @@ const EnhancedAIChatWorking = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-slate-700"
+            className="flex-shrink-0 p-4 sm:p-5 border-t border-gray-200 dark:border-slate-700"
           >
             <div className="space-y-3 sm:space-y-4">
               {/* Category Pills */}
