@@ -81,13 +81,13 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
           {/* Desktop fullscreen button */}
           <button
             onClick={() => setFullscreen(true)}
-            className="absolute top-3 right-3 z-10 p-2 rounded-lg bg-surface/80 hover:bg-surface border border-border/50 shadow-sm transition-all duration-200"
+            className="absolute top-4 right-4 z-10 p-3 rounded-lg bg-surface/90 hover:bg-surface border border-border/50 shadow-md hover:shadow-lg transition-all duration-200"
             aria-label="Open fullscreen"
           >
-            <Maximize2 size={16} className="text-muted hover:text-text" />
+            <Maximize2 size={20} className="text-muted hover:text-text" />
           </button>
 
-          <div className="h-[500px] sm:h-[550px] md:h-[600px]">
+          <div className="h-[500px] sm:h-[600px] md:h-[650px] lg:h-[700px]">
             <EnhancedAIChatWorking
               onQuestionSelect={onQuestionSelect}
               onInputFocus={onInputFocus}
