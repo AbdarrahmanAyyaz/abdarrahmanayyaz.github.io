@@ -3,3 +3,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FAB Chat Styles */
+.fab-chat {
+  position: fixed;
+  inset-inline-end: 16px;
+  inset-block-end: 16px;
+  z-index: 50;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .fab-chat {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .fab-chat {
+    display: grid;
+  }
+}
+
+/* Global Typography */
+:root {
+  scroll-padding-top: 72px;
+}
+
+body {
+  color: hsl(var(--text));
+  line-height: 1.6;
+}
+
+p {
+  max-width: 65ch;
+}
+
+.hero img {
+  transform: none !important;
+}
+
+/* Performance optimizations */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}

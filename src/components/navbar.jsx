@@ -89,7 +89,7 @@ export default function Navbar() {
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 items-center justify-between" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           {/* Logo */}
           <motion.a 
             href="#home" 
@@ -146,19 +146,19 @@ export default function Navbar() {
           {/* Mobile Social Icons + Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
             {/* Social Icons - Mobile Only */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map(({ href, label, Icon, newTab }) => (
                 <motion.a
                   key={label}
                   href={href}
                   target={newTab ? "_blank" : "_self"}
                   rel={newTab ? "noopener noreferrer" : undefined}
-                  className="p-2 rounded-lg text-muted hover:text-text hover:bg-surface/50 transition-all duration-200 touch-manipulation min-w-[40px] min-h-[40px] flex items-center justify-center"
+                  className="p-2 rounded-lg text-muted hover:text-text hover:bg-surface/50 transition-all duration-200 touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={label}
                 >
-                  <Icon size={16} />
+                  <Icon size={18} />
                 </motion.a>
               ))}
             </div>

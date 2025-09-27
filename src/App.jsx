@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/navbar';
 import BottomDock from './components/BottomDock';
 import ProgressIndicators from './components/ProgressIndicators';
-import Home from './components/Home';
+import Home from './components/HomeNew';
 import About from './components/About';
 import Skills from './components/Skills';
 import Work from './components/Work';
