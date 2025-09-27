@@ -1,11 +1,25 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronDown, Maximize2, X } from "lucide-react";
 import EnhancedAIChatWorking from "./EnhancedAIChatWorking";
 import profileImage from "../assets/NewPic.png";
 
 export default function ChatSection({ onQuestionSelect, onInputFocus, onInputChange }) {
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+
+  // Handle escape key to close fullscreen
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && fullscreen) {
+        setFullscreen(false);
+      }
+    };
+
+    if (fullscreen) {
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
+    }
+  }, [fullscreen]);
 
   return (
     <section className="mt-6" id="chat">
@@ -63,7 +77,16 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
           </p>
         </div>
 
-        <div className="rounded-xl border border-border bg-surface shadow-lg overflow-hidden max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+        <div className="relative rounded-xl border border-border bg-surface shadow-lg overflow-hidden max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+          {/* Desktop fullscreen button */}
+          <button
+            onClick={() => setFullscreen(true)}
+            className="absolute top-3 right-3 z-10 p-2 rounded-lg bg-surface/80 hover:bg-surface border border-border/50 shadow-sm transition-all duration-200"
+            aria-label="Open fullscreen"
+          >
+            <Maximize2 size={16} className="text-muted hover:text-text" />
+          </button>
+
           <div className="h-[500px] sm:h-[550px] md:h-[600px]">
             <EnhancedAIChatWorking
               onQuestionSelect={onQuestionSelect}
@@ -83,10 +106,19 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
           onClick={() => setFullscreen(false)}
         >
           <div
-            className="h-[85vh] w-full max-w-3xl rounded-2xl bg-surface p-2 sm:p-4"
+            className="relative h-[85vh] w-full max-w-4xl rounded-2xl bg-surface p-2 sm:p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="h-full">
+            {/* Close button */}
+            <button
+              onClick={() => setFullscreen(false)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-surface/90 hover:bg-border/20 border border-border/50 shadow-sm transition-all duration-200"
+              aria-label="Close fullscreen"
+            >
+              <X size={18} className="text-muted hover:text-text" />
+            </button>
+
+            <div className="h-full pt-2">
               <EnhancedAIChatWorking
                 onQuestionSelect={onQuestionSelect}
                 onInputFocus={onInputFocus}
