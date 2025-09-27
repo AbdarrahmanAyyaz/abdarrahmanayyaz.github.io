@@ -656,35 +656,52 @@ button:active, a[role="button"]:active {
   }
 }
 
-/* iPhone 16 Pro Max and large iPhone specific fixes */
-@media screen and (max-width: 430px) and (min-height: 900px) {
+/* iPhone-specific optimizations */
+@media screen and (max-width: 430px) {
+  /* Profile image sizing for iPhone */
   .profile-image-responsive {
-    transform: scale(1.2) !important;
-    max-width: 70px !important;
-    max-height: 70px !important;
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    transform: none !important;
   }
 
   .profile-image-responsive:hover {
-    transform: scale(1.25) !important;
+    transform: scale(1.05) !important;
   }
 
-  /* Disable gradient border animation on large iPhones */
+  /* Disable gradient border animation on iPhones */
   .gradient-border {
     animation: none !important;
     background: linear-gradient(45deg, #8b5cf6, #3b82f6, #ec4899, #8b5cf6) !important;
   }
-}
 
-/* General iPhone Pro Max sizing (including iPhone 15 Pro Max) */
-@media screen and (max-width: 430px) {
-  .profile-image-responsive {
-    transform: scale(1.3) !important;
-    width: 70px !important;
-    height: 70px !important;
+  /* iPhone-specific spacing adjustments */
+  .hero-section {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 
-  .profile-image-responsive:hover {
-    transform: scale(1.35) !important;
+  /* Better text sizing for iPhone */
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Ensure proper spacing between elements */
+  .profile-info {
+    margin-top: 1rem !important;
+  }
+
+  /* Optimize button sizing for iPhone */
+  .quick-action-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    min-width: 40px !important;
   }
 }
 
@@ -1095,6 +1112,12 @@ input, textarea, select, button, a, [role="button"] {
 }
 
 /* Hide the floating chat bubble on mobile screens < 640px */
+@media (max-width: 639px) {
+  .fab-resume {
+    display: none !important;
+  }
+}
+
 @media (min-width: 640px) and (max-width: 768px) {
   .fab-resume {
     display: flex;

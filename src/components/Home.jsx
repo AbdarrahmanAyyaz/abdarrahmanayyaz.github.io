@@ -149,11 +149,11 @@ export default function Home() {
 
         {/* Hero Section - Responsive Layout - Hide in focus mode */}
         {!isFocusMode && (
-          <div className="text-center md:text-center space-y-6 sm:space-y-8 mb-8 sm:mb-10">
+          <div className="text-center md:text-center space-y-4 sm:space-y-6 md:space-y-8 mb-6 sm:mb-8 md:mb-10">
 
           {/* Profile Section - Responsive Layout */}
           <motion.div
-            className="flex flex-col md:flex-col items-center justify-center mobile-profile-horizontal"
+            className="flex flex-col md:flex-col items-center justify-center"
             variants={fadeUp}
             initial="hidden"
             animate="show"
@@ -185,10 +185,10 @@ export default function Home() {
             </div>
 
             {/* Profile Info */}
-            <div className="profile-info space-y-4 md:space-y-6 mt-6 md:mt-8">
+            <div className="profile-info space-y-3 sm:space-y-4 md:space-y-6 mt-4 sm:mt-6 md:mt-8">
               {/* Name */}
               <motion.h1
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text"
+                className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-text px-2"
                 custom={1}
                 variants={fadeUp}
                 initial="hidden"
@@ -199,7 +199,7 @@ export default function Home() {
 
               {/* Subtitle */}
               <motion.p
-                className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-muted mt-3 md:mt-4"
+                className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-muted mt-2 sm:mt-3 md:mt-4 px-2"
                 custom={2}
                 variants={fadeUp}
                 initial="hidden"
@@ -216,7 +216,7 @@ export default function Home() {
 
               {/* Quick Action Buttons */}
               <motion.div
-                className="flex justify-center md:justify-center gap-3 mt-6 md:mt-8"
+                className="flex justify-center md:justify-center gap-2 sm:gap-3 mt-4 sm:mt-6 md:mt-8 px-2"
                 custom={3}
                 variants={fadeUp}
                 initial="hidden"
