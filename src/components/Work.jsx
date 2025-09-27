@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "./Section";
 import SectionHeader from "./ui/SectionHeader";
@@ -8,8 +8,13 @@ import ProjectGrid from "./ProjectGrid";
 import { projects } from "../data/projects";
 import useSkillsFilterStore from "../store/useSkillsFilter";
 
-export default function Work() {
+function Work() {
   const { selectedSkills, clearSelectedSkills } = useSkillsFilterStore();
+
+  // Memoize the clear function to prevent unnecessary re-renders
+  const handleClearFilters = useCallback(() => {
+    clearSelectedSkills();
+  }, [clearSelectedSkills]);
 
   // Use the projects array directly
   const allProjects = useMemo(() => projects, []);
@@ -105,7 +110,7 @@ export default function Work() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={clearSelectedSkills}
+                onClick={handleClearFilters}
                 className="ml-auto"
               >
                 Clear filters
@@ -139,7 +144,7 @@ export default function Work() {
             <p className="text-muted mb-4">No projects match the selected skills.</p>
             <Button
               variant="ghost"
-              onClick={clearSelectedSkills}
+              onClick={handleClearFilters}
             >
               Show all projects
             </Button>
@@ -152,3 +157,5 @@ export default function Work() {
     </Section>
   );
 }
+
+export default React.memo(Work);

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SkillPill from './SkillPill';
 import { Badge, Button } from './ui';
@@ -38,7 +38,7 @@ const skillsData = [
 
 const categories = ['all', 'AI', 'Cloud', 'Frontend', 'Backend', 'DevOps'];
 
-const SkillsMatrix = () => {
+const SkillsMatrix = React.memo(() => {
   const {
     activeCategory,
     query,
@@ -52,6 +52,23 @@ const SkillsMatrix = () => {
     resetFilters,
     getFilteredSkills
   } = useSkillsFilterStore();
+
+  // Memoize event handlers
+  const handleCategoryChange = useCallback((category) => {
+    setActiveCategory(category);
+  }, [setActiveCategory]);
+
+  const handleQueryChange = useCallback((e) => {
+    setQuery(e.target.value);
+  }, [setQuery]);
+
+  const handleRecentOnlyChange = useCallback((e) => {
+    setRecentOnly(e.target.checked);
+  }, [setRecentOnly]);
+
+  const handleMinLevelChange = useCallback((e) => {
+    setMinLevel(parseInt(e.target.value));
+  }, [setMinLevel]);
 
   const filteredSkills = useMemo(() => 
     getFilteredSkills(skillsData), 
@@ -78,7 +95,7 @@ const SkillsMatrix = () => {
             key={category}
             variant={activeCategory === category ? 'primary' : 'ghost'}
             size="sm"
-            onClick={() => setActiveCategory(category)}
+            onClick={() => handleCategoryChange(category)}
             className="relative"
           >
             {category === 'all' ? 'All' : category}
@@ -101,7 +118,7 @@ const SkillsMatrix = () => {
             type="text"
             placeholder="Search skills..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleQueryChange}
             className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-bg text-text placeholder-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
         </div>
@@ -112,7 +129,7 @@ const SkillsMatrix = () => {
             <input
               type="checkbox"
               checked={recentOnly}
-              onChange={(e) => setRecentOnly(e.target.checked)}
+              onChange={handleRecentOnlyChange}
               className="w-4 h-4 text-accent border-border rounded focus-visible:ring-2 focus-visible:ring-ring"
             />
             <span className="text-muted">Recent (12mo)</span>
@@ -122,7 +139,7 @@ const SkillsMatrix = () => {
             <label className="text-muted">Min Level:</label>
             <select
               value={minLevel}
-              onChange={(e) => setMinLevel(parseInt(e.target.value))}
+              onChange={handleMinLevelChange}
               className="px-2 py-1 text-sm border border-border rounded bg-bg text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {[1, 2, 3, 4, 5].map(level => (
@@ -216,6 +233,6 @@ const SkillsMatrix = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SkillsMatrix;
