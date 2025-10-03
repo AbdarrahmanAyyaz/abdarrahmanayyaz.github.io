@@ -9,6 +9,8 @@ import RealEst from '../assets/1714780311641.jpeg';
 import triaged from '../assets/triagedai.png';
 import advancely from '../assets/advancely.png';
 import porsche from '../assets/Porsche.png';
+import scrag from '../assets/SCRAG.png';
+import oic from '../assets/OIC.png';
 
 export const projects = [
   {
@@ -36,16 +38,40 @@ export const projects = [
     highlights: ['Weekly insights']
   },
   {
+    id: 'excel-to-rag',
+    title: 'Excel to RAG Converter',
+    subtitle: 'RAG Pipeline Tool',
+    description: 'Streamlit app that converts Excel and other files to RAG-ready format. File upload • data extraction • vector embedding.',
+    raw: 'Pipeline tool to convert Excel and various file formats into RAG-ready vector embeddings. Streamlines the process of preparing data for retrieval-augmented generation.',
+    image: scrag,
+    tags: ['Streamlit', 'Python', 'RAG', 'Vector DB'],
+    liveUrl: 'https://excel-to-rag-converter.streamlit.app/',
+    sourceUrl: '',
+    highlights: ['Multi-format support']
+  },
+  {
+    id: 'oic-migration',
+    title: 'OIC Migration Assistant',
+    subtitle: 'AI Agent for Oracle Integration Cloud',
+    description: 'AI agent in OCI for OIC migration queries. Gen 2 to Gen 3 migration • RAG-powered guidance • query resolution.',
+    raw: 'Internal AI agent built in Oracle Cloud Infrastructure to assist with Oracle Integration Cloud migration from Gen 2 to Gen 3 using RAG technology for intelligent query responses.',
+    image: oic,
+    tags: ['OCI', 'RAG', 'AI Agent', 'Oracle Integration'],
+    liveUrl: '',
+    sourceUrl: '', // Internal project
+    highlights: ['Internal Oracle tool']
+  },
+  {
     id: 'portfolio',
     title: 'Portfolio React App',
     subtitle: 'Personal Portfolio Website',
-    description: 'Fast, dark UI with Framer Motion. Mobile-first layout • interactive AI chat • Lighthouse 95+ mobile.',
-    raw: 'This website—dark, clean, Tailwind UI with Framer Motion. Features responsive design, smooth animations, and interactive AI chat.',
+    description: 'Light/dark theme with Framer Motion. Mobile-first layout • RAG-powered AI chat • smooth animations.',
+    raw: 'This website—light and dark themes, clean Tailwind UI with Framer Motion. Features responsive design, smooth animations, and RAG-powered interactive AI chat.',
     image: portfolio,
     tags: ['React', 'Tailwind', 'Framer Motion', 'TypeScript'],
     liveUrl: 'https://abdarrahman.dev',
     sourceUrl: 'https://github.com/AbdarrahmanAyyaz/abdarrahmanayyaz.github.io',
-    highlights: ['Lighthouse 95+ mobile']
+    highlights: ['RAG-powered AI chat']
   },
   {
     id: 'tumor-segmentation',
@@ -87,13 +113,13 @@ export const projects = [
     id: 'dna-sequencing',
     title: 'DNA Sequencing with CNN Models',
     subtitle: 'Bioinformatics Research',
-    description: 'CNN classifier for sequence motifs. TensorFlow pipeline.',
-    raw: 'CNN classifier for DNA sequencing experiments. Advanced machine learning approach to genetic sequence analysis.',
+    description: 'CNN classifier for DNA binding site prediction. Achieved 93% accuracy with hyperparameter tuning.',
+    raw: 'ML models for predicting transcription factor binding sites in DNA sequences. Achieved 93% accuracy using CNN models with advanced hyperparameter tuning and data visualization.',
     image: dna,
     tags: ['Python', 'TensorFlow', 'CNN', 'Bioinformatics', 'ML'],
     liveUrl: '',
     sourceUrl: 'https://github.com/AbdarrahmanAyyaz/DNA-Sequencing',
-    highlights: ['+X% F1 vs baseline']
+    highlights: ['93% accuracy']
   },
   {
     id: 'social-media',

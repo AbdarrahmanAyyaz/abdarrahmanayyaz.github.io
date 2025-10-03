@@ -8,6 +8,22 @@
     "links": {"demo": "/work#triagedai"}
   },
   {
+    "project": "Excel to RAG Converter",
+    "one_liner": "Pipeline to convert Excel and other files to RAG-ready format.",
+    "stack": ["Streamlit", "Python", "RAG", "Vector DB"],
+    "features": ["file upload", "data extraction", "vector embedding", "RAG preparation"],
+    "impact": ["automates RAG setup", "supports multiple file formats"],
+    "links": {"demo": "https://excel-to-rag-converter.streamlit.app/"}
+  },
+  {
+    "project": "OIC Migration Assistant",
+    "one_liner": "AI agent in OCI helping with OIC integration migration from Gen 2 to Gen 3.",
+    "stack": ["OCI", "RAG", "AI Agent", "Oracle Integration Cloud"],
+    "features": ["migration guidance", "query resolution", "Gen 2 to Gen 3 migration", "RAG-powered responses"],
+    "impact": ["streamlines OIC migration", "reduces migration complexity"],
+    "links": {}
+  },
+  {
     "project": "Advancely",
     "one_liner": "AI-powered goals & habits with insights and recommendations.",
     "stack": ["React/TS", "Node/Express", "Postgres", "OpenAI", "Perplexity Sonar", "Mailjet", "Firebase"],
