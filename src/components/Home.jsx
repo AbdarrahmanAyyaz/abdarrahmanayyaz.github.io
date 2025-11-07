@@ -1,13 +1,11 @@
-import React, { useState, useCallback, useMemo, Suspense, lazy } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Maximize2, Minimize2, Github, Linkedin, Mail, FileText } from "lucide-react";
 import Section from "./Section";
 import ScrollCue from "./ScrollCue";
+import EnhancedAIChatWorking from "./EnhancedAIChatWorking";
 import TypewriterText from "./TypewriterText";
 import profileImage from "../assets/NewPic.png";
-
-// Lazy load the AI chat component for better performance
-const EnhancedAIChatWorking = lazy(() => import("./EnhancedAIChatWorking"));
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -49,26 +47,26 @@ function Home() {
   const [hasUserTyped, setHasUserTyped] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
 
-  const handleQuestionSelect = (question) => {
+  const handleQuestionSelect = useCallback((question) => {
     // This will be passed to the chat component to auto-fill the input
     const event = new CustomEvent('autoFillQuestion', { detail: question });
     window.dispatchEvent(event);
-  };
+  }, []);
 
-  const toggleChatSize = () => {
+  const toggleChatSize = useCallback(() => {
     const sizes = ['compact', 'expanded', 'fullscreen'];
     const currentIndex = sizes.indexOf(chatSize);
     const nextIndex = (currentIndex + 1) % sizes.length;
     const newSize = sizes[nextIndex];
     setChatSize(newSize);
     localStorage.setItem('chatSize', newSize);
-  };
+  }, [chatSize]);
 
   const toggleFocusMode = useCallback(() => {
     setIsFocusMode(!isFocusMode);
   }, [isFocusMode]);
 
-  const getChatHeight = useMemo(() => {
+  const getChatHeight = () => {
     const isLandscape = window.innerHeight < window.innerWidth && window.innerHeight < 600;
 
     switch (chatSize) {
@@ -84,51 +82,47 @@ function Home() {
         if (isLandscape) return '75vh';
         return window.innerWidth < 640 ? '50vh' : window.innerWidth < 768 ? '55vh' : '500px';
     }
-  }, [chatSize]);
+  };
 
-  const getChatIcon = useCallback(() => {
+  const getChatIcon = () => {
     return chatSize === 'fullscreen' ? Minimize2 : Maximize2;
-  }, [chatSize]);
+  };
 
   // Auto-expand handlers
-  const handleChatInputFocus = useCallback(() => {
-    const isMobile = window.innerWidth < 768;
+  const handleChatInputFocus = () => {
+    const isMobileDevice = window.innerWidth < 768;
 
     if (chatSize === 'compact') {
-      // On mobile, expand more aggressively after first interaction
-      const targetSize = isMobile && hasUserTyped ? 'expanded' : 'expanded';
+      // On mobile, go to fullscreen for better typing experience
+      const targetSize = isMobileDevice ? 'fullscreen' : 'expanded';
       setChatSize(targetSize);
       localStorage.setItem('chatSize', targetSize);
     }
-  }, [chatSize, hasUserTyped]);
+  };
 
-  const handleChatInputChange = useCallback((value) => {
+  const handleChatInputChange = (value) => {
     if (value.length > 0 && !hasUserTyped) {
       setHasUserTyped(true);
+      const isMobileDevice = window.innerWidth < 768;
+
       if (chatSize === 'compact') {
-        setChatSize('expanded');
-        localStorage.setItem('chatSize', 'expanded');
+        // On mobile, jump to fullscreen when user starts typing
+        const targetSize = isMobileDevice ? 'fullscreen' : 'expanded';
+        setChatSize(targetSize);
+        localStorage.setItem('chatSize', targetSize);
       }
     }
-  }, [hasUserTyped, chatSize]);
+  };
 
   // Handle window resize for mobile detection
-  const handleResize = useCallback(() => {
-    setIsMobile(window.innerWidth <= 430);
-  }, []);
-
   React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 430);
+    };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [handleResize]);
-
-  // Memoize action buttons to prevent recreating on every render
-  const actionButtons = useMemo(() => [
-    { icon: FileText, label: "Resume", action: () => window.open('/AbdarrahmanAyyazResume.pdf', '_blank') },
-    { icon: Linkedin, label: "LinkedIn", action: () => window.open('https://www.linkedin.com/in/abdarrahman-ayyaz/', '_blank') },
-    { icon: Github, label: "GitHub", action: () => window.open('https://github.com/AbdarrahmanAyyaz', '_blank') },
-    { icon: Mail, label: "Email", action: () => window.location.href = 'mailto:abdarrahmanayyaz00@gmail.com' }
-  ], []);
+  }, []);
 
   return (
     <Section
@@ -146,17 +140,16 @@ function Home() {
           maskImage: "radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%)",
         }}
       />
-
+      
       {/* Subtle radial spotlight behind name for light mode */}
-      <div
+      <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px]"
-        style={{
-          background: `radial-gradient(ellipse at center, hsl(var(--accent) / 0.04) 0%, transparent 60%)`
-        }}
+        style={{ 
+          background: `radial-gradient(ellipse at center, hsl(var(--accent) / 0.04) 0%, transparent 60%)` 
+        }} 
       />
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
-
 
         {/* Hero Section - Responsive Layout - Hide in focus mode */}
         {!isFocusMode && (
@@ -233,7 +226,12 @@ function Home() {
                 initial="hidden"
                 animate="show"
               >
-                {actionButtons.map((item, index) => (
+                {[
+                  { icon: FileText, label: "Resume", action: () => window.open('/AbdarrahmanAyyazResume.pdf', '_blank') },
+                  { icon: Linkedin, label: "LinkedIn", action: () => window.open('https://www.linkedin.com/in/abdarrahman-ayyaz/', '_blank') },
+                  { icon: Github, label: "GitHub", action: () => window.open('https://github.com/AbdarrahmanAyyaz', '_blank') },
+                  { icon: Mail, label: "Email", action: () => window.location.href = 'mailto:abdarrahmanayyaz00@gmail.com' }
+                ].map((item, index) => (
                   <motion.button
                     key={item.label}
                     onClick={item.action}
@@ -304,7 +302,7 @@ function Home() {
               backdropFilter: 'blur(15px)',
               background: 'rgba(255, 255, 255, 0.05)',
               borderColor: 'rgba(139, 92, 246, 0.3)',
-              height: isFocusMode ? 'calc(100vh - 2rem)' : getChatHeight,
+              height: isFocusMode ? 'calc(100vh - 2rem)' : getChatHeight(),
               transition: "height 220ms ease-out, box-shadow 220ms ease-out",
               maxWidth: isFocusMode ? '100%' : '100%',
               width: '100%',
@@ -314,22 +312,16 @@ function Home() {
             }}
           >
             <div className={`flex flex-col h-full transition-all duration-300`}>
-              <Suspense fallback={
-                <div className="flex items-center justify-center h-full">
-                  <div className="animate-pulse text-muted">Loading chat...</div>
-                </div>
-              }>
-                <EnhancedAIChatWorking
-                  onQuestionSelect={handleQuestionSelect}
-                  chatSize={chatSize}
-                  isFocusMode={isFocusMode}
-                  onToggleSize={toggleChatSize}
-                  onToggleFocus={toggleFocusMode}
-                  getChatIcon={getChatIcon}
-                  onInputFocus={handleChatInputFocus}
-                  onInputChange={handleChatInputChange}
-                />
-              </Suspense>
+              <EnhancedAIChatWorking
+                onQuestionSelect={handleQuestionSelect}
+                chatSize={chatSize}
+                isFocusMode={isFocusMode}
+                onToggleSize={toggleChatSize}
+                onToggleFocus={toggleFocusMode}
+                getChatIcon={getChatIcon}
+                onInputFocus={handleChatInputFocus}
+                onInputChange={handleChatInputChange}
+              />
             </div>
           </motion.div>
 

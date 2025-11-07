@@ -71,7 +71,7 @@ export const projects = [
     tags: ['React', 'Tailwind', 'Framer Motion', 'TypeScript'],
     liveUrl: 'https://abdarrahman.dev',
     sourceUrl: 'https://github.com/AbdarrahmanAyyaz/abdarrahmanayyaz.github.io',
-    highlights: ['RAG-powered AI chat']
+    highlights: ['Interactive AI assistant']
   },
   {
     id: 'tumor-segmentation',

@@ -66,6 +66,7 @@ const EnhancedAIChatWorking = ({
   const [currentChatId] = useState(1);
   const [isTyping, setIsTyping] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const messagesEndRef = useRef(null);
 
   const EXPAND_REGEX = /\b(expand|details|more|deep dive)\b/i;
@@ -209,11 +210,11 @@ const EnhancedAIChatWorking = ({
         // Simple keyword-based responses for demo mode
         const lowerMessage = messageText.toLowerCase();
         if (lowerMessage.includes('triaged')) {
-          response = "TriagedAI is one of my flagship projects - an AI-powered technical support system enabling **60% faster debugging** for production issues! It has helped hundreds of users and uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
+          response = "[TriagedAI](https://triagedai.com) is one of my flagship projects - an AI-powered technical support system enabling **60% faster debugging** for production issues! It has helped hundreds of users and uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
         } else if (lowerMessage.includes('advancely')) {
-          response = "Advancely is my AI-powered personal development platform with **1000+ users** achieving **40% habit improvement rates**. It helps people reach their 5-year goals through intelligent habit tracking and personalized recommendations. Check out the Work section for more details!";
+          response = "[Advancely](https://advancely.ai) is my AI-powered personal development platform with **1000+ users** achieving **40% habit improvement rates**. It helps people reach their 5-year goals through intelligent habit tracking and personalized recommendations. Check out the Work section for more details!";
         } else if (lowerMessage.includes('research') || lowerMessage.includes('brain') || lowerMessage.includes('tumor')) {
-          response = "My brain tumor segmentation research achieved 98.3% accuracy using deep learning on MRI data. It's fascinating work combining AI with medical imaging - you can see the full details in my Work section!";
+          response = "My [brain tumor segmentation](https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md) research achieved 98.3% accuracy using deep learning on MRI data. It's fascinating work combining AI with medical imaging - you can see the full details in my Work section!";
         } else if (lowerMessage.includes('skills') || lowerMessage.includes('technology') || lowerMessage.includes('tech')) {
           response = "I work with AI technologies like OpenAI and LangChain, frontend with React & Tailwind (4+ years), cloud platforms especially Oracle Cloud Infrastructure, and I'm currently exploring Vector DBs and RAG optimization. Check out my Skills section for the full breakdown!";
         } else if (lowerMessage.includes('collaborate') || lowerMessage.includes('work together') || lowerMessage.includes('hire')) {
@@ -274,6 +275,16 @@ const EnhancedAIChatWorking = ({
       return () => document.removeEventListener('click', handleClickOutside);
     }
   }, [expandedCategory]);
+
+  // Track mobile state
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Handle ESC key for focus mode
   useEffect(() => {
@@ -483,8 +494,8 @@ const EnhancedAIChatWorking = ({
           />
         </div>
 
-        {/* Show Quick Action Pills below input when conversation has started */}
-        {currentMessages.length > 1 && (
+        {/* Show Quick Action Pills below input when conversation has started - Hide on mobile */}
+        {currentMessages.length > 1 && !isMobile && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

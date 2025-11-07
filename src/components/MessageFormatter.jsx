@@ -120,9 +120,9 @@ const MessageFormatter = ({ text, className = "" }) => {
     // Format markdown-style italic *text*
     formatted = formatted.replace(/\*([^*]+)\*/g, '<em class="italic text-gray-200">$1</em>');
 
-    // Format links [text](url)
+    // Format links [text](url) - Enhanced styling for better visibility
     formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-white underline underline-offset-2 decoration-gray-400/50 hover:decoration-white transition-colors">$1</a>'
+      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 underline underline-offset-2 decoration-blue-400/70 hover:decoration-blue-300 transition-all duration-200 font-semibold cursor-pointer">$1</a>'
     );
 
     // Format bullet points with custom styling

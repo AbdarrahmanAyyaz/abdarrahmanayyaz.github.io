@@ -12,21 +12,17 @@ if (!apiKey) {
 
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
-// Comprehensive Portfolio Context for Enhanced AI Training
-const COMPREHENSIVE_PORTFOLIO_CONTEXT = `
+// Base Context for AI Training
+const BASE_PORTFOLIO_CONTEXT = `
 You are AI Abdarrahman, an AI version of Abdarrahman Ayyaz.
 
-PROFESSIONAL ROLE:
-- Cloud Support Engineer at Oracle (day job)
-- Assists enterprise developers with debugging JavaScript, Java, and REST API issues
-- Supports CI/CD pipeline configuration using Oracle Cloud Developer Tools
-- Collaborates with product and engineering teams on platform reliability
+OVERVIEW:
+- Cloud Support Engineer at Oracle (professional role)
+- AI enthusiast who builds solutions in personal time
+- Creates internal tools for developer productivity
+- Builds passion projects like TriagedAI and Advancely
 
-PROJECTS/ Poducts shipped:
-- AI enthusiast who builds AI solutions in personal time
-- Creates internal tools to assist with developer productivity and workflow at Oracle
-- Deploys AI applications and experiments with new technologies
-- Builds projects like TriagedAI and Advancely as passion projects
+Note: Additional context will be provided dynamically based on the specific question asked.
 
 PERSONAL PHILOSOPHY:
 CONsistency, FOcus, Discipline - These three pillars guide my approach to development, learning, and problem-solving. I believe in building reliable systems, maintaining focused execution, and applying disciplined engineering practices.
@@ -175,9 +171,9 @@ export const initializeGeminiChat = () => {
   if (!genAI) {
     throw new Error('Gemini API not initialized - API key missing');
   }
-  
+
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
+    model: "gemini-1.5-flash",
     generationConfig: {
       maxOutputTokens: 300,
       temperature: 0.7,
@@ -188,7 +184,7 @@ export const initializeGeminiChat = () => {
     history: [
       {
         role: "user",
-        parts: [{ text: COMPREHENSIVE_PORTFOLIO_CONTEXT }]
+        parts: [{ text: BASE_PORTFOLIO_CONTEXT }]
       },
       {
         role: "model", 
@@ -198,40 +194,199 @@ export const initializeGeminiChat = () => {
   });
 };
 
+// Intent detection for dynamic context
+const getMessageIntent = (message) => {
+  const lowerMessage = message.toLowerCase();
+
+  if (/(who are you|about you|tell me about yourself|about me|hobbies|interests|outside work|what do you like|coffee chat|coffee|network|family|community|volunteer|values|personal|martial arts|boxing|hiking|travel|con-fo-di|philosophy|discipline|consistency|focus)/i.test(lowerMessage)) {
+    return 'personal';
+  }
+
+  if (/(where do you work|current work|current job|current role|employment|work at|working at|job at|oracle|employer|current company|work experience|career|professional background|cloud support|support engineer)/i.test(lowerMessage)) {
+    return 'work';
+  }
+
+  if (/(triagedai|advancely|brain tumor|portfolio|project|how does|tell me about|what is|realtimesearch|brats)/i.test(lowerMessage)) {
+    return 'project';
+  }
+
+  return 'general';
+};
+
+// Cached markdown content
+let portfolioMarkdown = null;
+let resumeMarkdown = null;
+
+// Fetch markdown files dynamically
+const fetchMarkdownContent = async () => {
+  if (!portfolioMarkdown || !resumeMarkdown) {
+    try {
+      const [portfolioResponse, resumeResponse] = await Promise.all([
+        fetch('/context/aa_portfolio_context.md'),
+        fetch('/context/resume_context.md')
+      ]);
+
+      if (portfolioResponse.ok) {
+        portfolioMarkdown = await portfolioResponse.text();
+      }
+      if (resumeResponse.ok) {
+        resumeMarkdown = await resumeResponse.text();
+      }
+    } catch (error) {
+      console.warn('Failed to fetch markdown files:', error);
+    }
+  }
+};
+
+// Build context based on intent using markdown files + JSON fallback
+const buildDynamicContext = async (intent) => {
+  await fetchMarkdownContent();
+  let contextBlock = '';
+
+  if (intent === 'personal') {
+    // Extract personal info from portfolio markdown
+    if (portfolioMarkdown) {
+      const aboutSection = portfolioMarkdown.match(/## About Me[\s\S]*?(?=##|$)/i);
+      const personalFAQ = portfolioMarkdown.match(/## Personal FAQ[\s\S]*?(?=##|$)/i);
+      const philosophy = portfolioMarkdown.match(/### CON-FO-DI Philosophy[\s\S]*?(?=###|##|$)/i);
+
+      contextBlock += 'PERSONAL INFO FROM PORTFOLIO:\n';
+      if (aboutSection) contextBlock += aboutSection[0] + '\n';
+      if (personalFAQ) contextBlock += personalFAQ[0] + '\n';
+      if (philosophy) contextBlock += philosophy[0] + '\n';
+    }
+
+    // Supplement with aboutCards as fallback
+    const personalContext = aboutCards.map(card =>
+      `${card.topic}: ${card.one_liner}`
+    ).join('\n');
+    contextBlock += `\nSUPPLEMENTAL PERSONAL INFO:\n${personalContext}\n\n`;
+
+  } else if (intent === 'work') {
+    // Extract work info from resume markdown
+    if (resumeMarkdown) {
+      const currentRole = resumeMarkdown.match(/## Current Role[\s\S]*?(?=##|$)/i);
+      const workExperience = resumeMarkdown.match(/## Work Experience[\s\S]*?(?=##|$)/i);
+
+      contextBlock += 'WORK INFO FROM RESUME:\n';
+      if (currentRole) contextBlock += currentRole[0] + '\n';
+      if (workExperience) contextBlock += workExperience[0] + '\n';
+    }
+
+  } else if (intent === 'project') {
+    // Extract projects from portfolio markdown first
+    if (portfolioMarkdown) {
+      const projectsSection = portfolioMarkdown.match(/## Projects[\s\S]*?(?=##|$)/i);
+      if (projectsSection) {
+        contextBlock += 'PROJECTS FROM PORTFOLIO:\n' + projectsSection[0] + '\n';
+      }
+    }
+
+    // Supplement with projectCards for additional details
+    const projectContext = projectCards.slice(0, 3).map(card =>
+      `${card.project}: ${card.one_liner} (Stack: ${card.stack?.join(', ')})`
+    ).join('\n');
+    contextBlock += `\nSUPPLEMENTAL PROJECT INFO:\n${projectContext}\n\n`;
+  }
+
+  return contextBlock;
+};
+
+// Project links mapping
+const PROJECT_LINKS = {
+  'triagedai': { url: 'https://triagedai.com', patterns: ['triagedai', 'triaged ai', 'triage ai'] },
+  'advancely': { url: 'https://advancely.ai', patterns: ['advancely'] },
+  'excel to rag': { url: 'https://excel-to-rag-converter.streamlit.app/', patterns: ['excel to rag', 'excel-to-rag', 'rag converter'] },
+  'portfolio': {
+    url: 'https://github.com/AbdarrahmanAyyaz/abdarrahmanayyaz.github.io',
+    patterns: ['portfolio react app', 'this portfolio', 'this website']
+  },
+  'tumor segmentation': {
+    url: 'https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md',
+    patterns: ['brain tumor', 'tumor segmentation', 'medical ai', 'brats']
+  },
+  'porsche sales': { url: 'https://abdullahayyaz.com', patterns: ['porsche sales', 'sales professional'] },
+  'workwaves': { url: 'https://github.com/AbdarrahmanAyyaz/Workwaves', patterns: ['workwaves', 'work waves', 'gig app'] },
+  'dna sequencing': { url: 'https://github.com/AbdarrahmanAyyaz/DNA-Sequencing', patterns: ['dna sequencing', 'dna binding', 'bioinformatics'] },
+  'social media': { url: 'https://github.com/AbdarrahmanAyyaz/Social-Media-App', patterns: ['social media app', 'experience share'] },
+  'linkedin': { url: 'https://www.linkedin.com/in/abdarrahman-ayyaz/', patterns: ['linkedin'] },
+  'github': { url: 'https://github.com/AbdarrahmanAyyaz', patterns: ['github'] },
+  'email': { url: 'mailto:abdarrahmanayyaz00@gmail.com', patterns: ['email'] }
+};
+
+// Function to inject links into AI response
+const injectProjectLinks = (text) => {
+  let enrichedText = text;
+
+  // Sort projects by pattern length (longest first) to match more specific terms first
+  const sortedProjects = Object.entries(PROJECT_LINKS).sort((a, b) => {
+    const maxLengthA = Math.max(...a[1].patterns.map(p => p.length));
+    const maxLengthB = Math.max(...b[1].patterns.map(p => p.length));
+    return maxLengthB - maxLengthA;
+  });
+
+  // For each project, find mentions and add links
+  sortedProjects.forEach(([projectName, { url, patterns }]) => {
+    patterns.forEach(pattern => {
+      // Escape special regex characters in the pattern
+      const escapedPattern = pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      // Create case-insensitive regex that matches whole words
+      // Use negative lookbehind/lookahead to avoid matching inside markdown links
+      const regex = new RegExp(
+        `(?<!\\[)\\b(${escapedPattern})\\b(?!\\]|\\))(?![^\\[]*\\])`,
+        'gi'
+      );
+
+      enrichedText = enrichedText.replace(regex, (match) => {
+        return `[${match}](${url})`;
+      });
+    });
+  });
+
+  return enrichedText;
+};
+
 export const sendMessageToGemini = async (chat, message) => {
   try {
+    // Detect intent and build dynamic context
+    const intent = getMessageIntent(message);
+    const dynamicContext = await buildDynamicContext(intent);
+
     // Check if user is asking for more details
     const wantsDetails = /(tell me more|more details|elaborate|explain|deep dive|how does|architecture|technical|stack)/i.test(message);
 
-    let enhancedMessage = message;
+    let enhancedMessage = dynamicContext;
     if (wantsDetails) {
-      enhancedMessage = `${message} (User wants detailed explanation - please provide more comprehensive answer)`;
+      enhancedMessage += `${message} (User wants detailed explanation - please provide more comprehensive answer)`;
     } else {
-      enhancedMessage = `${message} (Keep response brief and conversational - 2-3 sentences max)`;
+      enhancedMessage += `${message} (Keep response brief and conversational - 2-3 sentences max)`;
     }
 
     const result = await chat.sendMessage(enhancedMessage);
     const response = await result.response;
-    const responseText = response.text();
+    let responseText = response.text();
 
     // Handle empty or very short responses
     if (!responseText || responseText.trim().length < 5) {
       console.warn('Empty or very short response from Gemini, using fallback');
 
-      // Simple fallback based on common question patterns
-      const lowerMessage = message.toLowerCase();
-      if (lowerMessage.includes('oci') || lowerMessage.includes('oracle') || lowerMessage.includes('work') || lowerMessage.includes('job')) {
-        return "I'm a Cloud Support Engineer at Oracle, helping enterprise developers with production issues and CI/CD pipelines. I also build AI tools as passion projects. What would you like to know?";
-      } else if (lowerMessage.includes('experience') || lowerMessage.includes('background')) {
-        return "Professionally, I'm a Cloud Support Engineer at Oracle. Personally, I'm passionate about AI and build tools like TriagedAI and Advancely. What interests you more?";
-      } else if (lowerMessage.includes('project') || lowerMessage.includes('ai')) {
-        return "I build AI projects like TriagedAI (technical support tool) and Advancely (personal development platform) in my personal time. Which project interests you?";
+      // Use intent-based fallbacks with dynamic context
+      if (intent === 'personal') {
+        responseText = "I'm passionate about martial arts (boxing), hiking in nature, and travel. I value family, consistency, focus, and discipline (my CON-FO-DI philosophy). I also organized a community food drive during COVID. What would you like to know more about?";
+      } else if (intent === 'work') {
+        responseText = "I'm a Cloud Support Engineer at Oracle, helping enterprise developers with production issues and CI/CD pipelines. I also build AI tools as passion projects. What would you like to know?";
+      } else if (intent === 'project') {
+        responseText = "I build AI projects like TriagedAI (technical support tool) and Advancely (personal development platform) in my personal time. Which project interests you?";
       } else {
-        return "I'm here to help! Ask me about my work at Oracle, my AI projects, or anything else you'd like to know.";
+        responseText = "I'm here to help! Ask me about my work at Oracle, my AI projects, personal interests, or anything else you'd like to know.";
       }
     }
 
-    return responseText;
+    // Inject project links into the response
+    const enrichedResponse = injectProjectLinks(responseText);
+
+    return enrichedResponse;
   } catch (error) {
     console.error('Gemini API Error:', error);
     return "I'm having trouble connecting right now. You can explore my portfolio sections above, or try asking again in a moment!";
