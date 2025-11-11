@@ -173,24 +173,16 @@ export const initializeGeminiChat = () => {
   }
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
-      maxOutputTokens: 300,
-      temperature: 0.7,
+      maxOutputTokens: 1000,
+      temperature: 0.9,
+      stopSequences: ["\n\n\n"] // Stop at paragraph breaks to ensure completion
     }
   });
-  
+
   return model.startChat({
-    history: [
-      {
-        role: "user",
-        parts: [{ text: BASE_PORTFOLIO_CONTEXT }]
-      },
-      {
-        role: "model", 
-        parts: [{ text: "Hello! I'm AI Abdarrahman 👋 I build AI solutions and work in cloud engineering. I've created projects like TriagedAI and Advancely, plus some medical AI research. What would you like to know about?" }]
-      }
-    ]
+    history: []
   });
 };
 
@@ -314,6 +306,34 @@ const PROJECT_LINKS = {
   'email': { url: 'mailto:abdarrahmanayyaz00@gmail.com', patterns: ['email'] }
 };
 
+// Function to ensure response ends with complete sentence
+const ensureCompleteSentence = (text) => {
+  if (!text || text.trim().length === 0) return text;
+
+  const trimmed = text.trim();
+
+  // Check if last character is proper sentence ending punctuation
+  const lastChar = trimmed[trimmed.length - 1];
+  const isComplete = ['.', '!', '?'].includes(lastChar);
+
+  if (isComplete) return trimmed;
+
+  // Find the last complete sentence
+  const lastSentenceEnd = Math.max(
+    trimmed.lastIndexOf('.'),
+    trimmed.lastIndexOf('!'),
+    trimmed.lastIndexOf('?')
+  );
+
+  // If we found a sentence ending, truncate to that point
+  if (lastSentenceEnd > 0) {
+    return trimmed.substring(0, lastSentenceEnd + 1);
+  }
+
+  // If no sentence ending found, add ellipsis to indicate continuation
+  return trimmed + '...';
+};
+
 // Function to inject links into AI response
 const injectProjectLinks = (text) => {
   let enrichedText = text;
@@ -356,14 +376,18 @@ export const sendMessageToGemini = async (chat, message) => {
     // Check if user is asking for more details
     const wantsDetails = /(tell me more|more details|elaborate|explain|deep dive|how does|architecture|technical|stack)/i.test(message);
 
-    let enhancedMessage = dynamicContext;
+    // Build the complete context message
+    let contextualMessage = `${BASE_PORTFOLIO_CONTEXT}\n\n`;
+    contextualMessage += `${dynamicContext}\n\n`;
+    contextualMessage += `User Question: ${message}\n\n`;
+
     if (wantsDetails) {
-      enhancedMessage += `${message} (User wants detailed explanation - please provide more comprehensive answer)`;
+      contextualMessage += `Please provide a detailed, comprehensive answer. IMPORTANT: Always end your response with a complete sentence (., !, or ?).`;
     } else {
-      enhancedMessage += `${message} (Keep response brief and conversational - 2-3 sentences max)`;
+      contextualMessage += `Keep response brief and conversational - 2-3 complete sentences maximum. IMPORTANT: Always end with proper punctuation (., !, or ?).`;
     }
 
-    const result = await chat.sendMessage(enhancedMessage);
+    const result = await chat.sendMessage(contextualMessage);
     const response = await result.response;
     let responseText = response.text();
 
@@ -383,8 +407,11 @@ export const sendMessageToGemini = async (chat, message) => {
       }
     }
 
+    // Ensure response ends with complete sentence
+    const completeResponse = ensureCompleteSentence(responseText);
+
     // Inject project links into the response
-    const enrichedResponse = injectProjectLinks(responseText);
+    const enrichedResponse = injectProjectLinks(completeResponse);
 
     return enrichedResponse;
   } catch (error) {
