@@ -3,17 +3,17 @@
   "name": "Abdarrahman Ayyaz",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "favicon.svg?v=2",
       "type": "image/svg+xml",
       "sizes": "any"
     },
     {
-      "src": "favicon.svg",
+      "src": "favicon.svg?v=2",
       "type": "image/svg+xml",
       "sizes": "192x192"
     },
     {
-      "src": "favicon.svg",
+      "src": "favicon.svg?v=2",
       "type": "image/svg+xml",
       "sizes": "512x512"
     }
