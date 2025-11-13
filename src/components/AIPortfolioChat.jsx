@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { initializeGeminiChat, sendMessageToGemini } from '../lib/gemini-secure';
+import { initializeGeminiChat, sendMessageToGemini } from '../lib/gemini';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import TypingIndicator from './TypingIndicator';
