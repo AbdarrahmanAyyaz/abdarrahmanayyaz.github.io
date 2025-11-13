@@ -68,7 +68,7 @@ import { initializeGeminiChat, sendMessageToGemini } from '../lib/gemini-secure'
 
 ```bash
 # Gemini API (CRITICAL - Keep server-side only!)
-GEMINI_API_KEY=AIzaSyCIBVEjxwt7W73LhVYT1jmBn7tcuk00Wxs
+GEMINI_API_KEY=[Your Google Gemini API key - from .env file]
 
 # Contact Form (if using Resend)
 RESEND_API_KEY=your_resend_key_here
