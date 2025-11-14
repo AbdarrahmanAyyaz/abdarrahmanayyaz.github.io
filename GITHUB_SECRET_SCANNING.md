@@ -2,7 +2,7 @@
 
 ## 🔒 Enable GitHub Secret Scanning
 
-GitHub offers free secret scanning for public repositories to detect accidentally committed secrets.
+GitHub offers free secret scanning for public repositories to detect accidentally committed secrets..
 
 ### Step 1: Enable Secret Scanning
 
