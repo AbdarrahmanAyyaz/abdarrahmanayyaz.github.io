@@ -36,7 +36,7 @@ jobs:
     - name: Build application
       env:
         # Use GitHub Secret for API key - NEVER hardcoded!
-        REACT_APP_GOOGLE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        REACT_APP_GOOGLE_GEMINI_API_KEY: ${{ secrets.REACT_APP_GOOGLE_GEMINI_API_KEY }}
         REACT_APP_SITE_URL: https://abdarrahmanayyaz.github.io
         CI: false  # Treat warnings as warnings, not errors
       run: npm run build
