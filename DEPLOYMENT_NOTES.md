@@ -75,11 +75,12 @@ Then add `GEMINI_API_KEY` as a repository secret in GitHub Settings.
 
 ## Current API Key
 
-The new API key is configured in:
-- `/home/user/abdarrahmanayyaz.github.io/.env`
-- `/home/user/abdarrahmanayyaz.github.io/.env.production`
+The API key should be configured in GitHub Secrets:
+- Go to repository Settings → Secrets and variables → Actions
+- Add secret named `REACT_APP_GOOGLE_GEMINI_API_KEY`
+- The GitHub Actions workflow will use this secret during deployment
 
-**Value**: `AIzaSyAyPztv2b9Ne0JPNq-Lye84KQsaiO-11mA`
+**NEVER commit API keys to documentation or code!**
 
 ## What's Protected
 

@@ -34,9 +34,12 @@ This guide shows you how to set up GitHub Secrets to securely manage your API ke
 3. **Click "New repository secret"**
 
 4. **Add the Gemini API Key:**
-   - **Name:** `GEMINI_API_KEY`
-   - **Value:** `AIzaSyAyPztv2b9Ne0JPNq-Lye84KQsaiO-11mA`
+   - **Name:** `REACT_APP_GOOGLE_GEMINI_API_KEY`
+   - **Value:** `[Your new Gemini API key from Google AI Studio]`
    - Click "Add secret"
+
+   **Important:** Get a fresh API key from https://makersuite.google.com/app/apikey
+   The previous key has been revoked due to exposure in git history.
 
 ### Step 2: Enable GitHub Pages
 
