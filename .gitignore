@@ -38,3 +38,28 @@ lerna-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Documentation files (except README.md)
+*.md
+!README.md
+
+# Screenshots and images in root
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+# But keep public assets and src/assets (needed for the app)
+!public/**/*.png
+!public/**/*.jpg
+!public/**/*.jpeg
+!public/**/*.svg
+!public/**/*.gif
+!public/**/*.webp
+!src/assets/**/*.png
+!src/assets/**/*.jpg
+!src/assets/**/*.jpeg
+!src/assets/**/*.svg
+!src/assets/**/*.gif
+!src/assets/**/*.webp
