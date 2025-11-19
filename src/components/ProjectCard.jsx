@@ -1,5 +1,4 @@
 import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
 import { Badge, Button } from './ui';
 
 function shortDesc(p) {

@@ -40,9 +40,11 @@ const PURPOSE_OPTIONS = [
   }
 ];
 
+// ContactCard component - currently unused but kept for future use
+// eslint-disable-next-line no-unused-vars
 const ContactCard = ({ title, subtitle, icon: Icon, href, onCopy, copyText }) => {
   const { toast } = useToast();
-  
+
   const handleCopy = useCallback(() => {
     if (copyText) {
       navigator.clipboard.writeText(copyText).then(() => {
@@ -70,7 +72,7 @@ const ContactCard = ({ title, subtitle, icon: Icon, href, onCopy, copyText }) =>
             <div className="text-sm text-muted truncate">{subtitle}</div>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2 shrink-0">
           {copyText && (
             <Button
@@ -91,7 +93,7 @@ const ContactCard = ({ title, subtitle, icon: Icon, href, onCopy, copyText }) =>
               className="shrink-0 hover:bg-accent hover:text-white"
             >
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
-              <a 
+              <a
                 href={href}
                 target={href.startsWith('http') ? '_blank' : '_self'}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}

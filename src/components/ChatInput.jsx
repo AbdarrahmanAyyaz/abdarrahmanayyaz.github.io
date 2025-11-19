@@ -7,16 +7,16 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
   const [isFocused, setIsFocused] = useState(false);
   const [currentPlaceholder, setCurrentPlaceholder] = useState('');
 
-  const placeholders = [
-    "Try: 'Show me your AI work'",
-    "What's your experience?",
-    "Tell me about your projects",
-    "Show me your best work",
-    "What technologies do you use?"
-  ];
-
   // Rotating placeholder effect
   useEffect(() => {
+    const placeholders = [
+      "Try: 'Show me your AI work'",
+      "What's your experience?",
+      "Tell me about your projects",
+      "Show me your best work",
+      "What technologies do you use?"
+    ];
+
     let currentIndex = 0;
     setCurrentPlaceholder(placeholders[0]);
 
@@ -26,7 +26,7 @@ const ChatInput = ({ onSend, disabled = false, placeholder = "Ask me about my pr
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [placeholders]);
+  }, []);
 
   // Listen for auto-fill events from both quick actions and expandable pills
   useEffect(() => {

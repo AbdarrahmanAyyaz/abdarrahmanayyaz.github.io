@@ -89,7 +89,6 @@ const ChatThemeContext = createContext();
 export const ChatThemeProvider = ({ children }) => {
   const { theme: systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState('default');
-  const [isManualSelection, setIsManualSelection] = useState(false);
 
   // Single effect to handle both initialization and system theme changes
   useEffect(() => {
