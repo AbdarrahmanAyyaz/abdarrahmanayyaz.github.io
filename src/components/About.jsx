@@ -185,7 +185,7 @@ export default function About() {
             className="w-full sm:w-auto"
           >
             <a
-              href="/AbdarrahmanAyyazResume.pdf"
+              href="/AbdarrahmansResume.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >

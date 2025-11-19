@@ -227,7 +227,7 @@ function Home() {
                 animate="show"
               >
                 {[
-                  { icon: FileText, label: "Resume", action: () => window.open('/AbdarrahmanAyyazResume.pdf', '_blank') },
+                  { icon: FileText, label: "Resume", action: () => window.open('/AbdarrahmansResume.pdf', '_blank') },
                   { icon: Linkedin, label: "LinkedIn", action: () => window.open('https://www.linkedin.com/in/abdarrahman-ayyaz/', '_blank') },
                   { icon: Github, label: "GitHub", action: () => window.open('https://github.com/AbdarrahmanAyyaz', '_blank') },
                   { icon: Mail, label: "Email", action: () => window.location.href = 'mailto:abdarrahmanayyaz00@gmail.com' }

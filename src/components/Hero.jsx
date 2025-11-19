@@ -18,7 +18,7 @@ const fadeUp = {
 
 export default function Hero() {
   const actionButtons = [
-    { href: "/AbdarrahmanAyyazResume.pdf", label: "Resume", icon: FileText },
+    { href: "/AbdarrahmansResume.pdf", label: "Resume", icon: FileText },
     { href: "https://www.linkedin.com/in/abdarrahman-ayyaz/", label: "LinkedIn", icon: Linkedin },
     { href: "https://github.com/AbdarrahmanAyyaz", label: "GitHub", icon: Github },
     { href: "mailto:abdarrahmanayyaz00@gmail.com", label: "Email", icon: Mail },

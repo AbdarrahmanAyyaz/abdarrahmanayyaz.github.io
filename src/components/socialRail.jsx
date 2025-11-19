@@ -9,7 +9,7 @@ const LINKS = [
   { href: "https://www.linkedin.com/in/abdarrahman-ayyaz/", label: "LinkedIn", Icon: FaLinkedinIn, color: "hsl(210, 100%, 44%)", newTab: true },
   { href: "https://github.com/AbdarrahmanAyyaz", label: "GitHub", Icon: FaGithub, color: "hsl(var(--accent))", newTab: true },
   { href: "mailto:abdarrahmanayyaz00@gmail.com", label: "Email", Icon: HiOutlineMail, color: "hsl(var(--success))", newTab: false },
-  { href: "/AbdarrahmanAyyazResume.pdf", label: "Resume", Icon: LuFileDown, color: "hsl(var(--warning))", newTab: true },
+  { href: "/AbdarrahmansResume.pdf", label: "Resume", Icon: LuFileDown, color: "hsl(var(--warning))", newTab: true },
 ];
 
 // Desktop Social Rail (left side)

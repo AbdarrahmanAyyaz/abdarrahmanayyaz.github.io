@@ -124,8 +124,8 @@ const BottomDock = () => {
                       size="sm"
                       className="h-9 text-xs font-medium whitespace-nowrap px-3 touch-manipulation"
                     >
-                      <a 
-                        href="/AbdarrahmanAyyazResume.pdf" 
+                      <a
+                        href="/AbdarrahmansResume.pdf" 
                         target="_blank"
                         rel="noopener noreferrer"
                       >

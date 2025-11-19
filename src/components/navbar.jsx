@@ -133,7 +133,7 @@ export default function Navbar() {
                 className="font-medium bg-accent hover:bg-accent/90 text-white shadow-md hover:shadow-lg transition-all duration-200"
               >
                 <a
-                  href="/AbdarrahmanAyyazResume.pdf"
+                  href="/AbdarrahmansResume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -265,7 +265,7 @@ export default function Navbar() {
                     className="w-full h-14 text-lg font-semibold rounded-2xl bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     <a
-                      href="/AbdarrahmanAyyazResume.pdf"
+                      href="/AbdarrahmansResume.pdf"
                       onClick={() => setOpen(false)}
                       target="_blank"
                       rel="noopener noreferrer"
