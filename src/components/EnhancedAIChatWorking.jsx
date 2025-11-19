@@ -74,61 +74,52 @@ const EnhancedAIChatWorking = ({
   // Initialize first chat with Gemini AI
   useEffect(() => {
     const initializeFirstChat = async () => {
-      const hasApiKey = !!process.env.REACT_APP_GOOGLE_GEMINI_API_KEY;
-      
-      if (hasApiKey) {
-        try {
-          console.log('EnhancedAIChatWorking: API key detected, initializing chat...');
-          // Warm external context (fetch + embed + cache all sources)
-          await warmRagFromPublic();
-          console.log('EnhancedAIChatWorking: RAG warming complete, creating chat instance...');
-          const chatInstance = await initializeGeminiChat();
-          console.log('EnhancedAIChatWorking: Chat instance created successfully');
-          const initialMessage = {
-            id: 1,
-            text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask about any project or say \"skills\".",
-            type: 'ai',
-            timestamp: new Date()
-          };
-
-          setChatSessions({
-            1: {
-              id: 1,
-              instance: chatInstance,
-              messages: [initialMessage],
-              title: 'Main Chat'
-            }
-          });
-
-          // Chat initialized successfully
-          console.log('EnhancedAIChatWorking: Chat initialization successful');
-          return;
-        } catch (error) {
-          console.error('EnhancedAIChatWorking: Failed to initialize chat:', error);
-          console.error('EnhancedAIChatWorking: Error details:', error.message);
-        }
-      } else {
-        console.log('EnhancedAIChatWorking: No API key detected, using demo mode');
-      }
-      
-      // Fallback message when API key is not available
-      const fallbackMessage = {
-        id: 1,
-        text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
-        type: 'ai',
-        timestamp: new Date()
-      };
-
-      setChatSessions({
-        1: {
+      try {
+        console.log('EnhancedAIChatWorking: Initializing chat...');
+        // Warm external context (fetch + embed + cache all sources)
+        await warmRagFromPublic();
+        console.log('EnhancedAIChatWorking: RAG warming complete, creating chat instance...');
+        const chatInstance = await initializeGeminiChat();
+        console.log('EnhancedAIChatWorking: Chat instance created successfully');
+        const initialMessage = {
           id: 1,
-          instance: null,
-          messages: [fallbackMessage],
-          title: 'Main Chat'
-        }
-      });
+          text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
+          type: 'ai',
+          timestamp: new Date()
+        };
 
-      // Fallback message set
+        setChatSessions({
+          1: {
+            id: 1,
+            instance: chatInstance,
+            messages: [initialMessage],
+            title: 'Main Chat'
+          }
+        });
+
+        // Chat initialized successfully
+        console.log('EnhancedAIChatWorking: Chat initialization successful');
+      } catch (error) {
+        console.error('EnhancedAIChatWorking: Failed to initialize chat:', error);
+        console.error('EnhancedAIChatWorking: Error details:', error.message);
+
+        // Fallback message when initialization fails
+        const fallbackMessage = {
+          id: 1,
+          text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
+          type: 'ai',
+          timestamp: new Date()
+        };
+
+        setChatSessions({
+          1: {
+            id: 1,
+            instance: null,
+            messages: [fallbackMessage],
+            title: 'Main Chat'
+          }
+        });
+      }
     };
 
     initializeFirstChat();
@@ -176,26 +167,25 @@ const EnhancedAIChatWorking = ({
 
     // Add user message
     addMessage(currentChatId, messageText, 'user');
-    
+
     // Start typing indicator
     setIsTyping(true);
-    
-    const hasApiKey = !!process.env.REACT_APP_GOOGLE_GEMINI_API_KEY;
+
     const expand = EXPAND_REGEX.test(messageText);
 
-    if (hasApiKey && currentChat.instance) {
+    if (currentChat.instance) {
       try {
         const response = await sendMessageToGemini(currentChat.instance, messageText, { expand });
-        
+
         // Realistic typing simulation
         const typingDelay = Math.min(1400 + (response.length * 4), 2800);
         await new Promise(resolve => setTimeout(resolve, typingDelay));
-        
+
         addMessage(currentChatId, response, 'ai');
       } catch (error) {
         console.error('Error getting AI response:', error);
-        addMessage(currentChatId, 
-          "I'm having trouble connecting right now, but I'm still here! You can explore my portfolio sections above to learn about my projects, or try asking me again in a moment.", 
+        addMessage(currentChatId,
+          "I'm having trouble connecting right now, but I'm still here! You can explore my portfolio sections above to learn about my projects, or try asking me again in a moment.",
           'ai'
         );
         // Error handled
@@ -203,11 +193,11 @@ const EnhancedAIChatWorking = ({
         setIsTyping(false);
       }
     } else {
-      // Demo mode - provide simple responses when no API key
+      // Fallback mode - provide simple responses when API is not available
       setTimeout(() => {
-        let response = "Thanks for your interest! I'm currently in demo mode. You can explore my full portfolio above to learn about TriagedAI, Advancely, and my research projects. Feel free to contact me directly to discuss opportunities!";
-        
-        // Simple keyword-based responses for demo mode
+        let response = "Thanks for your interest! The AI chat is currently unavailable. You can explore my full portfolio above to learn about TriagedAI, Advancely, and my research projects. Feel free to contact me directly to discuss opportunities!";
+
+        // Simple keyword-based responses for fallback mode
         const lowerMessage = messageText.toLowerCase();
         if (lowerMessage.includes('triaged')) {
           response = "[TriagedAI](https://triagedai.com) is one of my flagship projects - an AI-powered technical support system enabling **60% faster debugging** for production issues! It has helped hundreds of users and uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
@@ -230,7 +220,7 @@ const EnhancedAIChatWorking = ({
         } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('website') || lowerMessage.includes('projects')) {
           response = "This portfolio showcases my key projects: **Advancely** (1000+ users, habit tracking), **TriagedAI** (60% faster debugging), and my **research in medical AI** (98.3% accuracy). Each project demonstrates different aspects of my full-stack and AI capabilities.";
         }
-        
+
         addMessage(currentChatId, response, 'ai');
         setIsTyping(false);
       }, 1500);
