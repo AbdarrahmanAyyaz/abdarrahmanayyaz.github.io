@@ -38,3 +38,23 @@ lerna-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Documentation and screenshots - keep private (but keep README.md and assets)
+# Ignore root-level documentation files
+/*.md
+!README.md
+
+# Ignore root-level screenshots and images
+/*.png
+/*.PNG
+/*.jpg
+/*.jpeg
+/*.gif
+
+# Ignore screenshots in root
+Screenshot*.png
+IMG_*.png
+IMG_*.PNG
+sc*.png
+*error*.png
+*Log*.png
