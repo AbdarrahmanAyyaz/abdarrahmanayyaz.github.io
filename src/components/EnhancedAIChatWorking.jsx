@@ -114,7 +114,7 @@ const EnhancedAIChatWorking = ({
       // Fallback message when API key is not available
       const fallbackMessage = {
         id: 1,
-        text: "Hello! I'm AI Abdarrahman 👋 I'm currently in demo mode. You can explore my portfolio sections above to learn about my projects including TriagedAI, Advancely, and my brain tumor segmentation research. Feel free to contact me directly for any questions!",
+        text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
         type: 'ai',
         timestamp: new Date()
       };
