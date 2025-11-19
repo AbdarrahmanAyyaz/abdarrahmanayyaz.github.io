@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Focus } from 'lucide-react';
-import { initializeGeminiChat, sendMessageToGemini, warmRagFromPublic } from '../lib/gemini';
+import { initializeGeminiChat, sendMessageToGemini, warmRagFromPublic } from '../lib/gemini-secure';
 import { useChatThemeStandalone } from '../hooks/useChatTheme';
 import ChatMessageSimple from './ChatMessageSimple';
 import ChatInput from './ChatInput';
