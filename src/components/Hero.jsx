@@ -76,8 +76,10 @@ export default function Hero() {
             <a
               key={button.label}
               href={button.href}
-              target={button.href.startsWith('http') ? '_blank' : '_self'}
-              rel={button.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              {...(button.href.startsWith('http') && {
+                target: '_blank',
+                rel: 'noopener noreferrer'
+              })}
               aria-label={button.label}
               className="h-11 w-11 grid place-items-center rounded-full bg-surface/80 dark:bg-surface/90 shadow hover:shadow-md transition-all duration-200 border border-border/50"
             >
