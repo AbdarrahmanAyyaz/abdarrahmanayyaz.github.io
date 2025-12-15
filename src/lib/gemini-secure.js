@@ -219,6 +219,9 @@ class SecureChatSession {
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('AI service quota exceeded. Please try again later.');
+        }
         if (data.rateLimited) {
           throw new Error('Rate limit exceeded. Please wait a moment before sending another message.');
         }
