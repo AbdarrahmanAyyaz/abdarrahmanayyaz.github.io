@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from './components/navbar';
 import ProgressIndicators from './components/ProgressIndicators';
 import Home from './components/HomeNew';
+import SignlFeature from './components/SignlFeature';
+import SafetyEvalCaseStudy from './components/SafetyEvalCaseStudy';
 import About from './components/About';
 import Skills from './components/Skills';
 import Work from './components/Work';
@@ -15,6 +17,8 @@ export default function App() {
       <Navbar />
       <ProgressIndicators />
       <Home />
+      <SignlFeature />
+      <SafetyEvalCaseStudy />
       <About />
       <Skills />
       <Work />
