@@ -21,7 +21,7 @@ WHAT HE'S BUILT (the artifacts to surface):
 
 - Production RAG agent on OCI Generative AI for OIC Gen 2 → Gen 3 migration. Vector embeddings, retrieval pipeline, internal-facing agent used by Oracle engineers to automate technical troubleshooting.
 
-- Production AI agent evaluations for Fortune 500 engineering teams post-sale. RAG pipelines that improved response accuracy by 35%. Surfaced critical failure patterns before customer exposure.
+- Production AI agent evaluations for Fortune 500 engineering teams post-sale. Improved response accuracy by 35% across the agents I evaluated. Surfaced critical failure patterns before customer exposure.
 
 - Signl / Opensignl (opensignl.com): research-backed content intelligence SaaS, founded solo. Daily agentic pipeline scans Reddit, X, LinkedIn, and news, ranks audience signals by source strength with verbatim evidence, then generates platform-native posts for X and LinkedIn. LLM-as-judge audit layer validates every output against platform-specific publishing rules before publication. Multi-model inference with graceful degradation and automatic failover. Voice profiling matches the user's actual writing patterns. Free tier (5 posts/month, 2 briefs/day) and $19/month Pro tier. Stack: Next.js, TypeScript, OpenAI API.
 

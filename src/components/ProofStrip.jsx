@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 // block from the original HomeNew.jsx work-preview. Each number maps to a real artifact in the KB.
 //
 // Per the visual designer's spec: tabular numerals, big numbers, muted caption + source below,
-// thin hairlines top/bottom, no cards, 2-col mobile / 4-col desktop, surgical entry motion.
+// thin hairlines top/bottom, no cards, surgical entry motion. 3-up grid (was 4 — dropped the
+// "production RAG pipelines" metric per Abdarrahman's request).
 const METRICS = [
   {
     value: "80%",
@@ -22,11 +23,6 @@ const METRICS = [
     label: "users served",
     source: "Triage AI",
   },
-  {
-    value: "35%",
-    label: "accuracy lift",
-    source: "production RAG pipelines",
-  },
 ];
 
 const ProofStrip = () => {
@@ -36,7 +32,7 @@ const ProofStrip = () => {
       className="w-full border-t border-b border-border/60 bg-surface/30"
     >
       <div className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 sm:gap-x-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-6 sm:gap-x-10">
           {METRICS.map((metric, i) => (
             <motion.div
               key={metric.label}

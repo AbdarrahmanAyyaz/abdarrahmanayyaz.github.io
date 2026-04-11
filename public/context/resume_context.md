@@ -51,7 +51,7 @@ The work is AI deployment engineering — building, evaluating, and shipping pro
 
 **Production AI Agent Evaluation**
 - Evaluated production AI agents for Fortune 500 engineering teams post-sale
-- Implemented RAG pipelines that improved response accuracy by 35%
+- Improved response accuracy by 35% across the agents I evaluated
 - Surfaced critical failure patterns before customer exposure
 
 **Enterprise Technical Partnership**

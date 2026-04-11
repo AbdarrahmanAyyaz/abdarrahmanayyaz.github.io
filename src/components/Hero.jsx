@@ -65,7 +65,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          Oracle AI deployment engineer. Founder of Signl. Safety eval frameworks, RAG pipelines, live SaaS.
+          Oracle AI deployment engineer. Founder of Signl. Safety eval frameworks and live SaaS.
         </motion.p>
 
         {/* Metric line */}
@@ -76,7 +76,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          1,000+ users served · 80% failure rate surfaced · 35% accuracy lift in production
+          1,000+ users served · 80% failure rate surfaced
         </motion.p>
 
         {/* Primary CTAs */}

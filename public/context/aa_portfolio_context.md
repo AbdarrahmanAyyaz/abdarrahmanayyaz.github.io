@@ -60,7 +60,7 @@ Designed and deployed a production RAG agent on OCI Generative AI for OIC Gen 2 
 - **Stack:** OCI Generative AI, vector embeddings, RAG
 
 ### Production AI Agent Evaluation (Oracle, post-sale)
-Evaluated production AI agents for Fortune 500 engineering teams as part of post-sale technical partnership. Implemented RAG pipelines that improved response accuracy by 35%. Surfaced critical failure patterns before customer exposure.
+Evaluated production AI agents for Fortune 500 engineering teams as part of post-sale technical partnership. Improved response accuracy by 35% across the agents I evaluated. Surfaced critical failure patterns before customer exposure.
 
 ### Triage AI (triagedai.com)
 Full-stack AI triage app serving 1,000+ users. Perplexity sonar-pro for grounded responses. PostgreSQL-backed conversation memory across sessions. Replaced AWS Comprehend with a client-side sentiment model — 95% accuracy on labeled set, $50/month infra cost eliminated, 200ms P95 latency cut. 40% relevance lift over baseline. Cut React re-renders by 60% via TanStack Query and targeted memoization.
