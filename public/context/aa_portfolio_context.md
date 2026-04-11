@@ -1,96 +1,97 @@
-# AA — Facts Pack (public, curated)
-_Last updated: 2025-09-13 • Changelog: v1 initial publish_
+# Abdarrahman Ayyaz — Portfolio Context
+_Last updated: 2026-04-11_
 
 ## Snapshot
-Title: AI & Cloud Engineer (OCI + LLMs)
-Focus: LLM integration, RAG, full-stack React/TS, analytics dashboards
-Experience: React/TS (4+ yrs), AI/LLM (2+), Cloud/OCI (3+)
-Location: Bay Area • Open to remote
-Availability: Limited client slots
-
-## Projects
-### Advancely.ai
-Goal: AI-guided 5-year goals → habits, analytics, insights
-Stack: React/TS, Tailwind, shadcn; Node/Express; Postgres/Drizzle
-AI: OpenAI (insights), Perplexity Sonar (learning recs)
-Features: Goal tracking, habit formation, AI insights
-Links: /work#advancely
-https://advancely.ai
-
-### TriagedAI
-Goal: Context-aware support agent for production issues
-Stack: React/TS, Express, Postgres/Drizzle; Perplexity API
-Features: Solution tracking, multi-chat, sentiment analysis
-Proof: 25% MTTR improvement reported
-Links: /work#triagedai
-https://triagedai.com
-
-### Brain Tumor Segmentation
-Dataset: BraTS (T1, T1CE, T2, FLAIR) • Model: U-Net
-Finding: FLAIR performed best; reported 98.3% Dice (validation)
-Scope: Multi-modality experiments; class-balance loss tuning
-Links: /work#brats
-
-### RealTimeSearch
-Goal: Lightweight RAG/agents with OCI GenAI or Ollama
-Features: Switchable providers, local-first option
-Links: /work#realtimesearch
-
-## Skills
-Frontend: React 18, TypeScript, shadcn, Tailwind
-Backend: Node/Express (REST), Postgres/Drizzle
-AI: LLM orchestration, embeddings, RAG, LangChain (as needed)
-Cloud: OCI (compute, networking, auth patterns)
-Analytics/Testing: (tools you use)
+- **Title:** AI Deployment Engineer
+- **Day job:** Oracle Cloud Infrastructure — Developer Tools, Santa Clara, CA
+- **Founder of:** Signl (opensignl.com)
+- **Education:** B.S. Computer Science, San Francisco State University (3.7 GPA, Dean's List, Genentech-PINC Scholarship, Data Science & Machine Learning Certificate)
+- **Location:** Santa Clara, CA (San Francisco Bay Area)
 
 ## About Me
-Interests: martial arts (boxing), hiking, nature, travel (multiple countries)
-Values: family time, community service, consistency, focus, discipline
-Community: organized a COVID-era food drive for people experiencing homelessness
-Networking: open to coffee chats and collaboration
+Day job is AI deployment engineering at Oracle Cloud Infrastructure. The title on my badge says "Cloud Support Engineer," but the work is post-sale technical partnership for Fortune 500, DOD, government (with GOV clearance), and FSI clients — building, evaluating, and shipping production AI systems.
 
-## Personal FAQ
-Q: What do you do outside of work?
-A: Martial arts/boxing, hiking in nature, and travel.
+Outside Oracle, I'm the founder of Signl (opensignl.com), a live content intelligence SaaS. Before Signl, I built Triage AI (triagedai.com), a full-stack AI triage app serving 1,000+ users.
 
-Q: Do you do coffee chats?
-A: Yes—open to coffee chats and networking.
+Outside the work: martial arts (boxing), hiking, travel. Based in Santa Clara, CA. I organized a community food drive during COVID for people experiencing homelessness.
 
-Q: What causes do you care about?
-A: Community giving; I organized a food drive during COVID.
-
-Q: What do you value?
-A: Family, giving back, and disciplined learning.
-
-## Development Philosophy & Principles
+Open to coffee chats and conversations with builders and AI teams.
 
 ### CON-FO-DI Philosophy
-CON-FO-DI stands for **Consistency • Focus • Discipline** - Abdarrahman's personal philosophy that guides everything he does, from daily habits to project delivery.
+CON-FO-DI = Consistency, Focus, Discipline. The personal philosophy that shapes how I approach building and shipping. Show up consistently. Focus on what matters. Follow through with discipline. It's how the work gets done.
 
-**Consistency**: Showing up every day and doing the work, even when motivation is low. Building reliable habits and maintaining steady progress rather than working in bursts. This applies to everything - coding, learning, fitness, relationships.
+## Personal FAQ
+**Q: What do you do outside of work?**
+A: Martial arts and boxing. Hiking. Travel.
 
-**Focus**: Saying no to distractions and staying committed to what matters most. Whether it's choosing which features to build, which skills to develop, or which opportunities to pursue - focus means doing fewer things exceptionally well.
+**Q: Where are you based?**
+A: Santa Clara, CA — San Francisco Bay Area. Open to remote.
 
-**Discipline**: Following through on commitments to yourself and others. Having the self-control to stick to the plan when it gets difficult. Making decisions based on long-term benefits rather than short-term comfort.
+**Q: Do you do coffee chats?**
+A: Yes — open to coffee chats and meeting people building in AI.
 
-**In Practice**: CON-FO-DI shows up in how Abdarrahman approaches projects - consistent daily work, focused scope (like TriagedAI solving one problem really well), and the discipline to ship even when perfectionism wants to keep tweaking. It's also why his code is clean and his projects actually get finished.
+**Q: What roles are you looking for next?**
+A: AI Deployment Engineer, AI Solutions Engineer, Forward-Deployed Engineer, or DevRel at AI-forward companies — OpenAI, Anthropic, Scale, and similar.
 
-This philosophy naturally extends to software development - consistent patterns, focused features, disciplined architecture - but it's fundamentally about how to approach any meaningful work or goal.
+**Q: What's the favorite thing you've built?**
+A: Hard to pick one. The chatbot safety evaluation framework I built at Oracle is the most technically interesting — built from scratch, surfaced an 80% failure rate on safety-critical scenarios, presented to VP, and the insights drove a redesign with 90% groundedness lift. Signl is the one that means the most as a founder — it's a live SaaS I built solo.
 
-### Other Principles
-- AI voice agents + ROI dashboards (appointment booking, conversion metrics)
-- Ship early, iterate based on real feedback
-- Solve real problems that people actually have
+**Q: What does "AI deployment engineer" actually mean day-to-day?**
+A: I'm the post-sale technical partner for Fortune 500, DOD, government, and FSI engineering teams on Oracle Cloud Infrastructure. The work spans: building AI evaluation harnesses, deploying RAG agents to production, debugging complex JavaScript / Java / REST API issues at the customer boundary, and presenting technical findings to senior leadership.
+
+## Projects
+
+### Signl (opensignl.com)
+Live content intelligence SaaS, founded solo. Daily agentic pipeline scans Reddit, X, LinkedIn, and news. Ranks audience signals by source strength with verbatim evidence. Generates platform-native posts for X and LinkedIn, validated by an LLM-as-judge audit layer against platform-specific publishing rules before output. Multi-model inference with graceful degradation and automatic failover. Voice profiling matches the user's actual writing patterns. Free tier (5 posts/month, 2 briefs/day) and $19/month Pro tier.
+- **Stack:** Next.js, TypeScript, OpenAI API
+- **Status:** Live — https://www.opensignl.com/
+- **Demo:** https://www.linkedin.com/feed/update/urn:li:activity:7448471121202429953/
+
+### AI Chatbot Safety Evaluation Framework (Oracle)
+Built from scratch for a production chatbot that had no evaluation infrastructure. Reverse-engineered the API from HAR files. Recreated session flows programmatically in Postman. Wrote a custom injection framework. Scored outputs with LLM-as-judge across three axes: safety, groundedness, and relevance. Used the framework to surface an 80% failure rate on safety-critical scenarios across 3 core test categories. Presented findings and insights to VP and senior leadership. The insights drove a multi-turn chatbot redesign that improved groundedness by 90%.
+- **Stack:** Postman, custom injection framework, LLM-as-judge, HAR analysis
+
+### AI-Powered Engineering Workspace (Oracle, OpenAI Codex)
+Tech-led the pod that built an internal AI engineering workspace. Integrates Oracle's support knowledge base with OpenAI GPT models via the OpenAI SDK to auto-generate issue drafts and runbooks on demand. Reduced average case resolution time across adopting engineering teams. Shipped end-to-end with OpenAI Codex.
+- **Stack:** OpenAI Codex, OpenAI SDK, GPT models, Oracle support KB integration
+
+### OCI RAG Migration Agent (Oracle)
+Designed and deployed a production RAG agent on OCI Generative AI for OIC Gen 2 → Gen 3 migration. Vector embeddings, retrieval pipeline, internal-facing agent used by Oracle engineers to automate technical troubleshooting. Reduced manual resolution time for internal teams.
+- **Stack:** OCI Generative AI, vector embeddings, RAG
+
+### Production AI Agent Evaluation (Oracle, post-sale)
+Evaluated production AI agents for Fortune 500 engineering teams as part of post-sale technical partnership. Implemented RAG pipelines that improved response accuracy by 35%. Surfaced critical failure patterns before customer exposure.
+
+### Triage AI (triagedai.com)
+Full-stack AI triage app serving 1,000+ users. Perplexity sonar-pro for grounded responses. PostgreSQL-backed conversation memory across sessions. Replaced AWS Comprehend with a client-side sentiment model — 95% accuracy on labeled set, $50/month infra cost eliminated, 200ms P95 latency cut. 40% relevance lift over baseline. Cut React re-renders by 60% via TanStack Query and targeted memoization.
+- **Stack:** React, TypeScript, PostgreSQL, Perplexity API
+- **Status:** Live — https://triagedai.com/
+- **Demo:** https://www.linkedin.com/feed/update/urn:li:activity:7375974681906118657/
+
+### Brain Tumor Segmentation (BraTS)
+Medical imaging research using U-Net architecture for multi-class brain tumor segmentation. BraTS dataset across all four MRI modalities (T1, T1CE, T2, FLAIR). Systematic single- vs multi-modality experiments. Presented research findings at the SFSU-Genentech partnership symposium to hundreds of engineers and industry professionals.
+- **Stack:** Python, TensorFlow, U-Net
+- **Repo:** https://github.com/AbdarrahmanAyyaz/TumorSegmentation
+
+## Skills
+
+**AI Coding Tools (used daily):** OpenAI Codex, Claude Code, Cursor, ChatGPT — for prototyping, code review, and workflow automation.
+
+**AI / LLM:** OpenAI API (GPT-5.4, Codex), Claude API, OCI Generative AI, RAG, Vector Databases, LLM Evaluation (LLM-as-a-Judge), Prompt Engineering, Agentic Workflows, Model Fine-tuning, MCP Tools.
+
+**Languages:** Python, TypeScript, JavaScript, Java, SQL, C++.
+
+**Frameworks & Libraries:** React, Next.js, Node.js, Express.js, LangChain, TensorFlow, Keras, PyTorch, Pandas, Docker, REST APIs.
+
+**Cloud & Infra:** AWS, GCP, OCI, PostgreSQL, MySQL, Firebase, CI/CD, Git, GitHub, Linux.
+
+## Target Roles
+AI Deployment Engineer, AI Solutions Engineer, Forward-Deployed Engineer, DevRel — at AI-forward companies (OpenAI, Anthropic, Scale, similar tier).
 
 ## Links
-Work: /work
-Skills: /skills
-Résumé: /resume
-LinkedIn: https://www.linkedin.com/in/abdarrahman-ayyaz/
-Portfolio: https://abdarrahman.dev/
-
----
-### Editing Guide
-- Keep it concise and factual; no private data.
-- Use "reported" for metrics that aren't independently audited.
-- After editing, bump `RAG_VERSION` in `src/lib/gemini.js` and reload the site.
+- **Portfolio:** https://abdarrahman.dev/
+- **LinkedIn:** https://www.linkedin.com/in/abdarrahman-ayyaz/
+- **GitHub:** https://github.com/AbdarrahmanAyyaz
+- **Email:** abdarrahmanayyaz00@gmail.com
+- **Signl:** https://www.opensignl.com/
+- **Triage AI:** https://triagedai.com/

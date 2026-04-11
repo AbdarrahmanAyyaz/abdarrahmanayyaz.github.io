@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import BottomDock from './components/BottomDock';
 import ProgressIndicators from './components/ProgressIndicators';
 import Home from './components/HomeNew';
 import About from './components/About';
@@ -15,7 +14,6 @@ export default function App() {
     <ToastProvider>
       <Navbar />
       <ProgressIndicators />
-      <BottomDock />
       <Home />
       <About />
       <Skills />

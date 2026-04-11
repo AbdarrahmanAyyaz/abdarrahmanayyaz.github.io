@@ -1,137 +1,77 @@
-// Project data for RadialProjectCarousel
+// Project data for Work section + ProjectGrid + FeaturedProject
+//
+// Order intentional: Signl first (founder, will get a dedicated SignlFeature.jsx
+// component in Phase 3 above Work). Triage AI keeps id 'triagedai' so the Work.jsx
+// `featuredId = "triagedai"` hardcode keeps showing it in the featured slot until
+// Phase 3 refactors that.
+//
+// Brain Tumor Segmentation entry intentionally omitted — pending re-verification
+// of Dice/Jaccard metrics against the original paper. See memory:
+// feedback_brain_tumor_metrics_pending.md
 
-// Import images
-import work from '../assets/gigApp.jpg';
-import portfolio from '../assets/portfolio.png';
-import SocialMedia from '../assets/SocialMedia.png';
-import dna from '../assets/dna.jpg';
-import RealEst from '../assets/1714780311641.jpeg';
 import triaged from '../assets/triagedai.png';
-import advancely from '../assets/advancely.png';
-import porsche from '../assets/Porsche.png';
-import scrag from '../assets/SCRAG.png';
 import oic from '../assets/OIC.png';
 
 export const projects = [
   {
-    id: 'triagedai',
-    title: 'TriagedAI',
-    subtitle: 'AI-Powered Technical Support',
-    description: 'AI-powered technical support copilot. Auto-summaries from logs • guided triage • one-click runbooks.',
-    raw: 'AI-powered technical support companion for faster debugging and guided triage. Features intelligent context-aware troubleshooting and automated issue resolution.',
-    image: triaged,
-    tags: ['AI', 'React', 'OpenAI', 'LangChain', 'OCI'],
-    liveUrl: 'https://triagedai.com',
-    sourceUrl: '', // Private repo
-    highlights: ['–38% time-to-resolution']
-  },
-  {
-    id: 'advancely',
-    title: 'Advancely',
-    subtitle: 'Personal Success Dashboard',
-    description: 'Personal success dashboard for habits, goals, and AI guidance. Weekly insights • streak tracking • review planner.',
-    raw: 'Personal success dashboard: habits, goals, and AI guidance. Dual-AI approach combining goal tracking with intelligent habit recommendations.',
-    image: advancely,
-    tags: ['AI', 'React', 'Tailwind', 'Goals', 'Habits'],
-    liveUrl: 'https://advancely.ai',
-    sourceUrl: '', // Private repo
-    highlights: ['Weekly insights']
-  },
-  {
-    id: 'excel-to-rag',
-    title: 'Excel to RAG Converter',
-    subtitle: 'RAG Pipeline Tool',
-    description: 'Streamlit app that converts Excel and other files to RAG-ready format. File upload • data extraction • vector embedding.',
-    raw: 'Pipeline tool to convert Excel and various file formats into RAG-ready vector embeddings. Streamlines the process of preparing data for retrieval-augmented generation.',
-    image: scrag,
-    tags: ['Streamlit', 'Python', 'RAG', 'Vector DB'],
-    liveUrl: 'https://excel-to-rag-converter.streamlit.app/',
+    id: 'signl',
+    title: 'Signl',
+    subtitle: 'Founder · Live content intelligence SaaS',
+    description: 'Research-backed content platform. A daily agentic pipeline scans Reddit, X, LinkedIn, and news, ranks audience signals by source strength with verbatim evidence, and generates platform-native posts validated by an LLM-as-judge audit layer before publication. Multi-model inference with graceful degradation and automatic failover.',
+    raw: 'Founder of Signl, a live content intelligence SaaS. Agentic research pipeline with LLM-as-judge audit layer and multi-model failover.',
+    // No image yet — Signl gets a dedicated SignlFeature.jsx full-bleed treatment in Phase 3.
+    tags: ['Founder', 'AI', 'Next.js', 'TypeScript', 'OpenAI'],
+    liveUrl: 'https://www.opensignl.com/',
     sourceUrl: '',
-    highlights: ['Multi-format support']
+    highlights: ['Live SaaS', 'Free + $19/mo Pro', 'Multi-model failover'],
   },
   {
-    id: 'oic-migration',
-    title: 'OIC Migration Assistant',
-    subtitle: 'AI Agent for Oracle Integration Cloud',
-    description: 'AI agent in OCI for OIC migration queries. Gen 2 to Gen 3 migration • RAG-powered guidance • query resolution.',
-    raw: 'Internal AI agent built in Oracle Cloud Infrastructure to assist with Oracle Integration Cloud migration from Gen 2 to Gen 3 using RAG technology for intelligent query responses.',
+    id: 'safety-eval',
+    title: 'AI Chatbot Safety Eval Framework',
+    subtitle: 'Oracle · Built from scratch',
+    description: "Built an end-to-end evaluation harness for a production chatbot that had no testing infrastructure. Reverse-engineered the API from HAR files, recreated session flows in Postman, wrote a custom injection framework, and scored outputs with LLM-as-judge across safety, groundedness, and relevance. Used the framework to surface an 80% failure rate on safety-critical scenarios. The insights drove a multi-turn redesign that improved groundedness by 90%.",
+    raw: 'Custom eval framework for a production chatbot at Oracle. Surfaced an 80% failure rate on safety-critical scenarios; insights drove a redesign with 90% groundedness lift.',
+    // No image yet — gets a dedicated SafetyEvalCaseStudy.jsx editorial block in Phase 3.
+    tags: ['AI', 'LLM Eval', 'Safety', 'Postman', 'LLM-as-Judge'],
+    liveUrl: '',
+    sourceUrl: '',
+    highlights: ['80% failure rate surfaced', '90% groundedness lift', 'Presented to VP'],
+  },
+  {
+    id: 'codex-workspace',
+    title: 'AI Engineering Workspace',
+    subtitle: 'Oracle · OpenAI Codex + OpenAI SDK',
+    description: "Tech-led the pod that built an internal AI engineering workspace at Oracle. Integrates the support knowledge base with OpenAI GPT models via the OpenAI SDK to auto-generate issue drafts and runbooks on demand. Shipped end-to-end with OpenAI Codex. Reduced average case resolution time across adopting engineering teams.",
+    raw: 'Internal AI engineering workspace at Oracle integrating the support KB with OpenAI GPT models for auto-generated issue drafts and runbooks.',
+    // No image yet.
+    tags: ['AI', 'OpenAI', 'OpenAI SDK', 'OpenAI Codex'],
+    liveUrl: '',
+    sourceUrl: '',
+    highlights: ['Reduced case resolution time', 'Tech-led the pod', 'Shipped end-to-end'],
+  },
+  {
+    id: 'oci-rag-migration',
+    title: 'OCI RAG Migration Agent',
+    subtitle: 'Oracle · Production RAG on OCI Generative AI',
+    description: "Designed and deployed a production RAG agent on OCI Generative AI for OIC Gen 2 → Gen 3 migration. Vector embeddings over the Oracle migration corpus, retrieval pipeline, internal-facing agent used by Oracle engineers to automate technical troubleshooting. Reduced manual resolution time for internal teams.",
+    raw: 'Production RAG agent on OCI Generative AI automating Oracle Integration Cloud Gen 2 → Gen 3 migration troubleshooting.',
     image: oic,
-    tags: ['OCI', 'RAG', 'AI Agent', 'Oracle Integration'],
+    tags: ['AI', 'RAG', 'OCI', 'Vector Embeddings'],
     liveUrl: '',
-    sourceUrl: '', // Internal project
-    highlights: ['Internal Oracle tool']
+    sourceUrl: '',
+    highlights: ['Production RAG', 'Reduced manual resolution time', 'Internal Oracle tool'],
   },
   {
-    id: 'portfolio',
-    title: 'Portfolio React App',
-    subtitle: 'Personal Portfolio Website',
-    description: 'Light/dark theme with Framer Motion. Mobile-first layout • RAG-powered AI chat • smooth animations.',
-    raw: 'This website—light and dark themes, clean Tailwind UI with Framer Motion. Features responsive design, smooth animations, and RAG-powered interactive AI chat.',
-    image: portfolio,
-    tags: ['React', 'Tailwind', 'Framer Motion', 'TypeScript'],
-    liveUrl: 'https://abdarrahman.dev',
-    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/abdarrahmanayyaz.github.io',
-    highlights: ['Interactive AI assistant']
-  },
-  {
-    id: 'tumor-segmentation',
-    title: 'Multi-Class Tumor Segmentation',
-    subtitle: 'Medical AI Research',
-    description: 'Medical image segmentation using U-Net/ResNet. Class-balanced training.',
-    raw: 'Medical image segmentation across multiple tumor classes using advanced deep learning. Achieved 98.3% accuracy on BraTS dataset with U-Net architecture.',
-    image: RealEst,
-    tags: ['PyTorch', 'Segmentation', 'ML', 'Medical AI', 'U-Net'],
-    liveUrl: '',
-    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md',
-    highlights: ['98.3% accuracy on BRATS']
-  },
-  {
-    id: 'porsche-sales',
-    title: 'Sales Professional Portfolio',
-    subtitle: 'Automotive Sales Platform',
-    description: 'Porsche sales platform with CRM-lite dashboard. Inventory manager • lead capture • WhatsApp handoff.',
-    raw: 'Sales professional portfolio for Porsches with clean UI and dashboard. Features inventory management and client tracking.',
-    image: porsche,
-    tags: ['React', 'Tailwind', 'Dashboard', 'UI/UX'],
-    liveUrl: 'https://abdullahayyaz.com',
-    sourceUrl: '', // Private repo
-    highlights: ['CRM-lite dashboard']
-  },
-  {
-    id: 'workwaves',
-    title: 'Work Waves (Gig App)',
-    subtitle: 'Gig Economy Helper',
-    description: 'Earnings & route companion for gig workers. Real-time map overlays • multi-app aggregation • local-first sync.',
-    raw: 'Gig-economy helper to manage multi-app shifts and track earnings. Features real-time location tracking and earnings analytics.',
-    image: work,
-    tags: ['React', 'Node', 'Maps', 'Analytics'],
-    liveUrl: '',
-    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/Workwaves',
-    highlights: ['Real-time map overlays']
-  },
-  {
-    id: 'dna-sequencing',
-    title: 'DNA Sequencing with CNN Models',
-    subtitle: 'Bioinformatics Research',
-    description: 'CNN classifier for DNA binding site prediction. Achieved 93% accuracy with hyperparameter tuning.',
-    raw: 'ML models for predicting transcription factor binding sites in DNA sequences. Achieved 93% accuracy using CNN models with advanced hyperparameter tuning and data visualization.',
-    image: dna,
-    tags: ['Python', 'TensorFlow', 'CNN', 'Bioinformatics', 'ML'],
-    liveUrl: '',
-    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/DNA-Sequencing',
-    highlights: ['93% accuracy']
-  },
-  {
-    id: 'social-media',
-    title: 'Experience Share (Social Media App)',
-    subtitle: 'Social Platform',
-    description: 'MERN social app with auth, posts, and comments. Full-featured social media platform with real-time interactions.',
-    raw: 'MERN social app with auth, posts, and comments. Full-featured social media platform with real-time interactions.',
-    image: SocialMedia,
-    tags: ['MERN', 'Auth', 'CRUD', 'Real-time'],
-    liveUrl: '',
-    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/Social-Media-App',
-    highlights: ['Full-stack MERN']
+    id: 'triagedai',
+    title: 'Triage AI',
+    subtitle: 'Founder · Full-stack AI triage · 1,000+ users',
+    description: "Full-stack AI triage app with Perplexity sonar-pro and PostgreSQL-backed conversation memory across sessions. Replaced AWS Comprehend with a client-side sentiment model — 95% accuracy on labeled set, $50/month infra cost eliminated, 200ms P95 latency cut. Cut React re-renders by 60% via TanStack Query and memoization. 40% relevance lift over baseline.",
+    raw: 'Full-stack AI triage app serving 1,000+ users. Perplexity sonar-pro, PostgreSQL conversation memory, custom client-side sentiment model that replaced AWS Comprehend.',
+    image: triaged,
+    tags: ['AI', 'React', 'TypeScript', 'PostgreSQL', 'Perplexity'],
+    liveUrl: 'https://triagedai.com',
+    sourceUrl: '',
+    highlights: ['1,000+ users', '40% relevance lift', 'Replaced AWS Comprehend'],
   },
 ];
 

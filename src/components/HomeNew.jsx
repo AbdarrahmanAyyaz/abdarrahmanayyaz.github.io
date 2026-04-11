@@ -4,6 +4,7 @@ import Section from "./Section";
 import ScrollCue from "./ScrollCue";
 import Hero from "./Hero";
 import ChatSection from "./ChatSection";
+import ProofStrip from "./ProofStrip";
 import { useHideFabWhenChatVisible } from "../hooks/useHideFabWhenChatVisible";
 
 const fadeUp = {
@@ -92,39 +93,11 @@ function HomeNew() {
           />
         </motion.div>
 
-        {/* Work Preview Section */}
-        <motion.div
-          className="work-preview mt-8 sm:mt-12 w-full max-w-4xl below-fold"
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <h2>See My Impact</h2>
-          <p>From solving enterprise production issues to serving thousands with AI solutions</p>
-
-          <button
-            className="explore-work-btn"
-            onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Explore My Work →
-          </button>
-
-          <div className="impact-stats">
-            <div className="stat">
-              <span className="number">3+</span>
-              <span className="label">AI Products</span>
-            </div>
-            <div className="stat">
-              <span className="number">10K+</span>
-              <span className="label">Users Impacted</span>
-            </div>
-            <div className="stat">
-              <span className="number">60%</span>
-              <span className="label">Efficiency Gains</span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Proof strip — sourced metrics, replaces the unsourced work-preview block.
+            Each number maps to a real artifact in the KB. */}
+        <div className="w-full mt-8 sm:mt-12">
+          <ProofStrip />
+        </div>
 
         {/* Scroll Cue */}
         <motion.div

@@ -1,32 +1,50 @@
 [
   {
     "type": "about",
+    "topic": "role",
+    "facts": ["AI deployment engineer at Oracle Cloud Infrastructure", "post-sale technical partner for Fortune 500, DOD, government, FSI clients", "official internal title is Cloud Support Engineer"],
+    "one_liner": "AI deployment engineer at Oracle \u2014 post-sale technical partner for Fortune 500, DOD, government, and FSI clients."
+  },
+  {
+    "type": "about",
+    "topic": "founder",
+    "facts": ["founder of Signl (opensignl.com)", "live content intelligence SaaS", "agentic research pipeline with LLM-as-judge audit layer"],
+    "one_liner": "Founder of Signl (opensignl.com), a live content intelligence SaaS."
+  },
+  {
+    "type": "about",
+    "topic": "location",
+    "facts": ["Santa Clara, CA", "San Francisco Bay Area", "open to remote"],
+    "one_liner": "Based in Santa Clara, CA \u2014 San Francisco Bay Area, open to remote."
+  },
+  {
+    "type": "about",
     "topic": "interests",
-    "facts": ["martial arts (boxing)", "hiking", "nature", "travel (multiple countries)"],
-    "one_liner": "Outside work: martial arts/boxing, hiking in nature, and travel."
+    "facts": ["martial arts (boxing)", "hiking", "travel"],
+    "one_liner": "Outside the work: martial arts, hiking, travel."
   },
   {
     "type": "about",
     "topic": "values",
-    "facts": ["family time", "community service", "consistency", "focus", "discipline"],
-    "one_liner": "I value family, giving back, and disciplined learning/building."
+    "facts": ["family", "community service", "consistency", "focus", "discipline"],
+    "one_liner": "Values family, community, and disciplined building \u2014 the CON-FO-DI philosophy."
   },
   {
     "type": "about",
     "topic": "community",
-    "facts": ["organized a COVID-era food drive for people experiencing homelessness"],
-    "one_liner": "I organized a community food drive during COVID."
+    "facts": ["organized a community food drive during COVID for people experiencing homelessness"],
+    "one_liner": "Organized a community food drive during COVID."
+  },
+  {
+    "type": "about",
+    "topic": "target_roles",
+    "facts": ["AI Deployment Engineer", "AI Solutions Engineer", "Forward-Deployed Engineer", "DevRel", "OpenAI", "Anthropic", "Scale"],
+    "one_liner": "Looking for AI Deployment / Solutions / Forward-Deployed / DevRel roles at AI-forward companies (OpenAI, Anthropic, Scale, similar)."
   },
   {
     "type": "about",
     "topic": "networking",
-    "facts": ["open to coffee chats", "interested in meeting builders and teams"],
-    "one_liner": "Open to coffee chats and networking."
-  },
-  {
-    "type": "about",
-    "topic": "availability",
-    "facts": ["remote collaboration", "project discussions"],
-    "one_liner": "Available for remote collaboration and project discussions."
+    "facts": ["open to coffee chats", "interested in meeting AI builders and teams"],
+    "one_liner": "Open to coffee chats with builders and AI teams."
   }
 ]

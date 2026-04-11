@@ -1,48 +1,50 @@
 [
   {
-    "project": "TriagedAI",
-    "one_liner": "Context-aware support agent that speeds up issue resolution.",
-    "stack": ["React/TS", "Express/TS", "Postgres + Drizzle", "Firebase Auth", "Perplexity API"],
-    "features": ["solution tracking", "multi-chat", "term tooltips", "sentiment analysis"],
-    "impact": ["reduces debugging time", "captures fixes for reuse"],
-    "links": {"demo": "/work#triagedai"}
+    "project": "Signl",
+    "one_liner": "Live content intelligence SaaS \u2014 founded solo. Agentic research pipeline with LLM-as-judge audit layer.",
+    "stack": ["Next.js", "TypeScript", "OpenAI API", "Multi-model pipeline"],
+    "features": ["agentic daily research across Reddit/X/LinkedIn/news", "ranked audience signals scored by source strength", "platform-native post generation", "LLM-as-judge audit layer before publication", "multi-model failover", "voice profiling"],
+    "impact": ["live SaaS with free + $19/mo Pro tier", "research-to-post in under 60 seconds"],
+    "links": {"live": "https://www.opensignl.com/", "demo": "https://www.linkedin.com/feed/update/urn:li:activity:7448471121202429953/"}
   },
   {
-    "project": "Excel to RAG Converter",
-    "one_liner": "Pipeline to convert Excel and other files to RAG-ready format.",
-    "stack": ["Streamlit", "Python", "RAG", "Vector DB"],
-    "features": ["file upload", "data extraction", "vector embedding", "RAG preparation"],
-    "impact": ["automates RAG setup", "supports multiple file formats"],
-    "links": {"demo": "https://excel-to-rag-converter.streamlit.app/"}
-  },
-  {
-    "project": "OIC Migration Assistant",
-    "one_liner": "AI agent in OCI helping with OIC integration migration from Gen 2 to Gen 3.",
-    "stack": ["OCI", "RAG", "AI Agent", "Oracle Integration Cloud"],
-    "features": ["migration guidance", "query resolution", "Gen 2 to Gen 3 migration", "RAG-powered responses"],
-    "impact": ["streamlines OIC migration", "reduces migration complexity"],
+    "project": "AI Chatbot Safety Evaluation Framework",
+    "one_liner": "Built from scratch for a production chatbot at Oracle. Surfaced an 80% failure rate on safety-critical scenarios.",
+    "stack": ["Postman", "custom injection framework", "LLM-as-judge", "HAR analysis"],
+    "features": ["reverse-engineered API from HAR files", "recreated session flows in Postman", "custom prompt injection layer", "LLM-as-judge scoring across safety, groundedness, relevance"],
+    "impact": ["surfaced 80% failure rate on safety-critical scenarios", "presented findings to VP and senior leadership", "insights drove redesign with 90% groundedness lift"],
     "links": {}
   },
   {
-    "project": "Advancely",
-    "one_liner": "AI-powered goals & habits with insights and recommendations.",
-    "stack": ["React/TS", "Node/Express", "Postgres", "OpenAI", "Perplexity Sonar", "Mailjet", "Firebase"],
-    "features": ["5-year goal framework", "habit tracking", "AI tips", "progress analytics"],
-    "links": {"demo": "/work#advancely"}
+    "project": "AI-Powered Engineering Workspace",
+    "one_liner": "Internal AI engineering workspace at Oracle, built with OpenAI Codex and the OpenAI SDK.",
+    "stack": ["OpenAI Codex", "OpenAI SDK", "GPT models", "Oracle support KB integration"],
+    "features": ["auto-generated issue drafts and runbooks", "Oracle support KB integration", "tech-led the pod that shipped it"],
+    "impact": ["reduced average case resolution time across adopting engineering teams"],
+    "links": {}
+  },
+  {
+    "project": "OCI RAG Migration Agent",
+    "one_liner": "Production RAG agent on OCI Generative AI for OIC Gen 2 \u2192 Gen 3 migration.",
+    "stack": ["OCI Generative AI", "vector embeddings", "RAG"],
+    "features": ["vector embeddings over Oracle migration corpus", "retrieval pipeline", "internal-facing agent for Oracle engineers"],
+    "impact": ["reduced manual resolution time for internal Oracle engineering teams"],
+    "links": {}
+  },
+  {
+    "project": "Triage AI",
+    "one_liner": "Full-stack AI triage app serving 1,000+ users. Replaced AWS Comprehend with a client-side sentiment model.",
+    "stack": ["React", "TypeScript", "PostgreSQL", "Perplexity API"],
+    "features": ["Perplexity sonar-pro for grounded responses", "PostgreSQL conversation memory across sessions", "client-side sentiment model (95% accuracy)", "TanStack Query memoization"],
+    "impact": ["1,000+ users", "40% relevance lift over baseline", "$50/month infra cost eliminated", "200ms P95 latency cut", "60% reduction in React re-renders"],
+    "links": {"live": "https://triagedai.com/", "demo": "https://www.linkedin.com/feed/update/urn:li:activity:7375974681906118657/"}
   },
   {
     "project": "Brain Tumor Segmentation",
-    "one_liner": "Medical AI research on BraTS using U-Net for tumor segmentation.",
-    "stack": ["Python", "PyTorch/TensorFlow", "Colab"],
-    "findings": ["FLAIR modality strongest; 98.3% Dice, 96.66% Jaccard (per study)"],
-    "links": {"paper": "/work#brats"}
-  },
-  {
-    "project": "RealTimeSearch",
-    "one_liner": "RAG/agents system with OCI GenAI or Ollama for real-time search.",
-    "stack": ["RAG", "OCI GenAI", "Ollama", "Vector DB"],
-    "features": ["real-time search", "agent-based retrieval", "cloud integration"],
-    "impact": ["enhanced search capabilities", "cloud-native architecture"],
-    "links": {"demo": "/work#realtimesearch"}
+    "one_liner": "U-Net architecture for multi-class brain tumor segmentation on the BraTS dataset.",
+    "stack": ["Python", "TensorFlow", "U-Net"],
+    "features": ["systematic single- vs multi-modality experiments", "all four BraTS modalities (T1, T1CE, T2, FLAIR)"],
+    "impact": ["presented findings at SFSU-Genentech partnership symposium to hundreds of attendees"],
+    "links": {"repo": "https://github.com/AbdarrahmanAyyaz/TumorSegmentation"}
   }
 ]
