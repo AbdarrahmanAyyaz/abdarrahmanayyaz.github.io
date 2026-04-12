@@ -13,10 +13,10 @@ const categoryData = {
     label: 'Projects',
     icon: '💼',
     questions: [
-      "Tell me about TriagedAI and how it helps with production issues",
-      "What's innovative about Advancely's dual AI approach?",
-      "Show me your brain tumor segmentation research findings",
-      "How did you achieve 98.3% accuracy in medical AI?"
+      "Tell me about Triage AI and its 1,000+ users",
+      "What is Signl and how does the agentic research pipeline work?",
+      "Tell me about the AI Safety Eval Framework you built at Oracle",
+      "Show me your brain tumor segmentation research"
     ]
   },
   technical: {
@@ -83,7 +83,7 @@ const EnhancedAIChatWorking = ({
         console.log('EnhancedAIChatWorking: Chat instance created successfully');
         const initialMessage = {
           id: 1,
-          text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
+          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [Signl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: surfaced 80% failure rate at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
           type: 'ai',
           timestamp: new Date()
         };
@@ -106,7 +106,7 @@ const EnhancedAIChatWorking = ({
         // Fallback message when initialization fails
         const fallbackMessage = {
           id: 1,
-          text: "Welcome to my portfolio! I am AI Abdarrahman, please see the following highlights for a quick overview of my work!\n\n**Highlights:**\n• Advancely.ai: dual-AI, goals/habits, **1000+ users**, 40% improvement\n• TriagedAI: context-aware troubleshooting, **60% faster debugging**\n• Brain Tumor Segmentation: BraTS, U-Net, **98.3% accuracy**\n\n**Next step:** Ask me about my work or projects!",
+          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [Signl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: surfaced 80% failure rate at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
           type: 'ai',
           timestamp: new Date()
         };
@@ -195,16 +195,18 @@ const EnhancedAIChatWorking = ({
     } else {
       // Fallback mode - provide simple responses when API is not available
       setTimeout(() => {
-        let response = "Thanks for your interest! The AI chat is currently unavailable. You can explore my full portfolio above to learn about TriagedAI, Advancely, and my research projects. Feel free to contact me directly to discuss opportunities!";
+        let response = "Thanks for your interest! The AI chat is currently unavailable. You can explore my full portfolio above to learn about Signl, Triage AI, and my Oracle AI work. Feel free to contact me directly to discuss opportunities!";
 
         // Simple keyword-based responses for fallback mode
         const lowerMessage = messageText.toLowerCase();
-        if (lowerMessage.includes('triaged')) {
-          response = "[TriagedAI](https://triagedai.com) is one of my flagship projects - an AI-powered technical support system enabling **60% faster debugging** for production issues! It has helped hundreds of users and uses Perplexity AI, React, and PostgreSQL. You can see it in my Work section above.";
-        } else if (lowerMessage.includes('advancely')) {
-          response = "[Advancely](https://advancely.ai) is my AI-powered personal development platform with **1000+ users** achieving **40% habit improvement rates**. It helps people reach their 5-year goals through intelligent habit tracking and personalized recommendations. Check out the Work section for more details!";
+        if (lowerMessage.includes('triaged') || lowerMessage.includes('triage ai')) {
+          response = "[Triage AI](https://triagedai.com) is a full-stack AI triage app serving **1,000+ users**. Built with Perplexity sonar-pro, React, TypeScript, and PostgreSQL-backed conversation memory. Achieved a **40% relevance lift** over baseline and replaced AWS Comprehend with a client-side sentiment model. Check it out in my Work section above.";
+        } else if (lowerMessage.includes('signl') || lowerMessage.includes('opensignl')) {
+          response = "[Signl](https://www.opensignl.com/) is a research-backed content intelligence platform I founded. An agentic pipeline scans Reddit, X, LinkedIn, and news daily, surfaces ranked audience signals with verbatim evidence, and generates platform-native posts validated by an LLM-as-judge audit layer. Multi-model inference with graceful degradation and automatic failover.";
+        } else if (lowerMessage.includes('safety') || lowerMessage.includes('eval') || lowerMessage.includes('oracle')) {
+          response = "At Oracle, I built an end-to-end AI safety evaluation framework from scratch — reverse-engineered the chatbot API from HAR files, built a custom injection framework, and implemented LLM-as-judge scoring. Surfaced an **80% failure rate** on safety-critical scenarios and presented findings to VP. The insights drove a redesign that improved groundedness by **90%**.";
         } else if (lowerMessage.includes('research') || lowerMessage.includes('brain') || lowerMessage.includes('tumor')) {
-          response = "My [brain tumor segmentation](https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md) research achieved 98.3% accuracy using deep learning on MRI data. It's fascinating work combining AI with medical imaging - you can see the full details in my Work section!";
+          response = "My [brain tumor segmentation research](https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md) used a U-Net architecture on the BraTS dataset (T1, T1CE, T2, FLAIR modalities) with systematic hyperparameter tuning. I presented findings at the SFSU–Genentech partnership symposium to hundreds of engineers and industry professionals.";
         } else if (lowerMessage.includes('skills') || lowerMessage.includes('technology') || lowerMessage.includes('tech')) {
           response = "I work with AI technologies like OpenAI and LangChain, frontend with React & Tailwind (4+ years), cloud platforms especially Oracle Cloud Infrastructure, and I'm currently exploring Vector DBs and RAG optimization. Check out my Skills section for the full breakdown!";
         } else if (lowerMessage.includes('collaborate') || lowerMessage.includes('work together') || lowerMessage.includes('hire')) {
@@ -218,7 +220,7 @@ const EnhancedAIChatWorking = ({
         } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
           response = "You can reach me through the quick action buttons above! 📧 Email me directly, connect on LinkedIn, or check out my GitHub. I typically respond within 24 hours and love discussing new opportunities and interesting projects.";
         } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('website') || lowerMessage.includes('projects')) {
-          response = "This portfolio showcases my key projects: **Advancely** (1000+ users, habit tracking), **TriagedAI** (60% faster debugging), and my **research in medical AI** (98.3% accuracy). Each project demonstrates different aspects of my full-stack and AI capabilities.";
+          response = "This portfolio showcases my key work: **Signl** (founder, live content intelligence SaaS), **AI Safety Eval Framework** (surfaced 80% failure rate at Oracle, 90% groundedness lift), **Triage AI** (1,000+ users, 40% relevance lift), and production AI systems I've built at Oracle.";
         }
 
         addMessage(currentChatId, response, 'ai');
@@ -360,7 +362,7 @@ const EnhancedAIChatWorking = ({
                 AI Abdarrahman
               </h2>
               <p className="text-muted mt-0.5 sm:mt-1 text-xs sm:text-sm">
-                AI & Cloud Engineer
+                AI Deployment Engineer · Founder of Signl
               </p>
             </div>
           </div>

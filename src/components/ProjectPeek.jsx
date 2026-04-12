@@ -87,19 +87,19 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const ProjectPeek = ({ projects = [] }) => {
-  // Specifically get the requested 3 projects: Advancely, TriagedAI, Multi-Class Tumor Segmentation
+  // Specifically get the requested 3 projects: Signl, TriagedAI, Safety Eval
   const featuredProjects = [
-    projects.find(p => p.name === 'Advancely'),
-    projects.find(p => p.name === 'TriagedAI'), 
-    projects.find(p => p.name === 'Multi-Class Tumor Segmentation')
+    projects.find(p => p.name === 'Signl'),
+    projects.find(p => p.name === 'TriagedAI'),
+    projects.find(p => p.name === 'AI Chatbot Safety Evaluation Framework')
   ]
     .filter(Boolean) // Remove any undefined projects
     .map((project, index) => ({
       ...project,
       // Add specific metrics for each project
-      metric: project.name === 'Advancely' ? "Live AI app" :
-              project.name === 'TriagedAI' ? "↓25% MTTR" :
-              project.name === 'Multi-Class Tumor Segmentation' ? "ML research" : null
+      metric: project.name === 'Signl' ? "Live SaaS" :
+              project.name === 'TriagedAI' ? "1,000+ users" :
+              project.name === 'AI Chatbot Safety Evaluation Framework' ? "Oracle" : null
     }));
 
   return (

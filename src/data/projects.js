@@ -46,6 +46,7 @@ export const projects = [
     image: triaged,
     tags: ['AI', 'React', 'TypeScript', 'PostgreSQL', 'Perplexity'],
     liveUrl: 'https://triagedai.com',
+    demoUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7375974681906118657/',
     sourceUrl: '',
     highlights: ['1,000+ users', '40% relevance lift', 'Replaced AWS Comprehend'],
   },

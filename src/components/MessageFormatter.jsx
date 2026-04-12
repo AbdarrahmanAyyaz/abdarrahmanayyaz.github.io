@@ -39,8 +39,8 @@ const MessageFormatter = ({ text, className = "" }) => {
 
   // Project names to highlight
   const projectNames = [
-    'TriagedAI', 'Advancely', 'RealTimeSearch', 'Brain Tumor Segmentation',
-    'BraTS', 'U-Net', 'FLAIR', 'Janazah Companion'
+    'TriagedAI', 'Triage AI', 'Signl', 'Opensignl', 'Brain Tumor Segmentation',
+    'BraTS', 'U-Net', 'FLAIR', 'Safety Eval'
   ];
 
   const handleCopyCode = async (code, index) => {

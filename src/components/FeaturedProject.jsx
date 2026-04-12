@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Play } from 'lucide-react';
 import { Badge, Button } from './ui';
 
 function shortDesc(p) {
@@ -68,6 +68,14 @@ const FeaturedProject = ({ project, className = "" }) => {
                   <a href={project.liveUrl} target="_blank" rel="noreferrer noopener" aria-label={`${project.title} live demo`}>
                     <span className="mr-1">Live Demo</span>
                     <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
+              )}
+              {project.demoUrl && (
+                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto">
+                  <a href={project.demoUrl} target="_blank" rel="noreferrer noopener" aria-label={`${project.title} demo video`}>
+                    <span className="mr-1">Watch Demo</span>
+                    <Play className="h-4 w-4" />
                   </a>
                 </Button>
               )}
