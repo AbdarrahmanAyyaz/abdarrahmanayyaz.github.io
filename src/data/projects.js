@@ -1,9 +1,9 @@
 // Project data for Work section + ProjectGrid + FeaturedProject
 //
-// Order intentional: Signl first (founder, will get a dedicated SignlFeature.jsx
-// component in Phase 3 above Work). Triage AI keeps id 'triagedai' so the Work.jsx
-// `featuredId = "triagedai"` hardcode keeps showing it in the featured slot until
-// Phase 3 refactors that.
+// Signl and the Safety Eval Framework are rendered by dedicated top-level
+// components (SignlFeature.jsx and SafetyEvalCaseStudy.jsx) above Work, so
+// they are intentionally absent from this list. Triage AI keeps id 'triagedai'
+// because Work.jsx hardcodes `featuredId = "triagedai"` for the featured slot.
 //
 // Brain Tumor Segmentation entry intentionally omitted — pending re-verification
 // of Dice/Jaccard metrics against the original paper. See memory:
@@ -13,30 +13,6 @@ import triaged from '../assets/triagedai.png';
 import oic from '../assets/OIC.png';
 
 export const projects = [
-  {
-    id: 'signl',
-    title: 'Signl',
-    subtitle: 'Founder · Live content intelligence SaaS',
-    description: 'Research-backed content platform. A daily agentic pipeline scans Reddit, X, LinkedIn, and news, ranks audience signals by source strength with verbatim evidence, and generates platform-native posts validated by an LLM-as-judge audit layer before publication. Multi-model inference with graceful degradation and automatic failover.',
-    raw: 'Founder of Signl, a live content intelligence SaaS. Agentic research pipeline with LLM-as-judge audit layer and multi-model failover.',
-    // No image yet — Signl gets a dedicated SignlFeature.jsx full-bleed treatment in Phase 3.
-    tags: ['Founder', 'AI', 'Next.js', 'TypeScript', 'OpenAI'],
-    liveUrl: 'https://www.opensignl.com/',
-    sourceUrl: '',
-    highlights: ['Live SaaS', 'Free + $19/mo Pro', 'Multi-model failover'],
-  },
-  {
-    id: 'safety-eval',
-    title: 'AI Chatbot Safety Eval Framework',
-    subtitle: 'Oracle · Built from scratch',
-    description: "Built an end-to-end evaluation harness for a production chatbot that had no testing infrastructure. Reverse-engineered the API from HAR files, recreated session flows in Postman, wrote a custom injection framework, and scored outputs with LLM-as-judge across safety, groundedness, and relevance. Used the framework to surface an 80% failure rate on safety-critical scenarios. The insights drove a multi-turn redesign that improved groundedness by 90%.",
-    raw: 'Custom eval framework for a production chatbot at Oracle. Surfaced an 80% failure rate on safety-critical scenarios; insights drove a redesign with 90% groundedness lift.',
-    // No image yet — gets a dedicated SafetyEvalCaseStudy.jsx editorial block in Phase 3.
-    tags: ['AI', 'LLM Eval', 'Safety', 'Postman', 'LLM-as-Judge'],
-    liveUrl: '',
-    sourceUrl: '',
-    highlights: ['80% failure rate surfaced', '90% groundedness lift', 'Presented to VP'],
-  },
   {
     id: 'codex-workspace',
     title: 'AI Engineering Workspace',
