@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Copy, ThumbsUp, Check, Heart } from 'lucide-react';
-import { useState } from 'react';
 import MessageFormatter from './MessageFormatter';
 import profileImage from '../assets/NewPic.png';
 
-const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
+const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, onLike }, ref) => {
   const isAI = type === 'ai';
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -42,6 +42,7 @@ const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -224,6 +225,8 @@ const ChatMessageSimple = ({ message, type, timestamp, onCopy, onLike }) => {
       )}
     </motion.div>
   );
-};
+});
+
+ChatMessageSimple.displayName = 'ChatMessageSimple';
 
 export default ChatMessageSimple;

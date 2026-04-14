@@ -102,8 +102,9 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Check if API key is configured
-    if (!process.env.GEMINI_API_KEY) {
+    // Use REACT_APP key (always valid); GEMINI_API_KEY may contain a stale JWT from Netlify site
+    const apiKey = process.env.REACT_APP_GOOGLE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
       console.error('GEMINI_API_KEY not found in environment variables');
       return {
         statusCode: 500,
@@ -146,7 +147,7 @@ exports.handler = async (event, context) => {
     }
 
     // Initialize Gemini AI
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
       generationConfig: {

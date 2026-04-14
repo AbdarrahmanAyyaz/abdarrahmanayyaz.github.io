@@ -449,8 +449,6 @@ export default function Contacts() {
                     disabled={status === 'loading' || !isFormValid()}
                     size="lg"
                     className="w-full sm:w-auto min-w-[160px] focus-visible:ring-2 focus-visible:ring-ring"
-                    loading={status === 'loading'}
-                    animate
                   >
                     {status === 'loading' ? 'Sending...' : 'Send Message'}
                   </Button>
