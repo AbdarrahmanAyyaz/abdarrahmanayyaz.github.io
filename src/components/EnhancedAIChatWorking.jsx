@@ -214,7 +214,7 @@ const EnhancedAIChatWorking = ({
         } else if (lowerMessage.includes('experience') || lowerMessage.includes('background')) {
           response = "I have **4+ years** of professional development experience, specializing in AI integration and cloud platforms. I've worked with React/TypeScript extensively, built production AI systems, and have experience with Oracle Cloud Infrastructure. My background spans both frontend development and machine learning research.";
         } else if (lowerMessage.includes('education') || lowerMessage.includes('degree') || lowerMessage.includes('study')) {
-          response = "I have completed my Computer Science degree with a focus on AI and machine learning. My academic work included research in medical imaging AI, particularly brain tumor segmentation using deep learning techniques with 98.3% accuracy.";
+          response = "I graduated from San Francisco State University with a B.S. in Computer Science (3.7 GPA, Dean's List, Genentech-PINC Scholarship). My research focused on brain tumor segmentation using U-Net on the BraTS dataset, presented at the SFSU–Genentech partnership symposium.";
         } else if (lowerMessage.includes('location') || lowerMessage.includes('where') || lowerMessage.includes('remote')) {
           response = "I'm based in [Location] and open to both remote and on-site opportunities. I have experience working with distributed teams and am comfortable with various collaboration tools.";
         } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
