@@ -66,7 +66,7 @@ function HomeNew() {
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 sm:pt-20 sm:pb-10 md:pt-20 md:pb-12 lg:pt-24 lg:pb-16 flex flex-col items-center justify-center min-h-[95vh]">
 
         {/* Hero Section */}
         <motion.div
