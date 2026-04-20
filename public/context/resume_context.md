@@ -22,7 +22,7 @@
 *Official internal title: Cloud Support Engineer*
 Santa Clara, CA
 
-The work is AI deployment engineering — building, evaluating, and shipping production AI systems as the post-sale technical partner for Fortune 500, DOD, government (with GOV clearance), and FSI engineering teams on Oracle Cloud Infrastructure.
+The work is AI deployment engineering — building, evaluating, and shipping production AI systems on Oracle Cloud Infrastructure.
 
 ### Key contributions
 
@@ -50,12 +50,12 @@ The work is AI deployment engineering — building, evaluating, and shipping pro
 - Reduced manual resolution time for internal Oracle engineering teams
 
 **Production AI Agent Evaluation**
-- Evaluated production AI agents for Fortune 500 engineering teams post-sale
+- Evaluated production AI agents for enterprise engineering teams post-sale
 - Improved response accuracy by 35% across the agents I evaluated
 - Surfaced critical failure patterns before customer exposure
 
 **Enterprise Technical Partnership**
-- Primary technical partner for Fortune 500 engineering teams including DOD, government (GOV clearance), and FSI clients
+- Technical partner for enterprise engineering teams on Oracle Cloud Infrastructure
 - Diagnosed complex JavaScript, Java, and REST API issues cross-functionally
 - Earned perfect CSAT scores across all engagements
 - Authored technical enablement guides and debugging playbooks adopted org-wide
@@ -70,7 +70,7 @@ The work is AI deployment engineering — building, evaluating, and shipping pro
 
 ## Founder / Side Projects
 
-**Founder — Signl (Opensignl)** (2026 – Present)
+**Founder — OpenSignl** (2026 – Present)
 - Founded and built a live content intelligence SaaS, https://www.opensignl.com/
 - Daily agentic pipeline scans Reddit, X, LinkedIn, and news; ranks audience signals by source strength; generates platform-native posts validated by an LLM-as-judge audit layer before output
 - Multi-model inference with graceful degradation and automatic failover

@@ -72,7 +72,7 @@ function Work() {
   const remainingProjects = sortedProjects.filter(p => p.id !== featuredProject?.id);
 
   return (
-    <Section id="work">
+    <Section id="work" className="border-t border-border/60">
       <div className="px-4 md:px-8 mx-auto max-w-6xl">
         {/* Header */}
         <header className="mb-10 md:mb-12">

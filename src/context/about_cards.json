@@ -2,14 +2,14 @@
   {
     "type": "about",
     "topic": "role",
-    "facts": ["AI deployment engineer at Oracle Cloud Infrastructure", "post-sale technical partner for Fortune 500, DOD, government, FSI clients", "official internal title is Cloud Support Engineer"],
-    "one_liner": "AI deployment engineer at Oracle \u2014 post-sale technical partner for Fortune 500, DOD, government, and FSI clients."
+    "facts": ["AI deployment engineer at Oracle Cloud Infrastructure", "builds, evaluates, and ships production AI systems", "official internal title is Cloud Support Engineer"],
+    "one_liner": "AI deployment engineer at Oracle \u2014 building, evaluating, and shipping production AI systems."
   },
   {
     "type": "about",
     "topic": "founder",
-    "facts": ["founder of Signl (opensignl.com)", "live content intelligence SaaS", "agentic research pipeline with LLM-as-judge audit layer"],
-    "one_liner": "Founder of Signl (opensignl.com), a live content intelligence SaaS."
+    "facts": ["founder of OpenSignl (opensignl.com)", "live content intelligence SaaS", "agentic research pipeline with LLM-as-judge audit layer"],
+    "one_liner": "Founder of OpenSignl (opensignl.com), a live content intelligence SaaS."
   },
   {
     "type": "about",

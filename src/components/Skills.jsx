@@ -5,7 +5,7 @@ import SkillsMatrix from "./SkillsMatrix";
 
 export default function Skills() {
   return (
-    <Section id="skills">
+    <Section id="skills" className="bg-[hsl(210,30%,92%)] dark:bg-[hsl(222,47%,15%)] border-y border-border/60">
       <SectionHeader
         eyebrow="Toolbox"
         title="Skills & Expertise"

@@ -107,7 +107,7 @@ export default function SignlFeature() {
           transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
           className="mt-4 text-[clamp(44px,7vw,80px)] font-bold tracking-tight leading-[1.02] text-text"
         >
-          Signl
+          OpenSignl
         </motion.h2>
 
         {/* Tagline */}
@@ -148,7 +148,7 @@ export default function SignlFeature() {
               href="https://www.opensignl.com/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit Signl"
+              aria-label="Visit OpenSignl"
             >
               Visit opensignl.com
               <ExternalLink className="ml-1.5 h-4 w-4" />
@@ -159,7 +159,7 @@ export default function SignlFeature() {
               href="https://www.linkedin.com/feed/update/urn:li:activity:7448471121202429953/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Watch Signl demo on LinkedIn"
+              aria-label="Watch OpenSignl demo on LinkedIn"
             >
               <Play className="mr-1.5 h-4 w-4" />
               Watch demo

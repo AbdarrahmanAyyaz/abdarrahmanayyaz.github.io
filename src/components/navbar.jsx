@@ -10,6 +10,7 @@ import { useFocusTrap } from "../hooks/useFocusTrap";
 
 const ITEMS = [
   { id: "home", label: "Home" },
+  { id: "experience", label: "Experience" },
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "work", label: "Work" },
@@ -88,7 +89,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="flex h-14 items-center justify-between" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           {/* Logo */}
           <motion.a 

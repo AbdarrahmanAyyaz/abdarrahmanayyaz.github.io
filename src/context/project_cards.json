@@ -1,6 +1,6 @@
 [
   {
-    "project": "Signl",
+    "project": "OpenSignl",
     "one_liner": "Live content intelligence SaaS \u2014 founded solo. Agentic research pipeline with LLM-as-judge audit layer.",
     "stack": ["Next.js", "TypeScript", "OpenAI API", "Multi-model pipeline"],
     "features": ["agentic daily research across Reddit/X/LinkedIn/news", "ranked audience signals scored by source strength", "platform-native post generation", "LLM-as-judge audit layer before publication", "multi-model failover", "voice profiling"],

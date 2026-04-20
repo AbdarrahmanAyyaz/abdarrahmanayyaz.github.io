@@ -53,7 +53,7 @@ export default function SafetyEvalCaseStudy() {
     <section
       id="safety-eval"
       aria-labelledby="safety-eval-title"
-      className="w-full py-20 md:py-28 scroll-mt-24"
+      className="w-full py-20 md:py-28 scroll-mt-24 bg-[hsl(210,30%,92%)] dark:bg-[hsl(222,47%,15%)] border-y border-border/60"
     >
       <div className="mx-auto w-full max-w-[820px] px-4 sm:px-6 lg:px-8">
         {/* Eyebrow */}

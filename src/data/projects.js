@@ -1,18 +1,31 @@
 // Project data for Work section + ProjectGrid + FeaturedProject
 //
-// Signl and the Safety Eval Framework are rendered by dedicated top-level
-// components (SignlFeature.jsx and SafetyEvalCaseStudy.jsx) above Work, so
-// they are intentionally absent from this list. Triage AI keeps id 'triagedai'
-// because Work.jsx hardcodes `featuredId = "triagedai"` for the featured slot.
+// The Safety Eval Framework has its own dedicated editorial section
+// (SafetyEvalCaseStudy.jsx) above Work, so it is intentionally absent here.
+// Triage AI keeps id 'triagedai' because Work.jsx hardcodes it as the featured slot.
 //
-// Brain Tumor Segmentation entry intentionally omitted — pending re-verification
-// of Dice/Jaccard metrics against the original paper. See memory:
-// feedback_brain_tumor_metrics_pending.md
+// Brain Tumor Segmentation entry: specific Dice/Jaccard/accuracy metrics
+// intentionally omitted — pending re-verification against the original paper.
+// See memory: feedback_brain_tumor_metrics_pending.md
 
 import triaged from '../assets/triagedai.png';
 import oic from '../assets/OIC.png';
+import opensignlImg from '../assets/opensignl.png';
 
 export const projects = [
+  {
+    id: 'opensignl',
+    title: 'OpenSignl',
+    subtitle: 'Founder · Live content intelligence SaaS',
+    description: "Founded and built a live content intelligence SaaS. Daily agentic pipeline scans Reddit, X, LinkedIn, and news; ranks audience signals by source strength with verbatim evidence. Generates platform-native posts validated by an LLM-as-judge audit layer against platform-specific publishing rules. Multi-model inference with graceful degradation and automatic failover. Voice profiling matches the user's actual writing patterns. Free + $19/mo Pro tier.",
+    raw: 'Live content intelligence SaaS founded solo. Agentic research pipeline with LLM-as-judge audit layer, multi-model inference, voice profiling.',
+    image: opensignlImg,
+    tags: ['AI', 'Next.js', 'TypeScript', 'OpenAI', 'LLM-as-Judge', 'Agentic'],
+    liveUrl: 'https://www.opensignl.com',
+    demoUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7448471121202429953/',
+    sourceUrl: '',
+    highlights: ['Solo founder', 'LLM-as-judge audit layer', 'Multi-model failover'],
+  },
   {
     id: 'codex-workspace',
     title: 'AI Engineering Workspace',
@@ -49,6 +62,30 @@ export const projects = [
     demoUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7375974681906118657/',
     sourceUrl: '',
     highlights: ['1,000+ users', '40% relevance lift', 'Replaced AWS Comprehend'],
+  },
+  {
+    id: 'ai-portfolio',
+    title: 'AI-Powered Portfolio',
+    subtitle: 'This site · Conversational AI stand-in with runtime RAG',
+    description: "This portfolio site itself. A conversational AI stand-in runs on a Gemini-backed Netlify function with a three-layer context system — hardcoded system prompt, runtime-fetched markdown context, and JSON fallback cards. Intent detection routes questions to the right context slice. Built with React, Tailwind, Framer Motion, and a custom chat UI.",
+    raw: 'Portfolio site with a conversational AI stand-in that uses runtime RAG-style context loading, intent detection, and a secure Gemini-backed Netlify function.',
+    // No cover image — card will render clean like codex-workspace until a fresh screenshot is added.
+    tags: ['AI', 'React', 'Tailwind', 'Gemini', 'Netlify Functions'],
+    liveUrl: 'https://abdarrahman.dev',
+    sourceUrl: 'https://github.com/AbdarrahmanAyyaz',
+    highlights: ['Conversational stand-in', 'Runtime context loading', 'Intent-based routing'],
+  },
+  {
+    id: 'brain-tumor-segmentation',
+    title: 'Brain Tumor Segmentation',
+    subtitle: 'Research · U-Net · BraTS · SFSU-Genentech symposium',
+    description: "Medical imaging research using a U-Net architecture for multi-class brain tumor segmentation on the BraTS dataset. Systematic single- vs multi-modality experiments across all four MRI modalities (T1, T1CE, T2, FLAIR). Presented research findings at the SFSU-Genentech partnership symposium to hundreds of engineers and industry professionals.",
+    raw: 'U-Net medical imaging research for multi-class brain tumor segmentation across T1/T1CE/T2/FLAIR MRI modalities. Presented at SFSU-Genentech symposium.',
+    // No cover image — awaiting a representative MRI/U-Net figure.
+    tags: ['AI', 'Python', 'TensorFlow', 'U-Net', 'Research'],
+    liveUrl: '',
+    sourceUrl: 'https://github.com/AbdarrahmanAyyaz/TumorSegmentation',
+    highlights: ['U-Net architecture', 'BraTS multi-modality', 'Symposium presentation'],
   },
 ];
 

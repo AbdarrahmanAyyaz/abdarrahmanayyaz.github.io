@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Section from "./Section";
 import SectionHeader from "./ui/SectionHeader";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/Card";
-import { Badge, Button } from "./ui";
+import { Button } from "./ui";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -20,19 +20,13 @@ const fadeUpVariants = {
 
 export default function About() {
   const focusAreas = [
-    "AI app UX with React/Tailwind",
-    "LLM ops: prompts, retrieval, evaluation", 
-    "Cloud troubleshooting (OCI/VBCS/VBS)"
-  ];
-
-  const personalValues = [
-    { key: "CON", full: "CONsistency", description: "builds habits" },
-    { key: "FO", full: "FOcus", description: "provides drive" },
-    { key: "DI", full: "DIscipline", description: "builds foundation" }
+    "Production LLM systems: RAG, eval harnesses, multi-model pipelines",
+    "Safety and groundedness evaluation at scale",
+    "AI deployment on OCI, OpenAI, and Anthropic stacks"
   ];
 
   return (
-    <Section id="about">
+    <Section id="about" className="border-t border-border/60">
       <SectionHeader
         eyebrow="Get to know me"
         title="About"
@@ -57,50 +51,17 @@ export default function About() {
               </CardHeader>
               
               <CardContent className="space-y-4">
-                {/* CON-FO-DI Philosophy */}
-                <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span className="text-lg font-bold text-text">
-                      {personalValues.map((value, index) => (
-                        <span key={value.key}>
-                          <span className="text-accent">{value.key}</span>
-                          {index < personalValues.length - 1 && <span className="text-muted">-</span>}
-                        </span>
-                      ))}
-                    </span>
-                  </div>
-                  <div className="space-y-2">
-                    {personalValues.map((value) => (
-                      <div key={value.key} className="text-sm text-muted">
-                        <span className="font-medium text-text">{value.full}</span> {value.description}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 <p className="text-text leading-relaxed">
-                  I build and deploy machine-learning solutions, troubleshoot cloud workloads, and support clients on Oracle Cloud Infrastructure.
-                  I love shipping clean React/Tailwind interfaces and exploring the latest LLM tooling.
+                  I build and deploy production AI systems. At Oracle, I ship RAG agents and evaluation frameworks — the work that catches the things you don't want to find out about in production. On the side, I'm the founder of OpenSignl, a content intelligence SaaS I built solo because I wanted to own the whole stack.
+                </p>
+
+                <p className="text-muted leading-relaxed">
+                  I care about evals before deployment, systems that degrade gracefully, and shipping things real people actually use. I'm still figuring a lot of it out — that's kind of the point.
                 </p>
 
                 <p className="text-muted">
-                  Outside of work, I enjoy time with family and nature.
+                  Outside of work: martial arts, hiking, travel. Based in Santa Clara, CA.
                 </p>
-
-                {/* Quick Stats */}
-                <div className="pt-4 border-t border-border">
-                  <div className="flex flex-wrap gap-3">
-                    <Badge variant="info" size="md">
-                      <strong>4+</strong>&nbsp;years React
-                    </Badge>
-                    <Badge variant="success" size="md">
-                      <strong>2+</strong>&nbsp;years AI/ML
-                    </Badge>
-                    <Badge variant="warning" size="md">
-                      <strong>3+</strong>&nbsp;years Cloud
-                    </Badge>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -138,15 +99,6 @@ export default function About() {
                   ))}
                 </ul>
 
-                {/* Additional Info */}
-                <div className="mt-6 pt-6 border-t border-border">
-                  <h4 className="text-sm font-medium text-text mb-3">Currently Learning</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" size="sm">Vector DBs</Badge>
-                    <Badge variant="outline" size="sm">RAG Optimization</Badge>
-                    <Badge variant="outline" size="sm">Next.js 14</Badge>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </motion.div>

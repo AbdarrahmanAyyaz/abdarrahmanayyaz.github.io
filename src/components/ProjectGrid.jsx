@@ -79,7 +79,7 @@ const ProjectGrid = ({
           {/* Results Count */}
           <p className="text-sm text-muted-foreground mt-3">
             {activeFilter === 'All'
-              ? `${projects.length} projects total`
+              ? `${projects.length} additional ${projects.length === 1 ? 'project' : 'projects'}`
               : `${filteredProjects.length} of ${projects.length} projects`
             }
           </p>

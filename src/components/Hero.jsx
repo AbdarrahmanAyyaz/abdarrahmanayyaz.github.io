@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, FileText, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, FileText, ExternalLink, ArrowRight } from "lucide-react";
 import { Button } from "./ui";
 import profileImage from "../assets/NewPic.png";
 
@@ -18,7 +18,7 @@ const fadeUp = {
 
 export default function Hero() {
   return (
-    <div className="mx-auto max-w-[760px] px-4 pt-6 sm:pt-10">
+    <div className="mx-auto max-w-[760px] px-4">
       <div className="flex flex-col items-center text-center">
         {/* Avatar */}
         <motion.img
@@ -37,7 +37,7 @@ export default function Hero() {
 
         {/* Eyebrow: Name */}
         <motion.p
-          className="mt-4 text-[11px] uppercase tracking-[0.2em] text-muted font-semibold"
+          className="mt-4 text-[13px] uppercase tracking-[0.25em] text-accent/90 font-bold"
           custom={1}
           variants={fadeUp}
           initial="hidden"
@@ -48,7 +48,7 @@ export default function Hero() {
 
         {/* H1: Headline */}
         <motion.h1
-          className="mt-2 text-[clamp(28px,5.6vw,52px)] font-bold tracking-tight text-text leading-[1.1] max-w-[680px] text-balance"
+          className="mt-3 text-[clamp(36px,6.5vw,72px)] font-black tracking-tight text-text leading-[1.05] max-w-[760px] text-balance"
           custom={2}
           variants={fadeUp}
           initial="hidden"
@@ -65,7 +65,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          Oracle AI deployment engineer. Founder of Signl. Safety eval frameworks and live SaaS.
+          Founder of OpenSignl. AI deployment engineer at Oracle. Safety eval frameworks and live SaaS.
         </motion.p>
 
         {/* Metric line */}
@@ -103,17 +103,23 @@ export default function Hero() {
               href="https://www.opensignl.com/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit Signl"
+              aria-label="Visit OpenSignl"
             >
-              See Signl
+              See OpenSignl
               <ExternalLink className="h-4 w-4 ml-1.5" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <a href="#work" aria-label="Jump to the full project list">
+              See All Work
+              <ArrowRight className="h-4 w-4 ml-1.5" />
             </a>
           </Button>
         </motion.div>
 
-        {/* Social row (demoted) */}
+        {/* Social row */}
         <motion.div
-          className="mt-5 flex items-center gap-4"
+          className="mt-6 flex items-center gap-2"
           custom={6}
           variants={fadeUp}
           initial="hidden"
@@ -123,26 +129,29 @@ export default function Hero() {
             href="https://www.linkedin.com/in/abdarrahman-ayyaz/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-muted hover:text-text transition-colors"
+            aria-label="LinkedIn profile"
+            title="LinkedIn"
+            className="inline-flex items-center justify-center h-11 w-11 rounded-full text-muted hover:text-text hover:bg-surface/60 border border-transparent hover:border-border transition-all"
           >
-            <Linkedin size={18} />
+            <Linkedin size={22} />
           </a>
           <a
             href="https://github.com/AbdarrahmanAyyaz"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-muted hover:text-text transition-colors"
+            aria-label="GitHub profile"
+            title="GitHub"
+            className="inline-flex items-center justify-center h-11 w-11 rounded-full text-muted hover:text-text hover:bg-surface/60 border border-transparent hover:border-border transition-all"
           >
-            <Github size={18} />
+            <Github size={22} />
           </a>
           <a
             href="mailto:abdarrahmanayyaz00@gmail.com"
-            aria-label="Email"
-            className="text-muted hover:text-text transition-colors"
+            aria-label="Email Abdarrahman"
+            title="Email"
+            className="inline-flex items-center justify-center h-11 w-11 rounded-full text-muted hover:text-text hover:bg-surface/60 border border-transparent hover:border-border transition-all"
           >
-            <Mail size={18} />
+            <Mail size={22} />
           </a>
         </motion.div>
       </div>

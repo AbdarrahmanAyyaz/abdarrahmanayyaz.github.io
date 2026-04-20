@@ -26,7 +26,7 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
       {/* Mobile-first compact preview */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-left shadow-sm hover:shadow transition-all duration-200 sm:hidden"
+        className="w-full rounded-xl border-2 border-border bg-surface px-4 py-3 text-left shadow-md hover:shadow-lg transition-all duration-200 sm:hidden"
       >
         <div className="flex items-center gap-3">
           <img src={profileImage} alt="" className="h-8 w-8 rounded-full object-cover" />
@@ -45,7 +45,7 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
 
       {/* Mobile expanded view */}
       {open && (
-        <div className="mt-3 rounded-xl border border-border bg-surface p-2 shadow-sm sm:hidden">
+        <div className="mt-3 rounded-xl border-2 border-border bg-surface p-2 shadow-md sm:hidden">
           <div className="rounded-xl border border-border p-2">
             <div className="h-[50vh]">
               <EnhancedAIChatWorking
@@ -77,7 +77,7 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
           </p>
         </div>
 
-        <div className="relative rounded-xl border border-border bg-surface shadow-lg overflow-hidden max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+        <div className="relative rounded-xl border-2 border-border bg-surface shadow-xl ring-1 ring-accent/10 overflow-hidden max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
           {/* Desktop fullscreen button */}
           <button
             onClick={() => setFullscreen(true)}

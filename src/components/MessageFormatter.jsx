@@ -39,7 +39,7 @@ const MessageFormatter = ({ text, className = "" }) => {
 
   // Project names to highlight
   const projectNames = [
-    'TriagedAI', 'Triage AI', 'Signl', 'Opensignl', 'Brain Tumor Segmentation',
+    'TriagedAI', 'Triage AI', 'OpenSignl', 'Signl', 'Opensignl', 'Brain Tumor Segmentation',
     'BraTS', 'U-Net', 'FLAIR', 'Safety Eval'
   ];
 

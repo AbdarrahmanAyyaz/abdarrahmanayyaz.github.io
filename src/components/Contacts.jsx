@@ -11,9 +11,16 @@ import { submitContactForm } from "../utils/contactApi";
 
 const PURPOSE_OPTIONS = [
   {
+    id: 'hiring',
+    label: 'Hiring / Role',
+    icon: '💼',
+    subject: 'Role Opportunity',
+    messageStart: 'Hi Abdarrahman,\n\nWe\'re hiring for a role that might be a fit. A bit about the opportunity: '
+  },
+  {
     id: 'freelance',
     label: 'Freelance',
-    icon: '💼',
+    icon: '🛠️',
     subject: 'Freelance Project Inquiry',
     messageStart: 'Hi Abdarrahman,\n\nI have a freelance project that might be a good fit for your skills. '
   },
@@ -303,7 +310,7 @@ export default function Contacts() {
   }, [status, toast]);
 
   return (
-    <Section id="contact">
+    <Section id="contact" className="bg-[hsl(210,30%,92%)] dark:bg-[hsl(222,47%,15%)] border-t border-border/60">
       <SectionHeader
         eyebrow="Get in Touch"
         title="Contact"
@@ -440,10 +447,11 @@ export default function Contacts() {
                 />
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                  <p className="text-xs text-muted">
-                    Your information is secure and will only be used to respond to your inquiry.
-                  </p>
-                  
+                  <div className="text-xs text-muted space-y-1">
+                    <p className="font-medium text-text">Typically respond within 24 hours.</p>
+                    <p>Your information is secure and will only be used to respond to your inquiry.</p>
+                  </div>
+
                   <Button
                     type="submit"
                     disabled={status === 'loading' || !isFormValid()}

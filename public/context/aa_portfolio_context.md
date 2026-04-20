@@ -4,14 +4,14 @@ _Last updated: 2026-04-11_
 ## Snapshot
 - **Title:** AI Deployment Engineer
 - **Day job:** Oracle Cloud Infrastructure — Developer Tools, Santa Clara, CA
-- **Founder of:** Signl (opensignl.com)
+- **Founder of:** OpenSignl (opensignl.com)
 - **Education:** B.S. Computer Science, San Francisco State University (3.7 GPA, Dean's List, Genentech-PINC Scholarship, Data Science & Machine Learning Certificate)
 - **Location:** Santa Clara, CA (San Francisco Bay Area)
 
 ## About Me
-Day job is AI deployment engineering at Oracle Cloud Infrastructure. The title on my badge says "Cloud Support Engineer," but the work is post-sale technical partnership for Fortune 500, DOD, government (with GOV clearance), and FSI clients — building, evaluating, and shipping production AI systems.
+Day job is AI deployment engineering at Oracle Cloud Infrastructure. The title on my badge says "Cloud Support Engineer," but the work is building, evaluating, and shipping production AI systems.
 
-Outside Oracle, I'm the founder of Signl (opensignl.com), a live content intelligence SaaS. Before Signl, I built Triage AI (triagedai.com), a full-stack AI triage app serving 1,000+ users.
+Outside Oracle, I'm the founder of OpenSignl (opensignl.com), a live content intelligence SaaS. Before OpenSignl, I built Triage AI (triagedai.com), a full-stack AI triage app serving 1,000+ users.
 
 Outside the work: martial arts (boxing), hiking, travel. Based in Santa Clara, CA. I organized a community food drive during COVID for people experiencing homelessness.
 
@@ -34,14 +34,14 @@ A: Yes — open to coffee chats and meeting people building in AI.
 A: AI Deployment Engineer, AI Solutions Engineer, Forward-Deployed Engineer, or DevRel at AI-forward companies — OpenAI, Anthropic, Scale, and similar.
 
 **Q: What's the favorite thing you've built?**
-A: Hard to pick one. The chatbot safety evaluation framework I built at Oracle is the most technically interesting — built from scratch, surfaced an 80% failure rate on safety-critical scenarios, presented to VP, and the insights drove a redesign with 90% groundedness lift. Signl is the one that means the most as a founder — it's a live SaaS I built solo.
+A: Hard to pick one. The chatbot safety evaluation framework I built at Oracle is the most technically interesting — built from scratch, surfaced an 80% failure rate on safety-critical scenarios, presented to VP, and the insights drove a redesign with 90% groundedness lift. OpenSignl is the one that means the most as a founder — it's a live SaaS I built solo.
 
 **Q: What does "AI deployment engineer" actually mean day-to-day?**
-A: I'm the post-sale technical partner for Fortune 500, DOD, government, and FSI engineering teams on Oracle Cloud Infrastructure. The work spans: building AI evaluation harnesses, deploying RAG agents to production, debugging complex JavaScript / Java / REST API issues at the customer boundary, and presenting technical findings to senior leadership.
+A: Building AI evaluation harnesses, deploying RAG agents to production, debugging complex JavaScript / Java / REST API issues at the customer boundary, and presenting technical findings to senior leadership.
 
 ## Projects
 
-### Signl (opensignl.com)
+### OpenSignl (opensignl.com)
 Live content intelligence SaaS, founded solo. Daily agentic pipeline scans Reddit, X, LinkedIn, and news. Ranks audience signals by source strength with verbatim evidence. Generates platform-native posts for X and LinkedIn, validated by an LLM-as-judge audit layer against platform-specific publishing rules before output. Multi-model inference with graceful degradation and automatic failover. Voice profiling matches the user's actual writing patterns. Free tier (5 posts/month, 2 briefs/day) and $19/month Pro tier.
 - **Stack:** Next.js, TypeScript, OpenAI API
 - **Status:** Live — https://www.opensignl.com/
@@ -60,7 +60,7 @@ Designed and deployed a production RAG agent on OCI Generative AI for OIC Gen 2 
 - **Stack:** OCI Generative AI, vector embeddings, RAG
 
 ### Production AI Agent Evaluation (Oracle, post-sale)
-Evaluated production AI agents for Fortune 500 engineering teams as part of post-sale technical partnership. Improved response accuracy by 35% across the agents I evaluated. Surfaced critical failure patterns before customer exposure.
+Evaluated production AI agents for enterprise engineering teams as part of post-sale technical partnership. Improved response accuracy by 35% across the agents I evaluated. Surfaced critical failure patterns before customer exposure.
 
 ### Triage AI (triagedai.com)
 Full-stack AI triage app serving 1,000+ users. Perplexity sonar-pro for grounded responses. PostgreSQL-backed conversation memory across sessions. Replaced AWS Comprehend with a client-side sentiment model — 95% accuracy on labeled set, $50/month infra cost eliminated, 200ms P95 latency cut. 40% relevance lift over baseline. Cut React re-renders by 60% via TanStack Query and targeted memoization.
@@ -93,5 +93,5 @@ AI Deployment Engineer, AI Solutions Engineer, Forward-Deployed Engineer, DevRel
 - **LinkedIn:** https://www.linkedin.com/in/abdarrahman-ayyaz/
 - **GitHub:** https://github.com/AbdarrahmanAyyaz
 - **Email:** abdarrahmanayyaz00@gmail.com
-- **Signl:** https://www.opensignl.com/
+- **OpenSignl:** https://www.opensignl.com/
 - **Triage AI:** https://triagedai.com/
