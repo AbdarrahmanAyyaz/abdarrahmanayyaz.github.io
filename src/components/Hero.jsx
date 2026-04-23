@@ -65,7 +65,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          Founder of OpenSignl. AI deployment engineer at Oracle. Safety eval frameworks and live SaaS.
+          Founder of OpenSignl. Cloud and AI engineer at Oracle. Safety eval frameworks and live SaaS.
         </motion.p>
 
         {/* Metric line */}

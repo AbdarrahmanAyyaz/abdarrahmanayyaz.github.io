@@ -30,7 +30,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted text-center sm:text-left">
-            © {year} Abdarrahman Ayyaz · AI deployment engineer, founder of OpenSignl.
+            © {year} Abdarrahman Ayyaz · Cloud and AI engineer, founder of OpenSignl.
           </p>
 
           <div className="flex items-center gap-1">

@@ -362,7 +362,7 @@ const EnhancedAIChatWorking = ({
                 AI Abdarrahman
               </h2>
               <p className="text-muted mt-0.5 sm:mt-1 text-xs sm:text-sm">
-                AI Deployment Engineer · Founder of OpenSignl
+                Cloud & AI Engineer · Founder of OpenSignl
               </p>
             </div>
           </div>
