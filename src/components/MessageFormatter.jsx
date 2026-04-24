@@ -99,26 +99,26 @@ const MessageFormatter = ({ text, className = "" }) => {
 
     // Format inline code with backticks
     formatted = formatted.replace(/`([^`]+)`/g,
-      '<code class="bg-gray-800/30 border border-gray-600/30 px-2 py-0.5 rounded-md text-gray-200 font-mono text-sm mx-1">$1</code>'
+      '<code class="bg-bg/60 border border-border px-2 py-0.5 rounded-md text-text font-mono text-sm mx-1">$1</code>'
     );
 
     // Auto-bold technical terms
     technicalTerms.forEach(term => {
       const regex = new RegExp(`\\b(${term})\\b`, 'g');
-      formatted = formatted.replace(regex, '<strong class="font-bold text-white bg-gray-800/20 px-1 rounded">$1</strong>');
+      formatted = formatted.replace(regex, '<strong class="font-bold text-text">$1</strong>');
     });
 
     // Highlight project names with special styling
     projectNames.forEach(project => {
       const regex = new RegExp(`\\b(${project})\\b`, 'g');
-      formatted = formatted.replace(regex, '<span class="font-bold text-white relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black after:opacity-60">$1</span>');
+      formatted = formatted.replace(regex, '<span class="font-bold text-text relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent after:opacity-60">$1</span>');
     });
 
     // Format markdown-style bold **text**
-    formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+    formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-text">$1</strong>');
 
     // Format markdown-style italic *text*
-    formatted = formatted.replace(/\*([^*]+)\*/g, '<em class="italic text-gray-200">$1</em>');
+    formatted = formatted.replace(/\*([^*]+)\*/g, '<em class="italic text-muted">$1</em>');
 
     // Format links [text](url) - Enhanced styling for better visibility
     formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
@@ -127,12 +127,12 @@ const MessageFormatter = ({ text, className = "" }) => {
 
     // Format bullet points with custom styling
     formatted = formatted.replace(/^• (.+)$/gm,
-      '<div class="flex items-start gap-3 my-2"><div class="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0"></div><span class="text-gray-200 leading-relaxed">$1</span></div>'
+      '<div class="flex items-start gap-3 my-2"><div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div><span class="text-text leading-relaxed">$1</span></div>'
     );
 
     // Format numbered lists
     formatted = formatted.replace(/^\d+\.\s+(.+)$/gm,
-      '<div class="flex items-start gap-3 my-2"><div class="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">•</div><span class="text-gray-200 leading-relaxed">$1</span></div>'
+      '<div class="flex items-start gap-3 my-2"><div class="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">•</div><span class="text-text leading-relaxed">$1</span></div>'
     );
 
     // Convert line breaks
