@@ -248,14 +248,16 @@ export default function Navbar() {
                 {/* Navigation Links */}
                 <nav className="flex-1">
                   <div className="flex flex-col gap-3">
-                    {ITEMS.map(({ id, label }, index) => (
+                    {ITEMS.map(({ id, label }, index) => {
+                      const entry = ENTRIES.find((e) => e.sectionId === id);
+                      return (
                       <motion.a
                         key={id}
                         href={`#${id}`}
                         onClick={() => setOpen(false)}
                         className={`group relative flex items-center justify-between px-6 py-4 text-xl font-semibold rounded-2xl transition-all duration-200
-                                   ${active === id 
-                                     ? 'bg-accent text-white shadow-lg' 
+                                   ${active === id
+                                     ? 'bg-accent text-white shadow-lg'
                                      : 'text-text hover:bg-surface border border-border hover:border-accent/30 hover:shadow-soft'
                                    }
                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`}
@@ -264,7 +266,18 @@ export default function Navbar() {
                         transition={{ delay: index * 0.1, duration: 0.4, ease: 'easeOut' }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <span>{label}</span>
+                        <span className="flex items-center gap-3">
+                          <span>{label}</span>
+                          {entry && (
+                            <span
+                              className={`font-mono text-[10px] tracking-[0.1em] ${
+                                active === id ? 'text-white/70' : 'text-muted'
+                              }`}
+                            >
+                              {entry.num}
+                            </span>
+                          )}
+                        </span>
                         {active === id ? (
                           <motion.div
                             className="w-2 h-2 rounded-full bg-white"
@@ -283,7 +296,8 @@ export default function Navbar() {
                           </svg>
                         )}
                       </motion.a>
-                    ))}
+                      );
+                    })}
                   </div>
                 </nav>
 

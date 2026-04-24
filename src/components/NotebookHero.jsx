@@ -27,7 +27,7 @@ function StatusReadout({ label, value, accent = false }) {
 export default function NotebookHero() {
   return (
     <section
-      className="notebook-shell mx-auto flex min-h-[80vh] w-full max-w-[820px] flex-col justify-center px-6 pb-16 md:px-16"
+      className="notebook-shell mx-auto flex w-full max-w-[820px] flex-col px-6 pt-8 pb-12 md:min-h-[80vh] md:justify-center md:px-16 md:pt-0 md:pb-16"
     >
       {/* Eyebrow */}
       <p
