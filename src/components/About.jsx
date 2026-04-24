@@ -54,7 +54,7 @@ export default function About() {
               <CardContent className="space-y-4">
                 <p className="text-text leading-relaxed">
                   I work on AI at Oracle during the week, and I&apos;m building{' '}
-                  <span className="text-accent">OpenSignl</span> on my own time &mdash; a research tool for creators, solo project. I like both.
+                  <span className="text-accent">OpenSignl</span> on my own time &mdash; a research tool for creators. I like both.
                 </p>
 
                 <p className="text-muted leading-relaxed">

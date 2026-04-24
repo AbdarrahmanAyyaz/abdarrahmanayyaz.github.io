@@ -95,10 +95,10 @@ export default function SafetyEvalCaseStudy() {
         <div className="mt-14">
           <Section label="The Problem" delay={0.05}>
             <p className="text-base sm:text-lg leading-relaxed">
-              A production chatbot at Oracle had no evaluation infrastructure
-              and no safety harness. Releases shipped without measurable
-              groundedness or safety scoring, and failure modes were caught
-              by manual QA — late, after the fact, and inconsistently.
+              My team at Oracle was testing a production chatbot and needed
+              a way to evaluate it systematically — safety, groundedness,
+              and relevance scored programmatically across adversarial and
+              edge-case scenarios, not just spot-checks.
             </p>
           </Section>
 
