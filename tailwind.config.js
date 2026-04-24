@@ -33,9 +33,47 @@ module.exports = {
         // Legacy support (keep existing vars for backwards compatibility)
         background: "hsl(var(--bg))",
         card: "hsl(var(--surface))",
+
+        // Field Notebook design tokens (Phase 1)
+        'ink': {
+          DEFAULT: '#EDEDE8',
+          muted: 'rgba(237,237,232,0.65)',
+          faint: 'rgba(237,237,232,0.4)',
+          ghost: 'rgba(237,237,232,0.08)',
+        },
+        'shell': {
+          DEFAULT: '#0A0A0C',
+          raised: '#141417',
+        },
+        'nb-amber': {
+          DEFAULT: '#E9A942',
+          soft: 'rgba(233,169,66,0.7)',
+          faint: 'rgba(233,169,66,0.25)',
+          wash: 'rgba(233,169,66,0.04)',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      letterSpacing: {
+        'tight-display': '-0.022em',
+        'mono-label': '0.14em',
+        'mono-eyebrow': '0.18em',
+      },
+      animation: {
+        'pulse-amber': 'pulse-amber 2.4s ease-in-out infinite',
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.4,0,0.2,1) both',
+      },
+      keyframes: {
+        'pulse-amber': {
+          '0%, 100%': { opacity: 1, boxShadow: '0 0 0 0 rgba(233,169,66,0.5)' },
+          '50%': { opacity: 0.55, boxShadow: '0 0 0 6px rgba(233,169,66,0)' },
+        },
+        'fade-up': {
+          from: { opacity: 0, transform: 'translateY(6px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
       },
       fontSize: {
         'xs': 'var(--text-xs)',
@@ -90,6 +128,7 @@ module.exports = {
         'bounce': 'var(--ease-bounce)',
         'out': 'var(--ease-out)',
         'in': 'var(--ease-in)',
+        'damped': 'cubic-bezier(0.4,0,0.2,1)',
       },
       container: {
         center: true,

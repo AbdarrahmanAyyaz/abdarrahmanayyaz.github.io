@@ -299,8 +299,7 @@ const EnhancedAIChatWorking = ({
     <div className="enhanced-ai-chat w-full max-w-none mx-auto px-2 sm:px-4 md:px-6 h-full">
       <div
         className="backdrop-blur-xl border rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col
-                   bg-white/80 border-gray-200
-                   dark:bg-slate-800/80 dark:border-slate-700"
+                   bg-surface/80 border-border"
       >
         
         {/* Chat Header with Controls */}
@@ -308,8 +307,7 @@ const EnhancedAIChatWorking = ({
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="chat-header p-3 sm:p-4 md:p-6 backdrop-blur-sm border-b relative z-20
-                     bg-gray-50/80 border-gray-200
-                     dark:bg-slate-800/80 dark:border-slate-700"
+                     bg-surface/80 border-border"
         >
           {/* Header Controls - Top Right */}
           <div className="absolute top-2 right-2 sm:top-3 md:top-4 sm:right-3 md:right-4 flex items-center gap-1 sm:gap-2">
@@ -320,8 +318,7 @@ const EnhancedAIChatWorking = ({
                   <button
                     onClick={onToggleSize}
                     className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
-                              bg-gray-100 text-gray-700 border-gray-400/30 hover:bg-gray-200 hover:border-gray-500/40
-                              dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20 dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40"
+                              bg-surface text-text border-border hover:bg-accent/10 hover:border-accent/40"
                     title={chatSize === 'fullscreen' ? 'Minimize chat' : 'Expand chat'}
                   >
                     {getChatIcon && React.createElement(getChatIcon(), { size: 14 })}
@@ -331,8 +328,7 @@ const EnhancedAIChatWorking = ({
                   <button
                     onClick={onToggleFocus}
                     className="p-1.5 sm:p-2 rounded-lg border transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center
-                              bg-gray-100 text-gray-700 border-gray-400/30 hover:bg-gray-200 hover:border-gray-500/40
-                              dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20 dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40"
+                              bg-surface text-text border-border hover:bg-accent/10 hover:border-accent/40"
                     title="Focus mode"
                   >
                     <Focus size={14} />
@@ -345,7 +341,7 @@ const EnhancedAIChatWorking = ({
 
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             <div
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 border-white/20 flex-shrink-0 overflow-hidden"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 border-accent/30 flex-shrink-0 overflow-hidden"
               style={{
                 boxShadow: `0 0 30px rgba(100, 100, 100, 0.3)`
               }}
@@ -371,8 +367,7 @@ const EnhancedAIChatWorking = ({
         {/* Chat Messages Area */}
         <div
           className="chat-messages flex-1 overflow-y-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 md:space-y-6 relative z-10 max-h-[65vh]
-                     bg-gradient-to-b from-gray-50/30 to-transparent
-                     dark:from-slate-800/30 dark:to-transparent"
+                     bg-gradient-to-b from-bg/40 to-transparent"
         >
           <AnimatePresence mode="popLayout">
             {currentMessages.map((message) => (
@@ -396,7 +391,7 @@ const EnhancedAIChatWorking = ({
 
         {/* Show Quick Action Pills above input only when no conversation has started */}
         {currentMessages.length <= 1 && (
-          <div className="flex-shrink-0 p-4 sm:p-5 border-t border-gray-200 dark:border-slate-700">
+          <div className="flex-shrink-0 p-4 sm:p-5 border-t border-border">
             <div className="space-y-3 sm:space-y-4">
               {/* Category Pills */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -413,10 +408,8 @@ const EnhancedAIChatWorking = ({
                         relative px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                         touch-manipulation min-h-[44px]
-                        bg-gray-100 text-gray-700 border-gray-400/30
-                        hover:bg-gray-200 hover:border-gray-500/40
-                        dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
-                        dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
+                        bg-surface text-text border-border
+                        hover:bg-accent/10 hover:border-accent/40
                       "
                       whileHover={{
                         scale: 1.02,
@@ -452,10 +445,8 @@ const EnhancedAIChatWorking = ({
                             px-3 py-2.5 rounded-lg border text-xs sm:text-sm text-left transition-all duration-200
                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                             touch-manipulation min-h-[44px]
-                            bg-gray-50 text-gray-700 border-gray-400/20
-                            hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
-                            dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
-                            dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
+                            bg-surface/50 text-text border-border/60
+                            hover:bg-accent/10 hover:border-accent/50 hover:text-text
                           "
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -492,7 +483,7 @@ const EnhancedAIChatWorking = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="flex-shrink-0 p-4 sm:p-5 border-t border-gray-200 dark:border-slate-700"
+            className="flex-shrink-0 p-4 sm:p-5 border-t border-border"
           >
             <div className="space-y-3 sm:space-y-4">
               {/* Category Pills */}
@@ -510,10 +501,8 @@ const EnhancedAIChatWorking = ({
                         relative px-2 py-2 sm:px-3 sm:py-2.5 rounded-lg border transition-all duration-200
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                         touch-manipulation min-h-[40px]
-                        bg-gray-100 text-gray-700 border-gray-400/30
-                        hover:bg-gray-200 hover:border-gray-500/40
-                        dark:bg-slate-700/50 dark:text-gray-300 dark:border-gray-400/20
-                        dark:hover:bg-slate-600/50 dark:hover:border-gray-300/40
+                        bg-surface text-text border-border
+                        hover:bg-accent/10 hover:border-accent/40
                       "
                       whileHover={{
                         scale: 1.02,
@@ -549,10 +538,8 @@ const EnhancedAIChatWorking = ({
                             px-2 py-2 sm:px-3 sm:py-2.5 rounded-lg border text-xs text-left transition-all duration-200
                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                             touch-manipulation min-h-[40px]
-                            bg-gray-50 text-gray-700 border-gray-400/20
-                            hover:bg-gray-100 hover:border-gray-500/30 hover:text-gray-900
-                            dark:bg-slate-700/30 dark:text-gray-300 dark:border-gray-400/15
-                            dark:hover:bg-slate-600/40 dark:hover:border-gray-300/30 dark:hover:text-white
+                            bg-surface/50 text-text border-border/60
+                            hover:bg-accent/10 hover:border-accent/50 hover:text-text
                           "
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}

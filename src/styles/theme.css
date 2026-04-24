@@ -1,15 +1,15 @@
 /* Design tokens for consistent theming */
 :root {
-  /* Light mode colors (HSL for better manipulation) - Enhanced contrast */
-  --bg: 210 30% 96%;           /* slightly darker for better contrast */
-  --surface: 0 0% 100%;        /* pure white */
-  --text: 222 47% 8%;          /* darker text for better readability */
-  --muted: 215 25% 28%;        /* darker muted text for better contrast */
-  --border: 214 32% 88%;       /* slightly more prominent borders */
-  --accent: 220 13% 18%;       /* dark gray for professional look */
-  --accent-2: 220 13% 25%;     /* slightly lighter gray */
-  --ring: 236 83% 70%;         /* focus ring color */
-  --shadow: 220 40% 2%;        /* shadow color base */
+  /* Light mode — notebook paper (warm cream + amber accent) */
+  --bg: 40 20% 96%;            /* warm cream paper */
+  --surface: 0 0% 100%;        /* pure white cards */
+  --text: 20 10% 10%;          /* warm near-black */
+  --muted: 20 8% 35%;          /* warm muted */
+  --border: 40 15% 88%;        /* warm border */
+  --accent: 38 78% 50%;        /* amber — primary accent */
+  --accent-2: 38 78% 60%;      /* lighter amber */
+  --ring: 38 78% 55%;          /* amber focus ring */
+  --shadow: 20 40% 4%;         /* warm shadow base */
   
   /* Semantic colors */
   --success: 220 13% 40%;      /* gray-600 */
@@ -94,17 +94,17 @@
   }
 }
 
-/* Dark mode overrides */
+/* Dark mode — notebook shell (near-black + warm ink + amber) */
 .dark {
-  --bg: 222 47% 11%;           /* slate-900 equivalent */
-  --surface: 222 47% 13%;      /* slightly lighter surface */
-  --text: 210 40% 98%;         /* slate-50 equivalent */
-  --muted: 215 20% 65%;        /* slate-400 equivalent */
-  --border: 217 19% 27%;       /* slate-700 equivalent */
-  --accent: 220 13% 70%;       /* light gray for dark mode */
-  --accent-2: 220 13% 75%;     /* lighter gray for dark mode */
-  --ring: 236 83% 75%;         /* same focus ring */
-  --shadow: 220 40% 2%;        /* deeper shadow in dark */
+  --bg: 240 10% 4%;            /* true near-black shell */
+  --surface: 240 8% 8%;        /* shell-raised */
+  --text: 60 10% 94%;          /* warm off-white ink */
+  --muted: 60 8% 60%;          /* warm muted */
+  --border: 60 5% 15%;         /* subtle warm border */
+  --accent: 38 78% 56%;        /* amber */
+  --accent-2: 38 78% 66%;      /* lighter amber */
+  --ring: 38 78% 56%;          /* amber focus ring */
+  --shadow: 20 40% 2%;         /* warm deep shadow */
   
   /* Adjusted semantic colors for dark mode */
   --success: 220 13% 50%;      /* gray-500 */
@@ -229,7 +229,7 @@ button:active, a[role="button"]:active {
 }
 
 .gradient-border {
-  background: linear-gradient(45deg, #8b5cf6, #3b82f6, #ec4899, #8b5cf6);
+  background: linear-gradient(45deg, #E9A942, #F5C06A, #D98F2A, #E9A942);
   background-size: 300% 300%;
   animation: gradient-rotate 4s ease infinite;
 }
@@ -259,9 +259,9 @@ button:active, a[role="button"]:active {
 
 .animated-mesh {
   background:
-    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, rgba(59, 130, 246, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 50% 75%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+    radial-gradient(circle at 25% 25%, rgba(233, 169, 66, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(245, 192, 106, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 50% 75%, rgba(217, 143, 42, 0.02) 0%, transparent 50%);
   background-size: 400% 400%, 350% 350%, 300% 300%;
   animation: mesh-float 15s ease-in-out infinite;
 }
@@ -269,9 +269,9 @@ button:active, a[role="button"]:active {
 .dark .animated-mesh {
   background:
     linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95)),
-    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 75%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 25% 25%, rgba(233, 169, 66, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(245, 192, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 75%, rgba(217, 143, 42, 0.06) 0%, transparent 50%);
   background-size: 100% 100%, 400% 400%, 350% 350%, 300% 300%;
 }
 
@@ -290,7 +290,7 @@ button:active, a[role="button"]:active {
 .floating-orbs::before {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent);
+  background: radial-gradient(circle, rgba(233, 169, 66, 0.3), transparent);
   top: 20%;
   right: 15%;
   animation-delay: 0s;
@@ -300,7 +300,7 @@ button:active, a[role="button"]:active {
 .floating-orbs::after {
   width: 150px;
   height: 150px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+  background: radial-gradient(circle, rgba(245, 192, 106, 0.2), transparent);
   bottom: 25%;
   left: 10%;
   animation-delay: 4s;
@@ -368,10 +368,10 @@ button:active, a[role="button"]:active {
 /* Chat Enhancement Keyframes */
 @keyframes chat-glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 20px rgba(233, 169, 66, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 40px rgba(233, 169, 66, 0.6), 0 0 60px rgba(245, 192, 106, 0.4);
   }
 }
 
@@ -448,10 +448,10 @@ button:active, a[role="button"]:active {
 
 @keyframes fab-pulse {
   0%, 100% {
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 25px rgba(233, 169, 66, 0.4);
   }
   50% {
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6), 0 0 0 0 rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 25px rgba(233, 169, 66, 0.6), 0 0 0 0 rgba(233, 169, 66, 0.4);
   }
 }
 
@@ -676,7 +676,7 @@ button:active, a[role="button"]:active {
   /* Disable gradient border animation on iPhones */
   .gradient-border {
     animation: none !important;
-    background: linear-gradient(45deg, #8b5cf6, #3b82f6, #ec4899, #8b5cf6) !important;
+    background: linear-gradient(45deg, #E9A942, #F5C06A, #D98F2A, #E9A942) !important;
   }
 
   /* iPhone-specific spacing adjustments */
@@ -727,8 +727,8 @@ button:active, a[role="button"]:active {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, #E9A942, #F5C06A);
+  box-shadow: 0 8px 25px rgba(233, 169, 66, 0.4);
   border: none;
   cursor: pointer;
   z-index: 1000;
@@ -742,7 +742,7 @@ button:active, a[role="button"]:active {
 
 .fab:hover {
   transform: scale(1.1);
-  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
+  box-shadow: 0 12px 35px rgba(233, 169, 66, 0.6);
 }
 
 .fab:active {
@@ -758,7 +758,7 @@ button:active, a[role="button"]:active {
 
 /* Quick Action Buttons */
 .quick-action-btn {
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6) !important;
+  background: linear-gradient(135deg, #E9A942, #F5C06A) !important;
   border: 2px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   width: 45px;
@@ -767,7 +767,7 @@ button:active, a[role="button"]:active {
 
 .quick-action-btn:hover {
   border-color: rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, #9333ea, #2563eb) !important;
+  background: linear-gradient(135deg, #D98F2A, #E9A942) !important;
 }
 
 /* Metrics badges/pills styling */
@@ -775,8 +775,8 @@ button:active, a[role="button"]:active {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, rgba(233, 169, 66, 0.1), rgba(245, 192, 106, 0.1));
+  border: 1px solid rgba(233, 169, 66, 0.3);
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -786,8 +786,8 @@ button:active, a[role="button"]:active {
 }
 
 .dark .metrics-badge {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
-  border-color: rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, rgba(233, 169, 66, 0.15), rgba(245, 192, 106, 0.15));
+  border-color: rgba(233, 169, 66, 0.4);
   color: hsl(var(--accent-2));
 }
 
@@ -807,7 +807,7 @@ button:active, a[role="button"]:active {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, var(--tech-color, #8b5cf6)10, transparent 60%);
+  background: radial-gradient(circle at center, var(--tech-color, #E9A942)10, transparent 60%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -818,7 +818,7 @@ button:active, a[role="button"]:active {
 }
 
 .tech-badge:hover {
-  border-color: var(--tech-color, #8b5cf6)40 !important;
+  border-color: var(--tech-color, #E9A942)40 !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -829,7 +829,7 @@ button:active, a[role="button"]:active {
 
 .dark .tech-badge:hover {
   background: rgba(0, 0, 0, 0.3) !important;
-  border-color: var(--tech-color, #8b5cf6)50 !important;
+  border-color: var(--tech-color, #E9A942)50 !important;
 }
 
 /* Loading states and smooth feedback */
@@ -903,10 +903,10 @@ input, textarea, select, button, a, [role="button"] {
 
 @keyframes indicator-glow {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 8px rgba(233, 169, 66, 0.5);
   }
   50% {
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 16px rgba(233, 169, 66, 0.8);
   }
 }
 
@@ -1037,7 +1037,7 @@ input, textarea, select, button, a, [role="button"] {
 .work-preview h2 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, #E9A942, #F5C06A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1051,7 +1051,7 @@ input, textarea, select, button, a, [role="button"] {
 .explore-work-btn {
   padding: 1rem 2.5rem;
   margin: 1.5rem 0;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, #E9A942, #F5C06A);
   border: none;
   border-radius: 50px;
   color: white;
@@ -1063,7 +1063,7 @@ input, textarea, select, button, a, [role="button"] {
 
 .explore-work-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 30px rgba(233, 169, 66, 0.4);
 }
 
 .impact-stats {
@@ -1082,7 +1082,7 @@ input, textarea, select, button, a, [role="button"] {
 .stat .number {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #6366f1;
+  color: #E9A942;
   display: block;
 }
 
@@ -1100,10 +1100,10 @@ input, textarea, select, button, a, [role="button"] {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, #E9A942, #F5C06A);
   color: white;
   border: none;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 12px rgba(233, 169, 66, 0.4);
   font-size: 1.5rem;
   display: none;
   z-index: 1000;

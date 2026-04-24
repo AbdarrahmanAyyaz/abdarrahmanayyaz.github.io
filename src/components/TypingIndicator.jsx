@@ -23,7 +23,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
           duration: 0.3,
           ease: "easeOut"
         }}
-        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border-2 border-purple-400/40 bg-gradient-to-br from-purple-600/80 to-blue-600/80 shadow-md flex-shrink-0 relative"
+        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border-2 border-accent/40 bg-accent/20 shadow-md flex-shrink-0 relative"
       >
         {/* Subtle border pulse */}
         <motion.div
@@ -35,7 +35,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 rounded-full border-2 border-purple-300/60"
+          className="absolute inset-0 rounded-full border-2 border-accent/60"
         />
       </motion.div>
 
@@ -49,7 +49,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
           stiffness: 200,
           damping: 20
         }}
-        className="max-w-[300px] p-4 sm:p-5 rounded-2xl sm:rounded-3xl backdrop-blur-sm border border-white/10 bg-gradient-to-br from-gray-800/60 to-gray-700/40 shadow-xl relative overflow-hidden"
+        className="max-w-[300px] p-4 sm:p-5 rounded-2xl sm:rounded-3xl backdrop-blur-sm border bg-surface border-border shadow-xl relative overflow-hidden"
       >
         {/* Subtle background */}
         <motion.div
@@ -61,7 +61,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 bg-gradient-to-br from-purple-500/8 to-blue-500/8"
+          className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent/10"
         />
 
         <div className="relative z-10 flex items-center gap-4">
@@ -82,9 +82,9 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
                   ease: "easeInOut",
                   type: "tween"
                 }}
-                className="w-2.5 h-2.5 bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 rounded-full shadow-lg"
+                className="w-2.5 h-2.5 bg-accent rounded-full shadow-lg"
                 style={{
-                  boxShadow: '0 2px 8px rgba(139, 92, 246, 0.4)'
+                  boxShadow: '0 2px 8px rgba(233, 169, 66, 0.4)'
                 }}
               />
             ))}
@@ -100,7 +100,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="text-sm text-gray-300 font-medium"
+            className="text-sm text-muted font-medium"
           >
             {text}
           </motion.span>
@@ -116,7 +116,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-purple-400/30 pointer-events-none"
+          className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-accent/30 pointer-events-none"
         />
 
         {/* Floating particles - Hidden on mobile for performance */}
@@ -140,7 +140,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
                 repeat: Infinity,
                 ease: "easeOut"
               }}
-              className="absolute w-1 h-1 bg-purple-400 rounded-full"
+              className="absolute w-1 h-1 bg-accent rounded-full"
             />
           ))}
         </div>
@@ -156,7 +156,7 @@ const TypingIndicator = ({ text = "AI Abdarrahman is thinking..." }) => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute left-8 sm:left-10 w-16 h-16 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-lg pointer-events-none -z-10"
+        className="absolute left-8 sm:left-10 w-16 h-16 bg-gradient-to-r from-accent/20 to-accent/5 rounded-full blur-lg pointer-events-none -z-10"
       />
     </motion.div>
   );

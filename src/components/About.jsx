@@ -28,6 +28,7 @@ export default function About() {
   return (
     <Section id="about" className="border-t border-border/60">
       <SectionHeader
+        entryId="about"
         eyebrow="Get to know me"
         title="About"
         description="My background, values, and what drives me in AI and cloud engineering."
@@ -52,15 +53,16 @@ export default function About() {
               
               <CardContent className="space-y-4">
                 <p className="text-text leading-relaxed">
-                  I build and deploy production AI systems. At Oracle, I ship RAG agents and evaluation frameworks — the work that catches the things you don't want to find out about in production. On the side, I'm the founder of OpenSignl, a content intelligence SaaS I built solo because I wanted to own the whole stack.
+                  I work on AI at Oracle during the week, and I&apos;m building{' '}
+                  <span className="text-accent">OpenSignl</span> on my own time &mdash; a research tool for creators, solo project. I like both.
                 </p>
 
                 <p className="text-muted leading-relaxed">
-                  I care about evals before deployment, systems that degrade gracefully, and shipping things real people actually use. I'm still figuring a lot of it out — that's kind of the point.
+                  I care about tools that work when real people use them, not just in the demo. Still learning a lot as I go.
                 </p>
 
                 <p className="text-muted">
-                  Outside of work: martial arts, hiking, travel. Based in Santa Clara, CA.
+                  When I&apos;m not at a keyboard: martial arts, hiking, and whatever trip I&apos;m planning next. Based in the SF Bay Area.
                 </p>
               </CardContent>
             </Card>
@@ -114,18 +116,38 @@ export default function About() {
         custom={3}
       >
         <p className="text-muted mb-6 max-w-2xl">
-          Interested in collaborating or learning more about my work?
+          Want to talk? Book a quick call or reach out — whatever works for you.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full md:w-auto">
           <Button
             asChild
             variant="primary"
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full md:w-auto"
+          >
+            <a
+              href="https://calendly.com/abdarrahmanayyaz00/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Schedule a 30-min Call
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full md:w-auto"
           >
             <a href="#contact">
               Get In Touch
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>
             </a>
@@ -134,7 +156,7 @@ export default function About() {
             asChild
             variant="outline"
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full md:w-auto"
           >
             <a
               href="/AbdarrahmansResume.pdf"
@@ -142,7 +164,7 @@ export default function About() {
               rel="noopener noreferrer"
             >
               View Resume
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <path d="M14 2v6h6"/>
                 <path d="M16 13H8"/>

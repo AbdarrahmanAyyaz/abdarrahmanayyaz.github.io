@@ -7,6 +7,7 @@ import { Button } from "./ui";
 import MenuButton from "./MenuButton";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 import { useFocusTrap } from "../hooks/useFocusTrap";
+import { ENTRIES } from "../data/entries";
 
 const ITEMS = [
   { id: "home", label: "Home" },
@@ -39,7 +40,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sections = ITEMS.map(({ id }) => document.getElementById(id)).filter(Boolean);
+    const sections = ENTRIES
+      .map(({ sectionId }) => document.getElementById(sectionId))
+      .filter(Boolean);
     if (!sections.length) return;
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
@@ -48,6 +51,11 @@ export default function Navbar() {
     sections.forEach((s) => io.observe(s));
     return () => io.disconnect();
   }, []);
+
+  const currentEntry = useMemo(
+    () => ENTRIES.find((e) => e.sectionId === active) || ENTRIES[0],
+    [active]
+  );
 
   // Handle escape key to close menu
   useEffect(() => {
@@ -92,19 +100,26 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="flex h-14 items-center justify-between" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           {/* Logo */}
-          <motion.a 
-            href="#home" 
-            aria-label="Go to home" 
-            className="text-2xl font-extrabold tracking-tight text-text hover:text-accent transition-colors"
+          <motion.a
+            href="#home"
+            aria-label="Go to home"
+            className="flex flex-col items-start leading-none text-text hover:text-accent transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            A<span className="text-accent">A</span>
+            <span className="text-2xl font-extrabold tracking-tight leading-none">
+              A<span className="text-accent">A</span>
+            </span>
+            <span className="hidden sm:inline font-mono text-[9px] uppercase tracking-mono-eyebrow text-nb-amber-soft mt-0.5 leading-none whitespace-nowrap">
+              field notebook · vol. iii
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            {ITEMS.map(({ id, label }) => (
+            {ITEMS.map(({ id, label }) => {
+              const entry = ENTRIES.find((e) => e.sectionId === id);
+              return (
               <a
                 key={id}
                 href={`#${id}`}
@@ -112,6 +127,11 @@ export default function Navbar() {
                 className={`${desktopLinkBase} ${active === id ? activeClass : ""}`}
               >
                 {label}
+                {entry && (
+                  <span className="ml-1.5 font-mono text-[9px] tracking-[0.1em] text-muted/70">
+                    {entry.num}
+                  </span>
+                )}
                 {active === id && (
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"
@@ -122,8 +142,23 @@ export default function Navbar() {
                   />
                 )}
               </a>
-            ))}
-            
+              );
+            })}
+
+            {/* Journey label — current field notebook entry */}
+            <div
+              className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-ink-ghost"
+              aria-live="polite"
+            >
+              <span
+                className="w-[7px] h-[7px] rounded-full bg-nb-amber animate-pulse-amber"
+                aria-hidden="true"
+              />
+              <span className="font-mono text-[10px] tracking-[0.06em] text-muted whitespace-nowrap">
+                reading entry {currentEntry.num} · {currentEntry.name.toLowerCase()}
+              </span>
+            </div>
+
             <div className="ml-4 flex items-center gap-2">
               <ThemeToggle showLabel={false} />
               
@@ -145,9 +180,9 @@ export default function Navbar() {
           </nav>
 
           {/* Mobile Social Icons + Menu Button */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1 md:hidden">
             {/* Social Icons - Mobile Only */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1 sm:gap-2">
               {SOCIAL_LINKS.map(({ href, label, Icon, newTab }) => (
                 <motion.a
                   key={label}

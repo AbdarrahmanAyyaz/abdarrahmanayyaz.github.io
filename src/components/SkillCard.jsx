@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
 import useSkillsFilterStore from "../store/useSkillsFilter";
 
 const LEVEL_LABEL = {
@@ -35,7 +34,6 @@ function formatLastUsed(lastUsed) {
 
 export default function SkillCard({ skill, isSelected }) {
   const toggleSkill = useSkillsFilterStore((state) => state.toggleSkill);
-  const primaryLink = skill.links && skill.links[0];
   const Icon = skill.icon;
   const iconColor = skill.iconColor;
 
@@ -50,7 +48,7 @@ export default function SkillCard({ skill, isSelected }) {
       layout
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.97 }}
-      className={`group relative flex flex-col items-start gap-3 rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+      className={`group relative flex h-full w-full flex-col items-start gap-3 rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
         isSelected
           ? "border-accent bg-accent/10 shadow-soft"
           : "border-border bg-surface hover:border-accent/40 hover:shadow-soft"
@@ -94,20 +92,6 @@ export default function SkillCard({ skill, isSelected }) {
           {formatLastUsed(skill.lastUsed)}
         </p>
       </div>
-
-      {primaryLink && (
-        <a
-          href={primaryLink.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="inline-flex items-center gap-1 text-[11px] font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
-          aria-label={`${primaryLink.label} for ${skill.name}`}
-        >
-          {primaryLink.label}
-          <ExternalLink size={11} />
-        </a>
-      )}
     </motion.button>
   );
 }

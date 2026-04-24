@@ -59,7 +59,7 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.1, type: "spring", stiffness: 500, damping: 25 }}
-          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-white/20 shadow-lg flex-shrink-0 overflow-hidden"
+          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-accent/30 shadow-lg flex-shrink-0 overflow-hidden"
         >
           <img
             src={profileImage}
@@ -79,16 +79,16 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
             transition={{ delay: 0.2 }}
             className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 px-1"
           >
-            <span className="text-xs sm:text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+            <span className="text-xs sm:text-sm font-semibold text-accent">
               AI Abdarrahman
             </span>
-            <div className="w-1 h-1 bg-gray-500 rounded-full hidden sm:block"></div>
-            <span className="text-xs text-gray-400 hidden sm:inline">
+            <div className="w-1 h-1 bg-muted rounded-full hidden sm:block"></div>
+            <span className="text-xs text-muted hidden sm:inline">
               {formatTimestamp(timestamp)}
             </span>
             <div className="flex items-center gap-1 ml-1 sm:ml-2">
-              <div className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse"></div>
-              <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">Online</span>
+              <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></div>
+              <span className="text-xs text-muted font-medium">Online</span>
             </div>
           </motion.div>
         )}
@@ -112,20 +112,20 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
             message-bubble p-3 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl md:rounded-3xl backdrop-blur-sm border shadow-xl relative overflow-hidden
             message-hover cursor-pointer group
             ${isAI
-              ? 'bg-gradient-to-br from-gray-800/60 to-gray-700/40 border-white/10 text-gray-100 hover:from-gray-700/70 hover:to-gray-600/50'
-              : 'bg-gradient-to-br from-purple-600/90 to-blue-600/90 border-purple-400/30 text-white ml-auto hover:from-purple-500/95 hover:to-blue-500/95'
+              ? 'bg-surface border-border text-text hover:bg-surface/70'
+              : 'bg-accent border-accent text-white ml-auto hover:bg-accent2'
             }
           `}
         >
           {/* Subtle animated background effect for AI messages */}
           {isAI && (
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-800/5 to-gray-700/5 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent animate-pulse"></div>
           )}
 
           <div className="relative z-10">
             <MessageFormatter
               text={message}
-              className={`text-sm sm:text-base md:text-lg leading-6 sm:leading-7 ${isAI ? 'text-gray-100' : 'text-white'}`}
+              className={`text-sm sm:text-base md:text-lg leading-6 sm:leading-7 ${isAI ? 'text-text' : 'text-white'}`}
             />
           </div>
 
@@ -133,7 +133,7 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
           <div className={`
             absolute inset-0 rounded-xl sm:rounded-2xl md:rounded-3xl opacity-0 transition-opacity duration-300 pointer-events-none
             ${isAI
-              ? 'bg-gradient-to-br from-purple-500/20 to-blue-500/20 group-hover:opacity-100'
+              ? 'bg-gradient-to-br from-accent/20 to-accent/10 group-hover:opacity-100'
               : 'bg-gradient-to-br from-white/10 to-white/5'
             }
           `}></div>
@@ -147,9 +147,9 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
             transition={{ delay: 0.4 }}
             className="flex items-center justify-end gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 px-1"
           >
-            <span className="text-xs text-gray-400">You</span>
-            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-muted">You</span>
+            <div className="w-1 h-1 bg-muted rounded-full"></div>
+            <span className="text-xs text-muted">
               {formatTimestamp(timestamp)}
             </span>
           </motion.div>
@@ -167,18 +167,18 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleCopy}
-              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group touch-manipulation min-h-[40px]"
+              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-bg/50 hover:bg-bg/70 border border-border hover:border-accent/40 transition-all duration-200 group touch-manipulation min-h-[40px]"
               title="Copy message"
             >
               {copied ? (
                 <>
-                  <Check size={12} className="text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400 font-medium hidden sm:inline">Copied!</span>
+                  <Check size={12} className="text-muted" />
+                  <span className="text-xs text-muted font-medium hidden sm:inline">Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy size={12} className="text-gray-400 group-hover:text-gray-300 transition-colors" />
-                  <span className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors hidden sm:inline">Copy</span>
+                  <Copy size={12} className="text-muted group-hover:text-text transition-colors" />
+                  <span className="text-xs text-muted group-hover:text-text transition-colors hidden sm:inline">Copy</span>
                 </>
               )}
             </motion.button>
@@ -190,21 +190,21 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
               className={`
                 flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border transition-all duration-200 group touch-manipulation min-h-[40px]
                 ${liked
-                  ? 'bg-pink-500/20 border-pink-400/30 text-pink-400'
-                  : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20 text-gray-400 hover:text-gray-300'
+                  ? 'bg-accent/20 border-accent/40 text-accent'
+                  : 'bg-bg/50 hover:bg-bg/70 border-border hover:border-accent/40 text-muted hover:text-text'
                 }
               `}
               title="Like message"
             >
               {liked ? (
                 <>
-                  <Heart size={12} className="text-pink-400 fill-current" />
-                  <span className="text-xs text-pink-400 font-medium hidden sm:inline">Liked</span>
+                  <Heart size={12} className="text-accent fill-current" />
+                  <span className="text-xs text-accent font-medium hidden sm:inline">Liked</span>
                 </>
               ) : (
                 <>
-                  <ThumbsUp size={12} className="group-hover:text-gray-300 transition-colors" />
-                  <span className="text-xs group-hover:text-gray-300 transition-colors hidden sm:inline">Like</span>
+                  <ThumbsUp size={12} className="group-hover:text-text transition-colors" />
+                  <span className="text-xs group-hover:text-text transition-colors hidden sm:inline">Like</span>
                 </>
               )}
             </motion.button>
@@ -218,7 +218,7 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.1, type: "spring", stiffness: 500, damping: 25 }}
-          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0 shadow-lg border-2 border-white/20"
+          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-accent flex items-center justify-center text-xs font-bold text-white flex-shrink-0 shadow-lg border-2 border-accent/40"
         >
           You
         </motion.div>

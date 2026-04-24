@@ -29,7 +29,7 @@ const ProofStrip = () => {
   return (
     <section
       aria-label="Proof points"
-      className="w-full border-t border-b border-border/60 bg-surface/30"
+      className="w-full border-t border-b border-border"
     >
       <div className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-6 sm:gap-x-10">
@@ -52,11 +52,11 @@ const ProofStrip = () => {
               >
                 {metric.value}
               </span>
-              <span className="mt-3 text-sm text-text/85 font-medium leading-snug">
+              <span className="mt-3 text-sm text-text font-medium leading-snug">
                 {metric.label}
               </span>
-              <span className="mt-1 text-[11px] uppercase tracking-wider text-muted">
-                {metric.source}
+              <span className="mt-2 font-mono text-[10px] uppercase tracking-mono-label text-muted/70">
+                source: {metric.source}
               </span>
             </motion.div>
           ))}

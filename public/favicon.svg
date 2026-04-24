@@ -1,4 +1,6 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="6" fill="#6366f1"/>
-  <text x="16" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white" dominant-baseline="central">AA</text>
+  <rect width="32" height="32" rx="6" fill="#0A0A0C"/>
+  <text x="16" y="16" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" text-anchor="middle" dominant-baseline="central">
+    <tspan fill="#EDEDE8">A</tspan><tspan fill="#E9A942">A</tspan>
+  </text>
 </svg>

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Rocket } from "lucide-react";
+import { ENTRIES as NOTEBOOK_ENTRIES } from "../data/entries";
 
 const ENTRIES = [
   {
@@ -81,6 +82,8 @@ const typeLabel = {
 };
 
 export default function Experience() {
+  const notebookEntry = NOTEBOOK_ENTRIES.find((e) => e.sectionId === "experience");
+
   return (
     <section
       id="experience"
@@ -88,6 +91,12 @@ export default function Experience() {
       className="w-full border-y border-border/60 bg-bg py-20 md:py-28 scroll-mt-24"
     >
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        {notebookEntry && (
+          <p className="font-mono text-[10px] uppercase tracking-mono-eyebrow text-nb-amber-soft mb-4">
+            {notebookEntry.eyebrow}
+          </p>
+        )}
+
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}

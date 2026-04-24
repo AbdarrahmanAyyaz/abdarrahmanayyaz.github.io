@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Section from "./Section";
 import ScrollCue from "./ScrollCue";
-import Hero from "./Hero";
+import NotebookHero from "./NotebookHero";
 import ChatSection from "./ChatSection";
 import ProofStrip from "./ProofStrip";
 import { useHideFabWhenChatVisible } from "../hooks/useHideFabWhenChatVisible";
@@ -44,39 +44,12 @@ function HomeNew() {
   return (
     <Section
       id="home"
-      className="relative w-full text-text overflow-hidden animated-mesh floating-orbs"
+      className="relative w-full text-text overflow-hidden"
     >
-      {/* Subtle grid pattern */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--text) / 0.06) 1px, transparent 1px)`,
-          backgroundSize: "24px 24px",
-          WebkitMaskImage: "radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%)",
-          maskImage: "radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%)",
-        }}
-      />
-
-      {/* Subtle radial spotlight */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px]"
-        style={{
-          background: `radial-gradient(ellipse at center, hsl(var(--accent) / 0.04) 0%, transparent 60%)`
-        }}
-      />
-
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
         {/* Hero Section */}
-        <motion.div
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-        >
-          <Hero />
-        </motion.div>
+        <NotebookHero />
 
         {/* Chat Section */}
         <motion.div

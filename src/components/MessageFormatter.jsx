@@ -37,10 +37,10 @@ const MessageFormatter = ({ text, className = "" }) => {
     'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Scikit-learn'
   ];
 
-  // Project names to highlight
+  // Project names to highlight (excluding names that commonly appear
+  // as markdown links — those should render as plain <a> links).
   const projectNames = [
-    'TriagedAI', 'Triage AI', 'OpenSignl', 'Signl', 'Opensignl', 'Brain Tumor Segmentation',
-    'BraTS', 'U-Net', 'FLAIR', 'Safety Eval'
+    'Brain Tumor Segmentation', 'BraTS', 'U-Net', 'FLAIR', 'Safety Eval'
   ];
 
   const handleCopyCode = async (code, index) => {
@@ -122,7 +122,7 @@ const MessageFormatter = ({ text, className = "" }) => {
 
     // Format links [text](url) - Enhanced styling for better visibility
     formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 underline underline-offset-2 decoration-blue-400/70 hover:decoration-blue-300 transition-all duration-200 font-semibold cursor-pointer">$1</a>'
+      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent/80 underline underline-offset-2 decoration-accent/70 hover:decoration-accent transition-all duration-200 font-semibold cursor-pointer">$1</a>'
     );
 
     // Format bullet points with custom styling
@@ -183,8 +183,8 @@ const MessageFormatter = ({ text, className = "" }) => {
                 >
                   {isCopied ? (
                     <>
-                      <Check size={14} className="text-gray-600 dark:text-gray-400" />
-                      <span className="text-gray-600 dark:text-gray-400">Copied!</span>
+                      <Check size={14} className="text-muted" />
+                      <span className="text-muted">Copied!</span>
                     </>
                   ) : (
                     <>

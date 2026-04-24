@@ -1,10 +1,9 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiMail, HiClipboardCopy, HiExternalLink, HiCheckCircle, HiSparkles } from "react-icons/hi";
+import { HiClipboardCopy, HiExternalLink, HiCheckCircle, HiSparkles, HiCheck } from "react-icons/hi";
 import { FaLinkedinIn } from "react-icons/fa";
 import Section from "./Section";
 import SectionHeader from "./ui/SectionHeader";
-import { Card, CardContent } from "./ui/Card";
 import { Button } from "./ui";
 import { useToast } from "./ui/Toast";
 import { submitContactForm } from "../utils/contactApi";
@@ -15,35 +14,40 @@ const PURPOSE_OPTIONS = [
     label: 'Hiring / Role',
     icon: '💼',
     subject: 'Role Opportunity',
-    messageStart: 'Hi Abdarrahman,\n\nWe\'re hiring for a role that might be a fit. A bit about the opportunity: '
+    messageStart: 'Hi Abdarrahman,\n\nWe\'re hiring for a role that might be a fit. A bit about the opportunity: ',
+    placeholder: 'Briefly describe the role and the problem your team is solving...'
   },
   {
     id: 'freelance',
     label: 'Freelance',
     icon: '🛠️',
     subject: 'Freelance Project Inquiry',
-    messageStart: 'Hi Abdarrahman,\n\nI have a freelance project that might be a good fit for your skills. '
+    messageStart: 'Hi Abdarrahman,\n\nI have a freelance project that might be a good fit for your skills. ',
+    placeholder: 'Tell me about the project scope, timeline, and what success looks like...'
   },
   {
     id: 'collab',
     label: 'Collab',
     icon: '🤝',
     subject: 'Collaboration Opportunity',
-    messageStart: 'Hi Abdarrahman,\n\nI\'d like to explore a potential collaboration opportunity. '
+    messageStart: 'Hi Abdarrahman,\n\nI\'d like to explore a potential collaboration opportunity. ',
+    placeholder: 'What are you building, and where do you think we could ship together...'
   },
   {
     id: 'mentorship',
     label: 'Mentorship',
     icon: '🎓',
     subject: 'Mentorship Request',
-    messageStart: 'Hi Abdarrahman,\n\nI\'m interested in learning more about AI development and cloud infrastructure. '
+    messageStart: 'Hi Abdarrahman,\n\nI\'m interested in learning more about AI development and cloud infrastructure. ',
+    placeholder: 'Tell me about your current path and what you\'re looking to learn...'
   },
   {
     id: 'question',
     label: 'Question',
     icon: '❓',
     subject: 'Quick Question',
-    messageStart: 'Hi Abdarrahman,\n\nI have a question about '
+    messageStart: 'Hi Abdarrahman,\n\nI have a question about ',
+    placeholder: 'What do you want to know? I\'ll aim to give a useful answer in 24 hours...'
   }
 ];
 
@@ -209,7 +213,18 @@ export default function Contacts() {
   });
   const [fieldErrors, setFieldErrors] = useState({});
   const [selectedPurpose, setSelectedPurpose] = useState(null);
+  const [emailCopied, setEmailCopied] = useState(false);
   const successRef = useRef(null);
+
+  const handleCopyEmail = useCallback(() => {
+    navigator.clipboard.writeText('abdarrahmanayyaz00@gmail.com').then(() => {
+      setEmailCopied(true);
+      toast.success('Email copied to clipboard');
+      setTimeout(() => setEmailCopied(false), 2000);
+    }).catch(() => {
+      toast.error('Failed to copy email');
+    });
+  }, [toast]);
 
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -310,192 +325,250 @@ export default function Contacts() {
   }, [status, toast]);
 
   return (
-    <Section id="contact" className="bg-[hsl(210,30%,92%)] dark:bg-[hsl(222,47%,15%)] border-t border-border/60">
+    <Section id="contact" className="border-t border-border/60">
       <SectionHeader
+        entryId="contact"
         eyebrow="Get in Touch"
         title="Contact"
-        description="Ready to collaborate on AI projects or need cloud support? I'd love to hear from you."
+        description="Ready to collaborate on AI projects or want to ship production systems? I'd love to hear from you."
         center
       />
 
-      <div className="mt-12 max-w-2xl mx-auto">
-          {/* Contact Form - Single Centered Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card className="bg-surface border border-border shadow-soft rounded-2xl overflow-hidden">
-            <CardContent className="p-6 sm:p-8">
-              <AnimatePresence mode="wait">
-                {/* Success Message */}
-                {status === "success" && (
-                  <motion.div
-                    ref={successRef}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="mb-6 p-4 rounded-xl border border-success/30 bg-success/10 text-success focus:outline-none"
-                    tabIndex={-1}
-                    role="status"
-                    aria-live="polite"
-                  >
-                    <div className="flex items-center gap-3">
-                      <HiCheckCircle className="w-5 h-5 shrink-0" />
-                      <div>
-                        <div className="font-medium">Message sent successfully!</div>
-                        <div className="text-sm mt-1">I'll get back to you within 24 hours.</div>
-                      </div>
-                    </div>
-                  </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mt-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6 lg:gap-10"
+      >
+        {/* LEFT — Digital ID */}
+        <div className="rounded-2xl border border-border bg-surface/60 backdrop-blur p-6 lg:p-7 h-full">
+          <p className="font-mono text-[10px] uppercase tracking-mono-eyebrow text-accent">
+            → DIGITAL ID
+          </p>
+          <h3 className="mt-4 text-2xl font-semibold tracking-tight text-text">
+            Abdarrahman Ayyaz
+          </h3>
+          <p className="mt-1 text-sm text-muted">
+            Cloud and AI Engineer · Founder of OpenSignl
+          </p>
+
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+            </span>
+            <span className="text-xs font-medium text-accent">
+              Available for Collaboration
+            </span>
+          </div>
+
+          <div className="my-6 border-t border-border/60"></div>
+
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-mono-label text-muted">
+              Email
+            </p>
+            <div className="mt-2 flex items-center gap-2">
+              <a
+                href="mailto:abdarrahmanayyaz00@gmail.com"
+                className="nb-link text-sm text-text"
+              >
+                abdarrahmanayyaz00@gmail.com
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="p-1.5 rounded-md text-muted hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label="Copy email address"
+              >
+                {emailCopied ? (
+                  <HiCheck className="h-4 w-4" />
+                ) : (
+                  <HiClipboardCopy className="h-4 w-4" />
                 )}
-              </AnimatePresence>
+              </button>
+            </div>
+          </div>
 
-              {/* Purpose Selector */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <HiSparkles className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-medium text-text">What's this about?</span>
-                </div>
-                
-                <div className="flex flex-wrap gap-2">
-                  {PURPOSE_OPTIONS.map((purpose) => (
-                    <button
-                      key={purpose.id}
-                      type="button"
-                      onClick={() => handlePurposeSelect(purpose)}
-                      className={`
-                        inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
-                        transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                        ${selectedPurpose?.id === purpose.id
-                          ? 'bg-accent text-white shadow-soft'
-                          : 'bg-surface/50 border border-border text-muted hover:text-text hover:border-accent/50'
-                        }
-                      `}
-                    >
-                      <span>{purpose.icon}</span>
-                      {purpose.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+          <div className="mt-6">
+            <p className="font-mono text-[10px] uppercase tracking-mono-label text-muted">
+              Elsewhere
+            </p>
+            <div className="mt-2 flex flex-col gap-2">
+              <a
+                href="https://www.linkedin.com/in/abdarrahman-ayyaz/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nb-link inline-flex items-center gap-2 text-sm text-text"
+              >
+                <FaLinkedinIn className="h-4 w-4 shrink-0" />
+                <span>linkedin.com/in/abdarrahman-ayyaz</span>
+              </a>
+              <a
+                href="https://github.com/AbdarrahmanAyyaz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nb-link inline-flex items-center gap-2 text-sm text-text"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="shrink-0">
+                  <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>github.com/AbdarrahmanAyyaz</span>
+              </a>
+            </div>
+          </div>
 
-              <form onSubmit={handleSubmit} noValidate className="space-y-6">
-                {/* Honeypot */}
-                <input
-                  type="text"
-                  name="company"
-                  tabIndex="-1"
-                  autoComplete="off"
-                  className="sr-only"
-                  aria-hidden="true"
-                />
+          <p className="mt-6 font-mono text-[9px] uppercase tracking-mono-label text-muted/70">
+            Typically responds within 24 hours
+          </p>
+        </div>
 
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <FormField
-                    name="name"
-                    label="Name"
-                    placeholder="Your full name"
-                    required
-                    autoComplete="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={fieldErrors.name}
-                    disabled={status === 'loading'}
-                  />
-
-                  <FormField
-                    name="email"
-                    type="email"
-                    label="Email"
-                    placeholder="you@example.com"
-                    required
-                    autoComplete="email"
-                    inputMode="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={fieldErrors.email}
-                    disabled={status === 'loading'}
-                  />
-                </div>
-
-                <FormField
-                  name="subject"
-                  label="Subject"
-                  placeholder="What's this about?"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  error={fieldErrors.subject}
-                  disabled={status === 'loading'}
-                />
-
-                <FormField
-                  name="message"
-                  label="Message"
-                  placeholder="Tell me about your project or how I can help..."
-                  rows={6}
-                  required
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  error={fieldErrors.message}
-                  disabled={status === 'loading'}
-                  hint="Please provide as much detail as possible to help me understand your needs."
-                />
-
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                  <div className="text-xs text-muted space-y-1">
-                    <p className="font-medium text-text">Typically respond within 24 hours.</p>
-                    <p>Your information is secure and will only be used to respond to your inquiry.</p>
+        {/* RIGHT — Form wrapped in glassmorphism container */}
+        <div className="rounded-2xl border border-border bg-surface/60 backdrop-blur p-6 sm:p-8">
+          <AnimatePresence mode="wait">
+            {status === "success" && (
+              <motion.div
+                ref={successRef}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mb-6 p-4 rounded-xl border border-success/30 bg-success/10 text-success focus:outline-none"
+                tabIndex={-1}
+                role="status"
+                aria-live="polite"
+              >
+                <div className="flex items-center gap-3">
+                  <HiCheckCircle className="w-5 h-5 shrink-0" />
+                  <div>
+                    <div className="font-medium">Message sent successfully!</div>
+                    <div className="text-sm mt-1">I'll get back to you within 24 hours.</div>
                   </div>
-
-                  <Button
-                    type="submit"
-                    disabled={status === 'loading' || !isFormValid()}
-                    size="lg"
-                    className="w-full sm:w-auto min-w-[160px] focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {status === 'loading' ? 'Sending...' : 'Send Message'}
-                  </Button>
                 </div>
-              </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-              {/* Contact Info Footer */}
-              <div className="mt-8 pt-6 border-t border-border text-center">
-                <p className="text-sm text-muted mb-4">
-                  <HiMail className="inline w-4 h-4 mr-2" />
-                  abdarrahmanayyaz00@gmail.com
-                </p>
-                <div className="flex justify-center items-center gap-4">
-                  <a
-                    href="https://www.linkedin.com/in/abdarrahman-ayyaz/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted hover:text-accent transition-colors p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg"
-                    title="LinkedIn"
-                  >
-                    <FaLinkedinIn className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://github.com/AbdarrahmanAyyaz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted hover:text-accent transition-colors p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg"
-                    title="GitHub"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                  </a>
-                </div>
+          {/* Purpose Selector */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <HiSparkles className="w-4 h-4 text-accent" />
+              <span className="text-sm font-medium text-text">What's this about?</span>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {PURPOSE_OPTIONS.map((purpose) => (
+                <button
+                  key={purpose.id}
+                  type="button"
+                  onClick={() => handlePurposeSelect(purpose)}
+                  className={`
+                    inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
+                    transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+                    ${selectedPurpose?.id === purpose.id
+                      ? 'bg-accent text-white shadow-soft'
+                      : 'bg-surface/50 border border-border text-muted hover:text-text hover:border-accent/50'
+                    }
+                  `}
+                >
+                  <span>{purpose.icon}</span>
+                  {purpose.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            {/* Honeypot */}
+            <input
+              type="text"
+              name="company"
+              tabIndex="-1"
+              autoComplete="off"
+              className="sr-only"
+              aria-hidden="true"
+            />
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <FormField
+                name="name"
+                label="Name"
+                placeholder="Your full name"
+                required
+                autoComplete="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                error={fieldErrors.name}
+                disabled={status === 'loading'}
+              />
+
+              <FormField
+                name="email"
+                type="email"
+                label="Email"
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+                inputMode="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                error={fieldErrors.email}
+                disabled={status === 'loading'}
+              />
+            </div>
+
+            <FormField
+              name="subject"
+              label="Subject"
+              placeholder="What's this about?"
+              value={formData.subject}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              error={fieldErrors.subject}
+              disabled={status === 'loading'}
+            />
+
+            <FormField
+              name="message"
+              label="Message"
+              placeholder={selectedPurpose?.placeholder || "Tell me about your project or how I can help..."}
+              rows={6}
+              required
+              value={formData.message}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              error={fieldErrors.message}
+              disabled={status === 'loading'}
+              hint="Please provide as much detail as possible to help me understand your needs."
+            />
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+              <div className="text-xs text-muted space-y-1">
+                <p className="font-medium text-text">Typically respond within 24 hours.</p>
+                <p>Your information is secure and will only be used to respond to your inquiry.</p>
               </div>
-            </CardContent>
-          </Card>
-          </motion.div>
-      </div>
+
+              <Button
+                type="submit"
+                disabled={status === 'loading' || !isFormValid()}
+                size="lg"
+                className="w-full sm:w-auto min-w-[180px] focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                {status === 'loading' ? (
+                  <span className="inline-flex items-center gap-2">
+                    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="4" />
+                      <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                    </svg>
+                    Transmitting…
+                  </span>
+                ) : 'Process Inquiry'}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </motion.div>
     </Section>
   );
 }

@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Section from "./Section";
 import SectionHeader from "./ui/SectionHeader";
 import { Badge, Button } from "./ui";
-import FeaturedProject from "./FeaturedProject";
-import ProjectGrid from "./ProjectGrid";
+import DossierCard from "./DossierCard";
 import { projects } from "../data/projects";
 import useSkillsFilterStore from "../store/useSkillsFilter";
 
@@ -66,17 +65,13 @@ function Work() {
     });
   }, [filteredProjects]);
 
-  // Featured project (TriagedAI by default)
-  const featuredId = "triagedai";
-  const featuredProject = sortedProjects.find(p => p.id === featuredId) || sortedProjects[0];
-  const remainingProjects = sortedProjects.filter(p => p.id !== featuredProject?.id);
-
   return (
     <Section id="work" className="border-t border-border/60">
       <div className="px-4 md:px-8 mx-auto max-w-6xl">
         {/* Header */}
         <header className="mb-10 md:mb-12">
           <SectionHeader
+            entryId="work"
             eyebrow="Selected Work"
             title="Projects & Applications"
             description="Selected work across AI, full-stack, and dashboards."
@@ -119,19 +114,13 @@ function Work() {
           )}
         </AnimatePresence>
 
-        {/* Featured Project */}
-        {featuredProject && (
-          <div className="mb-12 md:mb-16">
-            <FeaturedProject project={featuredProject} />
+        {/* Dossier grid — all projects rendered as unified DossierCards */}
+        {sortedProjects.length > 0 && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {sortedProjects.map((project) => (
+              <DossierCard key={project.id} project={project} />
+            ))}
           </div>
-        )}
-
-        {/* Remaining Projects Grid */}
-        {remainingProjects.length > 0 && (
-          <ProjectGrid
-            projects={remainingProjects}
-            showFilters={selectedSkills.length === 0} // Only show filters when no global skills filter is active
-          />
         )}
 
         {/* No results message */}
@@ -153,6 +142,17 @@ function Work() {
 
         {/* Accessibility project count */}
         <p className="sr-only">{allProjects.length} projects listed</p>
+
+        {/* Ask AI Abdarrahman CTA */}
+        <div className="mt-16 pt-8 border-t border-border text-center">
+          <p className="text-sm text-muted max-w-xl mx-auto">
+            Confused by the stack?{' '}
+            <a href="#chat" className="nb-link text-text">
+              Ask AI Abdarrahman <span className="nb-arrow">↗</span>
+            </a>
+            {' '}to explain how I built these.
+          </p>
+        </div>
       </div>
     </Section>
   );

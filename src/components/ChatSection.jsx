@@ -43,6 +43,7 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
         </div>
       </button>
 
+
       {/* Mobile expanded view */}
       {open && (
         <div className="mt-3 rounded-xl border-2 border-border bg-surface p-2 shadow-md sm:hidden">
@@ -67,15 +68,6 @@ export default function ChatSection({ onQuestionSelect, onInputFocus, onInputCha
 
       {/* Desktop view - always visible */}
       <div className="hidden sm:block">
-        <div className="text-center mb-3 sm:mb-4">
-          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-text flex items-center justify-center gap-2">
-            Let's talk about me
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" title="Online"></span>
-          </h3>
-          <p className="text-muted text-xs sm:text-sm mt-1 sm:mt-2 px-2 max-w-sm mx-auto">
-            Ask about my projects, experience, or skills
-          </p>
-        </div>
 
         <div className="relative rounded-xl border-2 border-border bg-surface shadow-xl ring-1 ring-accent/10 overflow-hidden max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
           {/* Desktop fullscreen button */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import ProgressIndicators from './components/ProgressIndicators';
+import ScrollProgressBar from './components/ScrollProgressBar';
 import Home from './components/HomeNew';
 import SignlFeature from './components/SignlFeature';
 import SafetyEvalCaseStudy from './components/SafetyEvalCaseStudy';
@@ -15,9 +15,10 @@ import './styles/responsive.css';
 
 export default function App() {
   return (
-    <ToastProvider>
+    <>
+      <ScrollProgressBar />
+      <ToastProvider>
       <Navbar />
-      <ProgressIndicators />
       <Home />
       <SignlFeature />
       <SafetyEvalCaseStudy />
@@ -28,5 +29,6 @@ export default function App() {
       <Contacts />
       <Footer />
     </ToastProvider>
+    </>
   );
 }

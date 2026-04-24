@@ -11,6 +11,7 @@
 import triaged from '../assets/triagedai.png';
 import oic from '../assets/OIC.png';
 import opensignlImg from '../assets/opensignl.png';
+import aiPortfolioHome from '../assets/ai-portfolio-home.png';
 
 export const projects = [
   {
@@ -25,6 +26,9 @@ export const projects = [
     demoUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7448471121202429953/',
     sourceUrl: '',
     highlights: ['Solo founder', 'LLM-as-judge audit layer', 'Multi-model failover'],
+    impactPills: ['Solo Founder', 'LLM-as-Judge Audit', 'Multi-Model Failover'],
+    challenge: "Creators burn hours surfacing cross-platform signal and end up posting generic takes that don't ship what they actually know.",
+    build: "Daily agentic pipeline ranks signals from Reddit, X, LinkedIn, and news, generates platform-native posts, and validates them with an LLM-as-judge before publish.",
   },
   {
     id: 'codex-workspace',
@@ -32,11 +36,16 @@ export const projects = [
     subtitle: 'Oracle · OpenAI Codex + OpenAI SDK',
     description: "Tech-led the pod that built an internal AI engineering workspace at Oracle. Integrates the support knowledge base with OpenAI GPT models via the OpenAI SDK to auto-generate issue drafts and runbooks on demand. Shipped end-to-end with OpenAI Codex. Reduced average case resolution time across adopting engineering teams.",
     raw: 'Internal AI engineering workspace at Oracle integrating the support KB with OpenAI GPT models for auto-generated issue drafts and runbooks.',
-    // No image yet.
+    // No product screenshot — uses designed cover fallback below.
+    coverCode: 'CDX',
+    coverCategory: 'Oracle · Internal',
     tags: ['AI', 'OpenAI', 'OpenAI SDK', 'OpenAI Codex'],
     liveUrl: '',
     sourceUrl: '',
     highlights: ['Reduced case resolution time', 'Tech-led the pod', 'Shipped end-to-end'],
+    impactPills: ['Tech-Led Pod', 'OpenAI Codex + SDK', 'Support KB Integration'],
+    challenge: "Oracle support engineers rewrote the same runbooks and issue drafts across repetitive cases with no leverage from the internal knowledge base.",
+    build: "Internal workspace integrating the support KB with GPT via the OpenAI SDK to auto-generate issue drafts and runbooks. Shipped end-to-end with OpenAI Codex.",
   },
   {
     id: 'oci-rag-migration',
@@ -49,6 +58,9 @@ export const projects = [
     liveUrl: '',
     sourceUrl: '',
     highlights: ['Production RAG', 'Reduced manual resolution time', 'Internal Oracle tool'],
+    impactPills: ['Production RAG', 'OCI Generative AI', 'Internal Oracle Tool'],
+    challenge: "OIC Gen 2 to Gen 3 migrations forced engineers to hand-traverse a sprawling corpus of migration docs, slowing resolution.",
+    build: "RAG agent on OCI Generative AI with vector embeddings over the migration corpus and a retrieval pipeline that automates internal troubleshooting.",
   },
   {
     id: 'triagedai',
@@ -62,6 +74,9 @@ export const projects = [
     demoUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7375974681906118657/',
     sourceUrl: '',
     highlights: ['1,000+ users', '40% relevance lift', 'Replaced AWS Comprehend'],
+    impactPills: ['1,000+ Users', '40% Relevance Lift', '-$50/mo · -200ms P95'],
+    challenge: "AWS Comprehend added $50/month of infra cost and 200ms P95 latency per classification, and baseline retrieval was noisy.",
+    build: "Swapped Comprehend for a 95%-accurate client-side sentiment model. Perplexity sonar-pro with PostgreSQL-backed conversation memory; TanStack Query cut re-renders 60%.",
   },
   {
     id: 'ai-portfolio',
@@ -69,11 +84,14 @@ export const projects = [
     subtitle: 'This site · Conversational AI stand-in with runtime RAG',
     description: "This portfolio site itself. A conversational AI stand-in runs on a Gemini-backed Netlify function with a three-layer context system — hardcoded system prompt, runtime-fetched markdown context, and JSON fallback cards. Intent detection routes questions to the right context slice. Built with React, Tailwind, Framer Motion, and a custom chat UI.",
     raw: 'Portfolio site with a conversational AI stand-in that uses runtime RAG-style context loading, intent detection, and a secure Gemini-backed Netlify function.',
-    // No cover image — card will render clean like codex-workspace until a fresh screenshot is added.
+    image: aiPortfolioHome,
     tags: ['AI', 'React', 'Tailwind', 'Gemini', 'Netlify Functions'],
     liveUrl: 'https://abdarrahman.dev',
     sourceUrl: 'https://github.com/AbdarrahmanAyyaz',
     highlights: ['Conversational stand-in', 'Runtime context loading', 'Intent-based routing'],
+    impactPills: ['Conversational Stand-in', 'Runtime RAG', 'Intent Routing'],
+    challenge: "Static portfolios force visitors to hunt through sections for specific proof; most leave before they find it.",
+    build: "Gemini-backed Netlify function with three-layer context (system prompt + runtime markdown + JSON fallback) and intent detection that routes each question to the right slice.",
   },
   {
     id: 'brain-tumor-segmentation',
@@ -81,11 +99,16 @@ export const projects = [
     subtitle: 'Research · U-Net · BraTS · SFSU-Genentech symposium',
     description: "Medical imaging research using a U-Net architecture for multi-class brain tumor segmentation on the BraTS dataset. Systematic single- vs multi-modality experiments across all four MRI modalities (T1, T1CE, T2, FLAIR). Presented research findings at the SFSU-Genentech partnership symposium to hundreds of engineers and industry professionals.",
     raw: 'U-Net medical imaging research for multi-class brain tumor segmentation across T1/T1CE/T2/FLAIR MRI modalities. Presented at SFSU-Genentech symposium.',
-    // No cover image — awaiting a representative MRI/U-Net figure.
+    // No product screenshot — uses designed cover fallback below.
+    coverCode: 'U-NET',
+    coverCategory: 'Research',
     tags: ['AI', 'Python', 'TensorFlow', 'U-Net', 'Research'],
     liveUrl: '',
     sourceUrl: 'https://github.com/AbdarrahmanAyyaz/TumorSegmentation',
     highlights: ['U-Net architecture', 'BraTS multi-modality', 'Symposium presentation'],
+    impactPills: ['U-Net Architecture', 'BraTS Multi-Modality', 'Symposium Presentation'],
+    challenge: "Multi-class tumor segmentation needs to generalize across all four MRI modalities (T1, T1CE, T2, FLAIR) without overfitting to a single signal.",
+    build: "U-Net with systematic single- vs multi-modality experiments across the BraTS dataset; findings presented at the SFSU-Genentech partnership symposium.",
   },
 ];
 
