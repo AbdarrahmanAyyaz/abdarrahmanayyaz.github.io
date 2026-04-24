@@ -62,9 +62,9 @@ export default function SafetyEvalCaseStudy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent"
+          className="font-mono text-[10px] uppercase tracking-mono-eyebrow text-accent"
         >
-          Case Study · AI Safety Evaluation
+          → Entry 03 · Case file
         </motion.p>
 
         {/* Headline */}

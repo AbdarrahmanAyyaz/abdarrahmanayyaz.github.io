@@ -106,9 +106,9 @@ export default function SignlFeature() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="text-[11px] font-semibold uppercase tracking-[0.22em] text-nb-amber"
+          className="font-mono text-[10px] uppercase tracking-mono-eyebrow text-nb-amber-soft"
         >
-          Featured · Founder Project
+          → Entry 02 · Building now
         </motion.p>
 
         {/* Title */}
