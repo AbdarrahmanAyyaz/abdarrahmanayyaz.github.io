@@ -88,7 +88,7 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
             </span>
             <div className="flex items-center gap-1 ml-1 sm:ml-2">
               <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></div>
-              <span className="text-xs text-muted font-medium">Online</span>
+              <span className="text-xs text-muted font-medium">AI · ready</span>
             </div>
           </motion.div>
         )}
@@ -168,6 +168,7 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
               whileTap={{ scale: 0.95 }}
               onClick={handleCopy}
               className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-bg/50 hover:bg-bg/70 border border-border hover:border-accent/40 transition-all duration-200 group touch-manipulation min-h-[40px]"
+              aria-label="Copy message"
               title="Copy message"
             >
               {copied ? (
@@ -194,6 +195,8 @@ const ChatMessageSimple = React.forwardRef(({ message, type, timestamp, onCopy, 
                   : 'bg-bg/50 hover:bg-bg/70 border-border hover:border-accent/40 text-muted hover:text-text'
                 }
               `}
+              aria-label={liked ? 'Unlike message' : 'Like message'}
+              aria-pressed={liked}
               title="Like message"
             >
               {liked ? (

@@ -368,6 +368,11 @@ const EnhancedAIChatWorking = ({
         <div
           className="chat-messages flex-1 overflow-y-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 md:space-y-6 relative z-10 max-h-[65vh]
                      bg-gradient-to-b from-bg/40 to-transparent"
+          role="log"
+          aria-live="polite"
+          aria-atomic="false"
+          aria-relevant="additions text"
+          aria-label="Chat conversation"
         >
           <AnimatePresence mode="popLayout">
             {currentMessages.map((message) => (

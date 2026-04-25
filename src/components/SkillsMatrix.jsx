@@ -156,6 +156,13 @@ const SkillsMatrix = React.memo(() => {
         )}
       </AnimatePresence>
 
+      {/* Live region — announces filter result count to screen readers */}
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {query.trim()
+          ? `${filteredSkills.length} skill${filteredSkills.length === 1 ? '' : 's'} match "${query}"`
+          : `${filteredSkills.length} skills`}
+      </p>
+
       {/* Skill grid */}
       <motion.div
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"

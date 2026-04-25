@@ -6,9 +6,9 @@
   --text: 20 10% 10%;          /* warm near-black */
   --muted: 20 8% 35%;          /* warm muted */
   --border: 40 15% 88%;        /* warm border */
-  --accent: 38 78% 50%;        /* amber — primary accent */
-  --accent-2: 38 78% 60%;      /* lighter amber */
-  --ring: 38 78% 55%;          /* amber focus ring */
+  --accent: 38 85% 42%;        /* amber — darkened for WCAG AA on cream/white */
+  --accent-2: 38 85% 50%;      /* lighter amber */
+  --ring: 38 85% 45%;          /* amber focus ring */
   --shadow: 20 40% 4%;         /* warm shadow base */
   
   /* Semantic colors */

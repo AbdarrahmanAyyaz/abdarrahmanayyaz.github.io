@@ -116,7 +116,7 @@ export default function Navbar() {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
             {ITEMS.map(({ id, label }) => {
               const entry = ENTRIES.find((e) => e.sectionId === id);
               return (
@@ -245,8 +245,22 @@ export default function Navbar() {
                   </Button>
                 </div>
 
+                {/* Currently-on indicator (mobile-only wayfinding cue) */}
+                <div
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 self-start"
+                  aria-live="polite"
+                >
+                  <span
+                    className="h-2 w-2 rounded-full bg-accent animate-pulse-amber"
+                    aria-hidden="true"
+                  />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-accent whitespace-nowrap">
+                    reading entry {currentEntry.num} · {currentEntry.name.toLowerCase()}
+                  </span>
+                </div>
+
                 {/* Navigation Links */}
-                <nav className="flex-1">
+                <nav className="flex-1" aria-label="Mobile primary">
                   <div className="flex flex-col gap-3">
                     {ITEMS.map(({ id, label }, index) => {
                       const entry = ENTRIES.find((e) => e.sectionId === id);

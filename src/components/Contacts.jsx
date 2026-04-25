@@ -158,7 +158,12 @@ const FormField = ({
         className="block text-sm font-medium text-text mb-2"
       >
         {label}
-        {required && <span className="text-danger ml-1" aria-label="required">*</span>}
+        {required && (
+          <>
+            <span className="text-danger ml-1" aria-hidden="true">*</span>
+            <span className="sr-only"> required</span>
+          </>
+        )}
       </label>
       
       <Component
@@ -561,9 +566,9 @@ export default function Contacts() {
                       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="4" />
                       <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
                     </svg>
-                    Transmitting…
+                    Sending…
                   </span>
-                ) : 'Process Inquiry'}
+                ) : 'Send message'}
               </Button>
             </div>
           </form>
