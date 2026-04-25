@@ -45,6 +45,13 @@ export default function NotebookHero() {
         Building the AI I wish I could use.
       </h1>
 
+      {/* Ink underline — wipes left to right after headline lands */}
+      <div
+        className="animate-ink-underline mt-3 h-px w-24 origin-left bg-nb-amber md:w-32"
+        style={{ animationDelay: '0.6s' }}
+        aria-hidden="true"
+      />
+
       {/* Subhead para 1 */}
       <p
         className="animate-fade-up mt-8 max-w-[56ch] text-[17px] leading-[1.6] text-ink-muted"

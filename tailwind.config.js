@@ -64,6 +64,7 @@ module.exports = {
       animation: {
         'pulse-amber': 'pulse-amber 2.4s ease-in-out infinite',
         'fade-up': 'fade-up 0.7s cubic-bezier(0.4,0,0.2,1) both',
+        'ink-underline': 'ink-underline 0.8s cubic-bezier(0.4,0,0.2,1) both',
       },
       keyframes: {
         'pulse-amber': {
@@ -73,6 +74,10 @@ module.exports = {
         'fade-up': {
           from: { opacity: 0, transform: 'translateY(6px)' },
           to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        'ink-underline': {
+          from: { transform: 'scaleX(0)' },
+          to: { transform: 'scaleX(1)' },
         },
       },
       fontSize: {
