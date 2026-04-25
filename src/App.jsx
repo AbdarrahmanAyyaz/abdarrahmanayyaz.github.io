@@ -10,6 +10,7 @@ import Skills from './components/Skills';
 import Work from './components/Work';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
+import SectionTransition from './components/ui/SectionTransition';
 import { ToastProvider } from './components/ui/Toast';
 import './styles/responsive.css';
 
@@ -26,12 +27,19 @@ export default function App() {
       <ToastProvider>
       <Navbar />
       <Home />
+      <SectionTransition toEntryId="signl" />
       <SignlFeature />
+      <SectionTransition toEntryId="safety-eval" />
       <SafetyEvalCaseStudy />
+      <SectionTransition toEntryId="experience" />
       <Experience />
+      <SectionTransition toEntryId="about" />
       <About />
+      <SectionTransition toEntryId="skills" />
       <Skills />
+      <SectionTransition toEntryId="work" />
       <Work />
+      <SectionTransition toEntryId="contact" />
       <Contacts />
       <Footer />
     </ToastProvider>
