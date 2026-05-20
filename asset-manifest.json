@@ -1,24 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.31bb417d.css",
-    "main.js": "/static/js/main.02a71604.js",
-    "static/media/Porsche.png": "/static/media/Porsche.1c80d48d248d2bdf1df7.png",
+    "main.css": "/static/css/main.297e62b6.css",
+    "main.js": "/static/js/main.8841c33e.js",
     "static/media/OIC.png": "/static/media/OIC.c94e8790142c60497768.png",
-    "static/media/advancely.png": "/static/media/advancely.a62720296a9d2a76b800.png",
     "static/media/triagedai.png": "/static/media/triagedai.f70df678acc149048729.png",
-    "static/media/SocialMedia.png": "/static/media/SocialMedia.b0265abca3dc18bc98f0.png",
-    "static/media/1714780311641.jpeg": "/static/media/1714780311641.7feb404ebd3e59447acb.jpeg",
-    "static/media/portfolio.png": "/static/media/portfolio.3c2cdd9cc319669ac5b8.png",
-    "static/media/gigApp.jpg": "/static/media/gigApp.4fc92e9e7f9b7f4367a2.jpg",
     "static/media/NewPic.png": "/static/media/NewPic.92eea82a7d8604d3cc28.png",
-    "static/media/SCRAG.png": "/static/media/SCRAG.2b521b9ee8e431becd39.png",
-    "static/media/dna.jpg": "/static/media/dna.d0ac4310d8351d0395a1.jpg",
+    "static/media/ai-portfolio-home.png": "/static/media/ai-portfolio-home.15a815f75e69bf056bc2.png",
+    "static/media/opensignl.png": "/static/media/opensignl.8481fa495ca93794f252.png",
     "index.html": "/index.html",
-    "main.31bb417d.css.map": "/static/css/main.31bb417d.css.map",
-    "main.02a71604.js.map": "/static/js/main.02a71604.js.map"
+    "main.297e62b6.css.map": "/static/css/main.297e62b6.css.map",
+    "main.8841c33e.js.map": "/static/js/main.8841c33e.js.map"
   },
   "entrypoints": [
-    "static/css/main.31bb417d.css",
-    "static/js/main.02a71604.js"
+    "static/css/main.297e62b6.css",
+    "static/js/main.8841c33e.js"
   ]
 }
