@@ -57,10 +57,9 @@ export default function NotebookHero() {
         className="animate-fade-up mt-8 max-w-[56ch] text-[17px] leading-[1.6] text-ink-muted"
         style={{ animationDelay: '0.2s' }}
       >
-        By day I build AI tools at Oracle. By night I&apos;m building
-        agentic systems like{' '}
-        <span className="text-nb-amber">OpenSignl</span> &mdash; a research
-        assistant for creators, figuring it out as I go.
+        I build AI tools at Oracle and a research tool for creators called{' '}
+        <span className="text-nb-amber">OpenSignl</span> on the side. Still
+        learning a lot as I go.
       </p>
 
       {/* Subhead para 2 */}
