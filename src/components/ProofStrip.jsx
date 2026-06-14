@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 const METRICS = [
   {
     value: "80%",
-    label: "failure rate surfaced",
+    label: "safety gaps flagged",
     source: "Oracle safety eval framework",
   },
   {

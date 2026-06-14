@@ -18,8 +18,8 @@ const BUILT_BULLETS = [
 const RESULTS = [
   {
     value: "80%",
-    label: "failure rate surfaced",
-    sub: "on safety-critical scenarios across 3 test categories",
+    label: "safety gaps flagged",
+    sub: "across safety-critical eval scenarios",
   },
   {
     value: "90%",
@@ -76,7 +76,7 @@ export default function SafetyEvalCaseStudy() {
           transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
           className="mt-4 text-[clamp(32px,5vw,52px)] font-bold tracking-tight leading-[1.1] text-text"
         >
-          Surfacing an 80% failure rate in a production chatbot.
+          Finding safety gaps in a production chatbot before they reached users.
         </motion.h2>
 
         {/* Subline */}
@@ -88,7 +88,7 @@ export default function SafetyEvalCaseStudy() {
           className="mt-4 text-base sm:text-lg text-muted"
         >
           A from-scratch evaluation harness for a customer-facing AI agent at
-          Oracle.
+          Oracle, built to stress-test safety, groundedness, and relevance.
         </motion.p>
 
         {/* Editorial body */}

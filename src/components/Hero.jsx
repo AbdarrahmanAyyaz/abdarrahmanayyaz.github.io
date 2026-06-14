@@ -76,7 +76,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          1,000+ users served · 80% failure rate surfaced
+          1,000+ users served · 80% safety gaps flagged
         </motion.p>
 
         {/* Primary CTAs */}

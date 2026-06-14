@@ -9,10 +9,10 @@
   },
   {
     "project": "AI Chatbot Safety Evaluation Framework",
-    "one_liner": "Built from scratch for a production chatbot at Oracle. Surfaced an 80% failure rate on safety-critical scenarios.",
+    "one_liner": "Built from scratch for a production chatbot at Oracle. Flagged safety gaps across 80% of stress-test scenarios.",
     "stack": ["Postman", "custom injection framework", "LLM-as-judge", "HAR analysis"],
     "features": ["reverse-engineered API from HAR files", "recreated session flows in Postman", "custom prompt injection layer", "LLM-as-judge scoring across safety, groundedness, relevance"],
-    "impact": ["surfaced 80% failure rate on safety-critical scenarios", "presented findings to VP and senior leadership", "insights drove redesign with 90% groundedness lift"],
+    "impact": ["flagged safety gaps across 80% of stress-test scenarios", "presented findings to VP and senior leadership", "insights drove redesign with 90% groundedness lift"],
     "links": {}
   },
   {

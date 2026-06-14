@@ -83,7 +83,7 @@ const EnhancedAIChatWorking = ({
         console.log('EnhancedAIChatWorking: Chat instance created successfully');
         const initialMessage = {
           id: 1,
-          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [OpenSignl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: surfaced 80% failure rate at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
+          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [OpenSignl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: flagged safety gaps across 80% of stress-test scenarios at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
           type: 'ai',
           timestamp: new Date()
         };
@@ -106,7 +106,7 @@ const EnhancedAIChatWorking = ({
         // Fallback message when initialization fails
         const fallbackMessage = {
           id: 1,
-          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [OpenSignl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: surfaced 80% failure rate at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
+          text: "Welcome to my portfolio! I am AI Abdarrahman, here are some highlights of my work.\n\n**Highlights:**\n• [OpenSignl](https://www.opensignl.com/): founder — research-backed content intelligence SaaS with multi-model failover\n• AI Safety Eval Framework: flagged safety gaps across 80% of stress-test scenarios at Oracle, drove **90% groundedness lift**\n• [Triage AI](https://triagedai.com): **1,000+ users**, 40% relevance lift, replaced AWS Comprehend\n\n**Next step:** Ask me about my work or projects!",
           type: 'ai',
           timestamp: new Date()
         };
@@ -204,7 +204,7 @@ const EnhancedAIChatWorking = ({
         } else if (lowerMessage.includes('signl') || lowerMessage.includes('opensignl')) {
           response = "[OpenSignl](https://www.opensignl.com/) is a research-backed content intelligence platform I founded. An agentic pipeline scans Reddit, X, LinkedIn, and news daily, surfaces ranked audience signals with verbatim evidence, and generates platform-native posts validated by an LLM-as-judge audit layer. Multi-model inference with graceful degradation and automatic failover.";
         } else if (lowerMessage.includes('safety') || lowerMessage.includes('eval') || lowerMessage.includes('oracle')) {
-          response = "At Oracle, I built an end-to-end AI safety evaluation framework from scratch — reverse-engineered the chatbot API from HAR files, built a custom injection framework, and implemented LLM-as-judge scoring. Surfaced an **80% failure rate** on safety-critical scenarios and presented findings to VP. The insights drove a redesign that improved groundedness by **90%**.";
+          response = "At Oracle, I built an end-to-end AI safety evaluation framework from scratch — reverse-engineered the chatbot API from HAR files, built a custom injection framework, and implemented LLM-as-judge scoring. The framework flagged safety gaps across **80% of stress-test scenarios** and the findings were presented to VP. The insights drove a redesign that improved groundedness by **90%**.";
         } else if (lowerMessage.includes('research') || lowerMessage.includes('brain') || lowerMessage.includes('tumor')) {
           response = "My [brain tumor segmentation research](https://github.com/AbdarrahmanAyyaz/TumorSegmentation/blob/main/README.md) used a U-Net architecture on the BraTS dataset (T1, T1CE, T2, FLAIR modalities) with systematic hyperparameter tuning. I presented findings at the SFSU–Genentech partnership symposium to hundreds of engineers and industry professionals.";
         } else if (lowerMessage.includes('skills') || lowerMessage.includes('technology') || lowerMessage.includes('tech')) {
@@ -220,7 +220,7 @@ const EnhancedAIChatWorking = ({
         } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
           response = "You can reach me through the quick action buttons above! 📧 Email me directly, connect on LinkedIn, or check out my GitHub. I typically respond within 24 hours and love discussing new opportunities and interesting projects.";
         } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('website') || lowerMessage.includes('projects')) {
-          response = "This portfolio showcases my key work: **OpenSignl** (founder, live content intelligence SaaS), **AI Safety Eval Framework** (surfaced 80% failure rate at Oracle, 90% groundedness lift), **Triage AI** (1,000+ users, 40% relevance lift), and production AI systems I've built at Oracle.";
+          response = "This portfolio showcases my key work: **OpenSignl** (founder, live content intelligence SaaS), **AI Safety Eval Framework** (flagged safety gaps across 80% of stress-test scenarios at Oracle, 90% groundedness lift), **Triage AI** (1,000+ users, 40% relevance lift), and production AI systems I've built at Oracle.";
         }
 
         addMessage(currentChatId, response, 'ai');

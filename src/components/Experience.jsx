@@ -13,10 +13,10 @@ const ENTRIES = [
     dates: "Jun 2024 — Present",
     note: "Internal title: Cloud Support Engineer",
     bullets: [
-      "Built a chatbot safety evaluation framework from scratch — surfaced 80% failure rate on safety-critical scenarios; insights drove a multi-turn redesign with 90% groundedness lift.",
+      "Built a chatbot safety evaluation framework from scratch — flagged safety gaps across 80% of stress-test scenarios; insights drove a multi-turn redesign with 90% groundedness lift.",
       "Tech-led the pod that built an AI-powered engineering workspace on OpenAI Codex + SDK, integrating Oracle's support KB to auto-generate issue drafts and runbooks.",
       "Designed and deployed a production RAG agent on OCI Generative AI for OIC Gen 2 → Gen 3 migration, cutting manual resolution time for internal engineering teams.",
-      "Evaluated production AI agents post-sale — 35% response accuracy lift; surfaced critical failure patterns before customer exposure.",
+      "Evaluated production AI agents post-sale — 35% response accuracy lift; surfaced critical risk patterns before customer exposure.",
     ],
     stack: ["OCI Generative AI", "OpenAI SDK", "LLM-as-judge", "RAG", "Postman"],
   },
